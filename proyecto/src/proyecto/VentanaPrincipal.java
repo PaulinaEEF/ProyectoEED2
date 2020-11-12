@@ -46,6 +46,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Boton_Archivos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -55,7 +56,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Boton_Archivos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         Boton_Archivos.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         Boton_Archivos.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/folder (1).png"))); // NOI18N
-        getContentPane().add(Boton_Archivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 530, 170, 110));
+        getContentPane().add(Boton_Archivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 520, 170, 110));
 
         boton_Indices.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         boton_Indices.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/index.png"))); // NOI18N
@@ -69,7 +70,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 boton_IndicesActionPerformed(evt);
             }
         });
-        getContentPane().add(boton_Indices, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 340, 170, 70));
+        getContentPane().add(boton_Indices, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 340, 170, 70));
 
         Boton_Campos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         Boton_Campos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/clipboard.png"))); // NOI18N
@@ -83,7 +84,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 Boton_CamposActionPerformed(evt);
             }
         });
-        getContentPane().add(Boton_Campos, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 410, 190, 90));
+        getContentPane().add(Boton_Campos, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 420, 190, 90));
 
         boton_Estandarizacion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         boton_Estandarizacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/check.png"))); // NOI18N
@@ -92,7 +93,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         boton_Estandarizacion.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         boton_Estandarizacion.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         boton_Estandarizacion.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/check (1).png"))); // NOI18N
-        getContentPane().add(boton_Estandarizacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 440, 200, 60));
+        getContentPane().add(boton_Estandarizacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 430, 200, 60));
 
         boton_Registros.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         boton_Registros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/register (3)_1.png"))); // NOI18N
@@ -106,7 +107,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 boton_RegistrosActionPerformed(evt);
             }
         });
-        getContentPane().add(boton_Registros, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, 190, 90));
+        getContentPane().add(boton_Registros, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 320, 190, 90));
 
         boton_Registros1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         boton_Registros1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (4).png"))); // NOI18N
@@ -124,26 +125,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 boton_Registros1ActionPerformed(evt);
             }
         });
-        getContentPane().add(boton_Registros1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 380, 90, 90));
+        getContentPane().add(boton_Registros1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 380, 90, 90));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/verde-claro.jpg"))); // NOI18N
         jLabel4.setText("jLabel4");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 320, 100, 100));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, 100, 100));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/rojo.jpg"))); // NOI18N
         jLabel5.setText("jLabel4");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 320, 110, 110));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 320, 110, 110));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/blue.jpg"))); // NOI18N
         jLabel6.setText("jLabel4");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 420, 90, 100));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 420, 90, 100));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/amarillo.jpg"))); // NOI18N
         jLabel7.setText("jLabel4");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 410, 100, 100));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 410, 100, 100));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FONDO2jpg.jpg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1550, 980));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-120, 0, 1550, 980));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/blue.jpg"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1180, 40));
