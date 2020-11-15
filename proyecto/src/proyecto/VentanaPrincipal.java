@@ -5,6 +5,10 @@
  */
 package proyecto;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -143,6 +147,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         boton_crearArchivo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         boton_crearArchivo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         boton_crearArchivo.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agregar-archivo (2).png"))); // NOI18N
+        boton_crearArchivo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                boton_crearArchivoMouseClicked(evt);
+            }
+        });
         Archivos.getContentPane().add(boton_crearArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 510, 190, 80));
 
         btn_salvar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -152,6 +161,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btn_salvar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         btn_salvar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btn_salvar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/disco-flexible (1).png"))); // NOI18N
+        btn_salvar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_salvarMouseClicked(evt);
+            }
+        });
         Archivos.getContentPane().add(btn_salvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 420, 170, 100));
 
         btn_cerrararchivo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -162,6 +176,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btn_cerrararchivo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         btn_cerrararchivo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btn_cerrararchivo.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/archivo (1).png"))); // NOI18N
+        btn_cerrararchivo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_cerrararchivoMouseClicked(evt);
+            }
+        });
         Archivos.getContentPane().add(btn_cerrararchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, 170, 80));
 
         btn_salir1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -857,6 +876,78 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btn_salir1MouseClicked
 
+    private void boton_crearArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_crearArchivoMouseClicked
+        // TODO add your handling code here:
+        
+        String nombreArchivo = JOptionPane.showInputDialog(null,"Escriba el nombre de Archivo:");
+        
+        if (nombreArchivo != null) {
+
+            // write data to file
+            try ( // create a writer
+                    FileOutputStream fos = new FileOutputStream(new File(nombreArchivo))) {
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            
+            JOptionPane.showMessageDialog(null, "Archivo creado con éxito");
+            
+            GnombreArchivo = nombreArchivo;
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese un nombre para poder crear el archivo");
+        }
+    }//GEN-LAST:event_boton_crearArchivoMouseClicked
+
+    private void btn_salvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_salvarMouseClicked
+        // TODO add your handling code here:
+        
+        String metadata = GnombreArchivo;
+
+        for (Campo campo : archivoFalso.getListaCampos()) {
+            metadata += "|"
+                    + campo.getNombre()
+                    + ":"
+                    + campo.getTipo()
+                    + ":"
+                    + campo.getBytes()
+                    + ":";
+
+            if (campo.isLprimaria()) {
+                metadata += "true";
+            } else {
+                metadata += "false";
+            }
+        }
+
+        try {
+            // create a writer
+            FileOutputStream fos = new FileOutputStream(new File(GnombreArchivo));
+            BufferedOutputStream writer = new BufferedOutputStream(fos);
+
+            // write data to file
+            writer.write(metadata.getBytes());
+
+            // flush remaining bytes
+            writer.flush();
+
+            // close the writer
+            writer.close();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        
+        JOptionPane.showMessageDialog(null, "Archivo guardado con éxito");
+        
+    }//GEN-LAST:event_btn_salvarMouseClicked
+
+    private void btn_cerrararchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cerrararchivoMouseClicked
+        // TODO add your handling code here:
+        
+        GnombreArchivo = null;
+    }//GEN-LAST:event_btn_cerrararchivoMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -973,4 +1064,5 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
     private Archivo archivoFalso = new Archivo();//solo es prueba
+    private String GnombreArchivo;
 }
