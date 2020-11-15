@@ -53,6 +53,11 @@ public class Campo {
     public void setLprimaria(boolean Lprimaria) {
         this.Lprimaria = Lprimaria;
     }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
     
     
 }
