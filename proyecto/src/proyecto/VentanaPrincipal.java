@@ -5,6 +5,8 @@
  */
 package proyecto;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Paulina Euceda, David Bendeck, José Zúniga, Judá Ponce
@@ -156,11 +158,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 boton_CrearCampoMouseClicked(evt);
             }
         });
-        boton_CrearCampo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boton_CrearCampoActionPerformed(evt);
-            }
-        });
         Campos.getContentPane().add(boton_CrearCampo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 30, 260, 80));
 
         boton_ListarCampos1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -191,7 +188,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Campos.getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 380));
 
         crearCampos.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        crearCampos.getContentPane().add(NombreCampo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 130, 20));
+        crearCampos.getContentPane().add(NombreCampo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 130, 30));
 
         comboTipos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Integer", "Char", "Boolean", "String", " " }));
         comboTipos.addActionListener(new java.awt.event.ActionListener() {
@@ -225,6 +222,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         crearCampos.getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, 80, 20));
 
         btn_confirmar.setText("Aceptar");
+        btn_confirmar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_confirmarMouseClicked(evt);
+            }
+        });
         crearCampos.getContentPane().add(btn_confirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, 100, 30));
 
         btn_regresar.setText("Regresar");
@@ -433,15 +435,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_boton_ModificarCamposActionPerformed
 
     private void boton_CrearCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_CrearCampoMouseClicked
+        Campos.setVisible(false);
         crearCampos.pack();
         crearCampos.setModal(true);
         crearCampos.setLocationRelativeTo(null);
         crearCampos.setVisible(true);
+        
     }//GEN-LAST:event_boton_CrearCampoMouseClicked
-
-    private void boton_CrearCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_CrearCampoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_boton_CrearCampoActionPerformed
 
     private void boton_ListarCampos1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_ListarCampos1MouseClicked
         // TODO add your handling code here:
@@ -454,6 +454,31 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void comboTiposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTiposActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboTiposActionPerformed
+
+    private void btn_confirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_confirmarMouseClicked
+        String nombre = NombreCampo.getText();
+        String tipoDato = comboTipos.getSelectedItem().toString();
+        int nBytes = CBytes.getValue().hashCode();
+        boolean llave;
+        if (RB_Si.isSelected()) {
+            llave = true;
+        }
+        if (RB_No.isSelected()) {
+            llave = false;
+        }
+        int reply = JOptionPane.showConfirmDialog(null, "Desea continuar añadiendo campos?", "Campo creado exitosamente!", JOptionPane.YES_NO_OPTION);
+        // aqui hay que guardar en el archivo
+        if (reply==JOptionPane.NO_OPTION) {
+            crearCampos.setVisible(false);
+            Campos.setVisible(true);
+            
+        }
+        NombreCampo.setText("");
+        comboTipos.setSelectedIndex(0);
+        CBytes.setValue(0);
+        RB_Si.setSelected(false);
+        RB_No.setSelected(false);
+    }//GEN-LAST:event_btn_confirmarMouseClicked
 
     /**
      * @param args the command line arguments
