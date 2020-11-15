@@ -61,6 +61,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btn_regresar = new javax.swing.JButton();
         buttonGroup1 = new javax.swing.ButtonGroup();
         fondo2 = new javax.swing.JLabel();
+        Modificar_Campos = new javax.swing.JDialog();
+        btn_aceptar1 = new javax.swing.JButton();
+        btn_regresar1 = new javax.swing.JButton();
+        cb_listaCampos = new javax.swing.JComboBox<>();
+        fondo_Modificar = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        NombreCampo1 = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        comboTipos1 = new javax.swing.JComboBox<>();
+        jLabel17 = new javax.swing.JLabel();
+        CBytes1 = new javax.swing.JSpinner();
+        jLabel18 = new javax.swing.JLabel();
+        RB_Si1 = new javax.swing.JRadioButton();
+        RB_No1 = new javax.swing.JRadioButton();
+        Listar_Campos = new javax.swing.JDialog();
+        Borrar_campos = new javax.swing.JDialog();
         Boton_Archivos = new javax.swing.JButton();
         boton_Indices = new javax.swing.JButton();
         Boton_Campos = new javax.swing.JButton();
@@ -158,7 +174,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 boton_CrearCampoMouseClicked(evt);
             }
         });
-        Campos.getContentPane().add(boton_CrearCampo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 30, 260, 80));
+        Campos.getContentPane().add(boton_CrearCampo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 30, 260, 80));
 
         boton_ListarCampos1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         boton_ListarCampos1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (4).png"))); // NOI18N
@@ -177,7 +193,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 boton_ListarCampos1ActionPerformed(evt);
             }
         });
-        Campos.getContentPane().add(boton_ListarCampos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 230, 240, 80));
+        Campos.getContentPane().add(boton_ListarCampos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 230, 240, 80));
 
         jLabel8.setFont(new java.awt.Font("Bodoni MT", 1, 24)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -231,6 +247,55 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         btn_regresar.setText("Regresar");
         crearCampos.getContentPane().add(btn_regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 290, 100, 30));
+
+        Modificar_Campos.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_aceptar1.setText("Modifcar");
+        Modificar_Campos.getContentPane().add(btn_aceptar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, -1, -1));
+
+        btn_regresar1.setText("Regresar");
+        btn_regresar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_regresar1ActionPerformed(evt);
+            }
+        });
+        Modificar_Campos.getContentPane().add(btn_regresar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, 80, -1));
+
+        cb_listaCampos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        Modificar_Campos.getContentPane().add(cb_listaCampos, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 80, 20));
+        Modificar_Campos.getContentPane().add(fondo_Modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 410));
+
+        jLabel15.setText("Nombre del campo");
+        Modificar_Campos.getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, -1, -1));
+        Modificar_Campos.getContentPane().add(NombreCampo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, 130, 30));
+
+        jLabel16.setText("Tipo de dato del campo");
+        Modificar_Campos.getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, -1, -1));
+
+        comboTipos1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Integer", "Char", "Boolean", "String", " " }));
+        comboTipos1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboTipos1ActionPerformed(evt);
+            }
+        });
+        Modificar_Campos.getContentPane().add(comboTipos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 130, 130, 20));
+
+        jLabel17.setText("Numero de bytes");
+        Modificar_Campos.getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, -1, -1));
+
+        CBytes1.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        Modificar_Campos.getContentPane().add(CBytes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, 40, -1));
+
+        jLabel18.setText("Llave primaria");
+        Modificar_Campos.getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 80, 20));
+
+        buttonGroup1.add(RB_Si1);
+        RB_Si1.setText("Si");
+        Modificar_Campos.getContentPane().add(RB_Si1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 230, -1, -1));
+
+        buttonGroup1.add(RB_No1);
+        RB_No1.setText("No");
+        Modificar_Campos.getContentPane().add(RB_No1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, -1, -1));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -480,6 +545,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         RB_No.setSelected(false);
     }//GEN-LAST:event_btn_confirmarMouseClicked
 
+    private void btn_regresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regresar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_regresar1ActionPerformed
+
+    private void comboTipos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipos1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboTipos1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -517,16 +590,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog Archivos;
+    private javax.swing.JDialog Borrar_campos;
     private javax.swing.JButton Boton_Archivos;
     private javax.swing.JButton Boton_Campos;
     private javax.swing.JSpinner CBytes;
+    private javax.swing.JSpinner CBytes1;
     private javax.swing.JDialog Campos;
     private javax.swing.JDialog Estandarización;
     private javax.swing.JLabel Fondo;
     private javax.swing.JDialog Indiices;
+    private javax.swing.JDialog Listar_Campos;
+    private javax.swing.JDialog Modificar_Campos;
     private javax.swing.JTextField NombreCampo;
+    private javax.swing.JTextField NombreCampo1;
     private javax.swing.JRadioButton RB_No;
+    private javax.swing.JRadioButton RB_No1;
     private javax.swing.JRadioButton RB_Si;
+    private javax.swing.JRadioButton RB_Si1;
     private javax.swing.JDialog Registros;
     private javax.swing.JButton boton_BorrarCampos;
     private javax.swing.JButton boton_CrearCampo;
@@ -538,19 +618,28 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton boton_Salir;
     private javax.swing.JButton boton_Salir1;
     private javax.swing.JButton boton_regresar;
+    private javax.swing.JButton btn_aceptar1;
     private javax.swing.JButton btn_confirmar;
     private javax.swing.JButton btn_regresar;
+    private javax.swing.JButton btn_regresar1;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cb_listaCampos;
     private javax.swing.JComboBox<String> comboTipos;
+    private javax.swing.JComboBox<String> comboTipos1;
     private javax.swing.JDialog crearCampos;
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel fondo2;
+    private javax.swing.JLabel fondo_Modificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
