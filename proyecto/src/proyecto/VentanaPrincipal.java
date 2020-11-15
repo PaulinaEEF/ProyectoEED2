@@ -35,7 +35,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         Fondo = new javax.swing.JLabel();
         Campos = new javax.swing.JDialog();
+        boton_ListarCampos = new javax.swing.JButton();
+        boton_BorrarCampos = new javax.swing.JButton();
+        boton_ModificarCampos = new javax.swing.JButton();
+        boton_CrearCampo = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        fondo = new javax.swing.JLabel();
         Registros = new javax.swing.JDialog();
         Indiices = new javax.swing.JDialog();
         Estandarización = new javax.swing.JDialog();
@@ -44,7 +49,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Boton_Campos = new javax.swing.JButton();
         boton_Estandarizacion = new javax.swing.JButton();
         boton_Registros = new javax.swing.JButton();
-        boton_Registros1 = new javax.swing.JButton();
+        boton_Salir = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -53,6 +58,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        boton_Salir1 = new javax.swing.JButton();
 
         Archivos.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -65,7 +71,90 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Archivos.getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 860));
 
         Campos.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        Campos.getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 350));
+
+        boton_ListarCampos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        boton_ListarCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (4).png"))); // NOI18N
+        boton_ListarCampos.setText("Listar Campos");
+        boton_ListarCampos.setContentAreaFilled(false);
+        boton_ListarCampos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        boton_ListarCampos.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        boton_ListarCampos.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (5).png"))); // NOI18N
+        boton_ListarCampos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                boton_ListarCamposMouseClicked(evt);
+            }
+        });
+        boton_ListarCampos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_ListarCamposActionPerformed(evt);
+            }
+        });
+        Campos.getContentPane().add(boton_ListarCampos, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 230, 240, 80));
+
+        boton_BorrarCampos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        boton_BorrarCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (4).png"))); // NOI18N
+        boton_BorrarCampos.setText("Borrar Campos");
+        boton_BorrarCampos.setContentAreaFilled(false);
+        boton_BorrarCampos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        boton_BorrarCampos.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        boton_BorrarCampos.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (5).png"))); // NOI18N
+        boton_BorrarCampos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                boton_BorrarCamposMouseClicked(evt);
+            }
+        });
+        boton_BorrarCampos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_BorrarCamposActionPerformed(evt);
+            }
+        });
+        Campos.getContentPane().add(boton_BorrarCampos, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 230, 210, 80));
+
+        boton_ModificarCampos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        boton_ModificarCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (4).png"))); // NOI18N
+        boton_ModificarCampos.setText("Modificar Campos");
+        boton_ModificarCampos.setContentAreaFilled(false);
+        boton_ModificarCampos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        boton_ModificarCampos.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        boton_ModificarCampos.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (5).png"))); // NOI18N
+        boton_ModificarCampos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                boton_ModificarCamposMouseClicked(evt);
+            }
+        });
+        boton_ModificarCampos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_ModificarCamposActionPerformed(evt);
+            }
+        });
+        Campos.getContentPane().add(boton_ModificarCampos, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 30, 270, 80));
+
+        boton_CrearCampo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        boton_CrearCampo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (4).png"))); // NOI18N
+        boton_CrearCampo.setText("Crear campos");
+        boton_CrearCampo.setContentAreaFilled(false);
+        boton_CrearCampo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        boton_CrearCampo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        boton_CrearCampo.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (5).png"))); // NOI18N
+        boton_CrearCampo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                boton_CrearCampoMouseClicked(evt);
+            }
+        });
+        boton_CrearCampo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_CrearCampoActionPerformed(evt);
+            }
+        });
+        Campos.getContentPane().add(boton_CrearCampo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 30, 260, 80));
+
+        jLabel8.setFont(new java.awt.Font("Bodoni MT", 1, 24)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("CAMPOS");
+        Campos.getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 150, 30));
+
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/campos.jpg"))); // NOI18N
+        Campos.getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 380));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -139,23 +228,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         getContentPane().add(boton_Registros, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 270, 190, 90));
 
-        boton_Registros1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        boton_Registros1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (4).png"))); // NOI18N
-        boton_Registros1.setContentAreaFilled(false);
-        boton_Registros1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        boton_Registros1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        boton_Registros1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (5).png"))); // NOI18N
-        boton_Registros1.addMouseListener(new java.awt.event.MouseAdapter() {
+        boton_Salir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        boton_Salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (4).png"))); // NOI18N
+        boton_Salir.setContentAreaFilled(false);
+        boton_Salir.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        boton_Salir.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        boton_Salir.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (5).png"))); // NOI18N
+        boton_Salir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                boton_Registros1MouseClicked(evt);
+                boton_SalirMouseClicked(evt);
             }
         });
-        boton_Registros1.addActionListener(new java.awt.event.ActionListener() {
+        boton_Salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boton_Registros1ActionPerformed(evt);
+                boton_SalirActionPerformed(evt);
             }
         });
-        getContentPane().add(boton_Registros1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 320, 90, 90));
+        getContentPane().add(boton_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 320, 90, 90));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoConLogo.jpeg"))); // NOI18N
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 20, 100));
@@ -182,6 +271,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoConLogo.jpeg"))); // NOI18N
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1140, -20, 1310, 900));
 
+        boton_Salir1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        boton_Salir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (4).png"))); // NOI18N
+        boton_Salir1.setContentAreaFilled(false);
+        boton_Salir1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        boton_Salir1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        boton_Salir1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (5).png"))); // NOI18N
+        boton_Salir1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                boton_Salir1MouseClicked(evt);
+            }
+        });
+        boton_Salir1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_Salir1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(boton_Salir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 320, 90, 90));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -197,13 +304,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Boton_CamposActionPerformed
 
-    private void boton_Registros1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_Registros1ActionPerformed
+    private void boton_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_SalirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_boton_Registros1ActionPerformed
+    }//GEN-LAST:event_boton_SalirActionPerformed
 
-    private void boton_Registros1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_Registros1MouseClicked
+    private void boton_SalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_SalirMouseClicked
         System.exit(0);
-    }//GEN-LAST:event_boton_Registros1MouseClicked
+    }//GEN-LAST:event_boton_SalirMouseClicked
 
     private void Boton_ArchivosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Boton_ArchivosMouseClicked
         Archivos.pack();
@@ -218,6 +325,46 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Campos.setLocationRelativeTo(null);
         Campos.setVisible(true);
     }//GEN-LAST:event_Boton_CamposMouseClicked
+
+    private void boton_Salir1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_Salir1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boton_Salir1MouseClicked
+
+    private void boton_Salir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_Salir1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boton_Salir1ActionPerformed
+
+    private void boton_ListarCamposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_ListarCamposMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boton_ListarCamposMouseClicked
+
+    private void boton_ListarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_ListarCamposActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boton_ListarCamposActionPerformed
+
+    private void boton_BorrarCamposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_BorrarCamposMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boton_BorrarCamposMouseClicked
+
+    private void boton_BorrarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_BorrarCamposActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boton_BorrarCamposActionPerformed
+
+    private void boton_ModificarCamposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_ModificarCamposMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boton_ModificarCamposMouseClicked
+
+    private void boton_ModificarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_ModificarCamposActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boton_ModificarCamposActionPerformed
+
+    private void boton_CrearCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_CrearCampoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boton_CrearCampoMouseClicked
+
+    private void boton_CrearCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_CrearCampoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boton_CrearCampoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -263,10 +410,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel Fondo;
     private javax.swing.JDialog Indiices;
     private javax.swing.JDialog Registros;
+    private javax.swing.JButton boton_BorrarCampos;
+    private javax.swing.JButton boton_CrearCampo;
     private javax.swing.JButton boton_Estandarizacion;
     private javax.swing.JButton boton_Indices;
+    private javax.swing.JButton boton_ListarCampos;
+    private javax.swing.JButton boton_ModificarCampos;
     private javax.swing.JButton boton_Registros;
-    private javax.swing.JButton boton_Registros1;
+    private javax.swing.JButton boton_Salir;
+    private javax.swing.JButton boton_Salir1;
+    private javax.swing.JLabel fondo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
