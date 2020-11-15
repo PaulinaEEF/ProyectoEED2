@@ -6,6 +6,7 @@
 package proyecto;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -86,6 +87,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         Borrar_campos = new javax.swing.JDialog();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        Lista_borrar = new javax.swing.JList<>();
+        jLabel23 = new javax.swing.JLabel();
         btn_regresar2 = new javax.swing.JButton();
         btn_delete1 = new javax.swing.JButton();
         fondo_delete = new javax.swing.JLabel();
@@ -402,11 +406,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         Listar_Campos.getContentPane().add(btn_return, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 410, 150, 80));
 
-        Lista_campos.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        Lista_campos.setModel(new DefaultListModel());
         jScrollPane1.setViewportView(Lista_campos);
 
         Listar_Campos.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 210, 250));
@@ -421,6 +421,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         Borrar_campos.setUndecorated(true);
         Borrar_campos.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Lista_borrar.setModel(new DefaultListModel());
+        Lista_borrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Lista_borrarMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(Lista_borrar);
+
+        Borrar_campos.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 160, 220));
+
+        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel23.setText("Seleccione un campo");
+        Borrar_campos.getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
         btn_regresar2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_regresar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda.png"))); // NOI18N
@@ -443,12 +457,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btn_delete1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         btn_delete1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btn_delete1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/borrar (1).png"))); // NOI18N
+        btn_delete1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_delete1MouseClicked(evt);
+            }
+        });
         Borrar_campos.getContentPane().add(btn_delete1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 160, 80));
 
         fondo_delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/eliminar1.png"))); // NOI18N
         Borrar_campos.getContentPane().add(fondo_delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(-120, 0, 820, 440));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Boton_Archivos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -636,6 +656,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void boton_BorrarCamposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_BorrarCamposMouseClicked
         Campos.setVisible(false);
+        
+        DefaultListModel modelo = new DefaultListModel();
+        for (Campo campo : archivoFalso.getListaCampos()) {
+            modelo.addElement(campo);
+        }
+        Lista_borrar.setModel(modelo);
+        
         Borrar_campos.pack();
         Borrar_campos.setModal(true);
         Borrar_campos.setLocationRelativeTo(null);
@@ -665,6 +692,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void boton_ListarCampos1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_ListarCampos1MouseClicked
         Campos.setVisible(false);
+                
+        DefaultListModel modelo = new DefaultListModel();
+        for (Campo campo : archivoFalso.getListaCampos()) {
+            modelo.addElement(campo);
+        }
+        Lista_campos.setModel(modelo);
+        
         Listar_Campos.pack();
         Listar_Campos.setModal(true);
         Listar_Campos.setLocationRelativeTo(null);
@@ -732,6 +766,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Campo.class.cast(cb_listaCampos.getSelectedItem()).setLprimaria(MDC_RB_Si.isSelected());
         Campo.class.cast(cb_listaCampos.getSelectedItem()).setBytes(MDC_CBytes.getValue().hashCode());
         Campo.class.cast(cb_listaCampos.getSelectedItem()).setTipo(MDC_comboTipos.getSelectedItem().toString());
+        JOptionPane.showMessageDialog(null, "Campo(s) modificado(s)");
+        
+        cb_listaCampos.setModel(new DefaultComboBoxModel<>());
+        for (Campo campo : archivoFalso.getListaCampos()) {
+            cb_listaCampos.addItem(campo);
+        }
+        cb_listaCampos.setSelectedItem(null);
     }//GEN-LAST:event_btn_aceptar1MouseClicked
 
     private void btn_returnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_returnMouseClicked
@@ -747,6 +788,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Borrar_campos.setVisible(false);
         Campos.setVisible(true);
     }//GEN-LAST:event_btn_regresar2MouseClicked
+
+    private void Lista_borrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Lista_borrarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Lista_borrarMouseClicked
+
+    private void btn_delete1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_delete1MouseClicked
+        // TODO add your handling code here:
+        int row = Lista_borrar.getSelectedIndex();
+        int response = JOptionPane.showConfirmDialog(null,"¿Está seguro de eliminar este campo?","Confirmar",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+
+        if (response == JOptionPane.OK_OPTION) {
+            DefaultListModel m = (DefaultListModel) Lista_borrar.getModel();
+            archivoFalso.getListaCampos().remove(row);
+            m.remove(row);
+        }
+        
+        
+    }//GEN-LAST:event_btn_delete1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -793,6 +852,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JDialog Estandarización;
     private javax.swing.JLabel Fondo;
     private javax.swing.JDialog Indiices;
+    private javax.swing.JList<String> Lista_borrar;
     private javax.swing.JList<String> Lista_campos;
     private javax.swing.JDialog Listar_Campos;
     private javax.swing.JSpinner MDC_CBytes;
@@ -847,6 +907,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -855,6 +916,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
     private Archivo archivoFalso = new Archivo();//solo es prueba
 }
