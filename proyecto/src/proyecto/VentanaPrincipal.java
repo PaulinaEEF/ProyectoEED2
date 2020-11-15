@@ -32,6 +32,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         Archivos = new javax.swing.JDialog();
+        jLabel9 = new javax.swing.JLabel();
         Fondo = new javax.swing.JLabel();
         Campos = new javax.swing.JDialog();
         jLabel8 = new javax.swing.JLabel();
@@ -53,6 +54,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
 
         Archivos.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel9.setFont(new java.awt.Font("Bodoni MT", 1, 24)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("ARCHIVOS");
+        Archivos.getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 250, 40));
 
         Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/archives.jpg"))); // NOI18N
         Archivos.getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 860));
@@ -265,5 +271,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 }
