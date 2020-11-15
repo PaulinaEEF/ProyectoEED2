@@ -59,13 +59,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         btn_confirmar = new javax.swing.JButton();
         btn_regresar = new javax.swing.JButton();
-        buttonGroup1 = new javax.swing.ButtonGroup();
         fondo2 = new javax.swing.JLabel();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         Modificar_Campos = new javax.swing.JDialog();
         btn_aceptar1 = new javax.swing.JButton();
         btn_regresar1 = new javax.swing.JButton();
         cb_listaCampos = new javax.swing.JComboBox<>();
-        fondo_Modificar = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         NombreCampo1 = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
@@ -75,6 +74,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         RB_Si1 = new javax.swing.JRadioButton();
         RB_No1 = new javax.swing.JRadioButton();
+        fondo_Modificar = new javax.swing.JLabel();
         Listar_Campos = new javax.swing.JDialog();
         Borrar_campos = new javax.swing.JDialog();
         Boton_Archivos = new javax.swing.JButton();
@@ -106,12 +106,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Campos.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         boton_regresar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        boton_regresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (4).png"))); // NOI18N
+        boton_regresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/return (8).png"))); // NOI18N
         boton_regresar.setText("Regresar");
         boton_regresar.setContentAreaFilled(false);
         boton_regresar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         boton_regresar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        boton_regresar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (5).png"))); // NOI18N
+        boton_regresar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/return (9).png"))); // NOI18N
         boton_regresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 boton_regresarMouseClicked(evt);
@@ -122,15 +122,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 boton_regresarActionPerformed(evt);
             }
         });
-        Campos.getContentPane().add(boton_regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 240, 80));
+        Campos.getContentPane().add(boton_regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 290, 240, 90));
 
         boton_BorrarCampos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        boton_BorrarCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (4).png"))); // NOI18N
+        boton_BorrarCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/WhatsApp Image 2020-11-14 at 22.01.02 (2).jpeg"))); // NOI18N
         boton_BorrarCampos.setText("Borrar Campos");
         boton_BorrarCampos.setContentAreaFilled(false);
         boton_BorrarCampos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         boton_BorrarCampos.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        boton_BorrarCampos.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (5).png"))); // NOI18N
+        boton_BorrarCampos.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/WhatsApp Image 2020-11-14 at 22.01.02 (1).jpeg"))); // NOI18N
         boton_BorrarCampos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 boton_BorrarCamposMouseClicked(evt);
@@ -144,45 +144,40 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Campos.getContentPane().add(boton_BorrarCampos, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 230, 210, 80));
 
         boton_ModificarCampos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        boton_ModificarCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (4).png"))); // NOI18N
+        boton_ModificarCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/add-anchor-point.png"))); // NOI18N
         boton_ModificarCampos.setText("Modificar Campos");
         boton_ModificarCampos.setContentAreaFilled(false);
         boton_ModificarCampos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         boton_ModificarCampos.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        boton_ModificarCampos.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (5).png"))); // NOI18N
+        boton_ModificarCampos.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/add-anchor-point (1).png"))); // NOI18N
         boton_ModificarCampos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 boton_ModificarCamposMouseClicked(evt);
             }
         });
-        boton_ModificarCampos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boton_ModificarCamposActionPerformed(evt);
-            }
-        });
-        Campos.getContentPane().add(boton_ModificarCampos, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 30, 270, 80));
+        Campos.getContentPane().add(boton_ModificarCampos, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 30, 210, 100));
 
         boton_CrearCampo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        boton_CrearCampo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (4).png"))); // NOI18N
+        boton_CrearCampo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/tools.png"))); // NOI18N
         boton_CrearCampo.setText("Crear campos");
         boton_CrearCampo.setContentAreaFilled(false);
         boton_CrearCampo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         boton_CrearCampo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        boton_CrearCampo.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (5).png"))); // NOI18N
+        boton_CrearCampo.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/tools (1).png"))); // NOI18N
         boton_CrearCampo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 boton_CrearCampoMouseClicked(evt);
             }
         });
-        Campos.getContentPane().add(boton_CrearCampo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 30, 260, 80));
+        Campos.getContentPane().add(boton_CrearCampo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 170, 110));
 
         boton_ListarCampos1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        boton_ListarCampos1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (4).png"))); // NOI18N
+        boton_ListarCampos1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/WhatsApp Image 2020-11-14 at 22.01.02.jpeg"))); // NOI18N
         boton_ListarCampos1.setText("Listar Campos");
         boton_ListarCampos1.setContentAreaFilled(false);
         boton_ListarCampos1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         boton_ListarCampos1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        boton_ListarCampos1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (5).png"))); // NOI18N
+        boton_ListarCampos1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/WhatsApp Image 2020-11-14 at 22.01.02 (3).jpeg"))); // NOI18N
         boton_ListarCampos1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 boton_ListarCampos1MouseClicked(evt);
@@ -204,98 +199,153 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Campos.getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 380));
 
         crearCampos.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        crearCampos.getContentPane().add(NombreCampo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 130, 30));
 
+        NombreCampo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        crearCampos.getContentPane().add(NombreCampo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 130, 30));
+
+        comboTipos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         comboTipos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Integer", "Char", "Boolean", "String", " " }));
         comboTipos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboTiposActionPerformed(evt);
             }
         });
-        crearCampos.getContentPane().add(comboTipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 130, 20));
+        crearCampos.getContentPane().add(comboTipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 130, 20));
 
+        CBytes.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         CBytes.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
-        crearCampos.getContentPane().add(CBytes, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 40, -1));
+        crearCampos.getContentPane().add(CBytes, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 60, -1));
 
         buttonGroup1.add(RB_Si);
+        RB_Si.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         RB_Si.setText("Si");
-        crearCampos.getContentPane().add(RB_Si, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, -1, -1));
+        crearCampos.getContentPane().add(RB_Si, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, -1, -1));
 
         buttonGroup1.add(RB_No);
+        RB_No.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         RB_No.setText("No");
-        crearCampos.getContentPane().add(RB_No, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, -1, -1));
+        crearCampos.getContentPane().add(RB_No, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, -1));
 
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel11.setText("Nombre del campo");
-        crearCampos.getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, -1));
+        crearCampos.getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 150, 20));
 
-        jLabel12.setText("Tipo de dato del campo");
-        crearCampos.getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, -1, -1));
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel12.setText("Tipo de dato");
+        crearCampos.getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 120, 20));
 
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel13.setText("Numero de bytes");
-        crearCampos.getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, -1, -1));
+        crearCampos.getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 140, 20));
 
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel14.setText("Llave primaria");
-        crearCampos.getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, 80, 20));
+        crearCampos.getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 110, 30));
 
+        btn_confirmar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_confirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agree.png"))); // NOI18N
         btn_confirmar.setText("Aceptar");
+        btn_confirmar.setContentAreaFilled(false);
+        btn_confirmar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btn_confirmar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_confirmar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agree (1).png"))); // NOI18N
         btn_confirmar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_confirmarMouseClicked(evt);
             }
         });
-        crearCampos.getContentPane().add(btn_confirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, 100, 30));
+        crearCampos.getContentPane().add(btn_confirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 320, 180, 80));
 
+        btn_regresar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_regresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/return (6).png"))); // NOI18N
         btn_regresar.setText("Regresar");
-        crearCampos.getContentPane().add(btn_regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 290, 100, 30));
+        btn_regresar.setContentAreaFilled(false);
+        btn_regresar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btn_regresar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_regresar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/return (7).png"))); // NOI18N
+        btn_regresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_regresarMouseClicked(evt);
+            }
+        });
+        crearCampos.getContentPane().add(btn_regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, 200, 80));
+
+        fondo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/camp.jpg"))); // NOI18N
+        crearCampos.getContentPane().add(fondo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 440));
 
         Modificar_Campos.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btn_aceptar1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_aceptar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/create.png"))); // NOI18N
         btn_aceptar1.setText("Modifcar");
-        Modificar_Campos.getContentPane().add(btn_aceptar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, -1, -1));
+        btn_aceptar1.setContentAreaFilled(false);
+        btn_aceptar1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btn_aceptar1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_aceptar1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/create (1).png"))); // NOI18N
+        Modificar_Campos.getContentPane().add(btn_aceptar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 150, 70));
 
+        btn_regresar1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_regresar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/return (8).png"))); // NOI18N
         btn_regresar1.setText("Regresar");
-        btn_regresar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_regresar1ActionPerformed(evt);
+        btn_regresar1.setContentAreaFilled(false);
+        btn_regresar1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btn_regresar1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_regresar1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/return (9).png"))); // NOI18N
+        btn_regresar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_regresar1MouseClicked(evt);
             }
         });
-        Modificar_Campos.getContentPane().add(btn_regresar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, 80, -1));
+        Modificar_Campos.getContentPane().add(btn_regresar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 150, 70));
 
+        cb_listaCampos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         cb_listaCampos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        Modificar_Campos.getContentPane().add(cb_listaCampos, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 80, 20));
-        Modificar_Campos.getContentPane().add(fondo_Modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 410));
+        Modificar_Campos.getContentPane().add(cb_listaCampos, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 50, 110, 30));
 
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel15.setText("Nombre del campo");
-        Modificar_Campos.getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, -1, -1));
-        Modificar_Campos.getContentPane().add(NombreCampo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, 130, 30));
+        Modificar_Campos.getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
 
-        jLabel16.setText("Tipo de dato del campo");
-        Modificar_Campos.getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, -1, -1));
+        NombreCampo1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Modificar_Campos.getContentPane().add(NombreCampo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 130, 30));
 
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel16.setText("Tipo de dato");
+        Modificar_Campos.getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
+
+        comboTipos1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         comboTipos1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Integer", "Char", "Boolean", "String", " " }));
         comboTipos1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboTipos1ActionPerformed(evt);
             }
         });
-        Modificar_Campos.getContentPane().add(comboTipos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 130, 130, 20));
+        Modificar_Campos.getContentPane().add(comboTipos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 130, 20));
 
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel17.setText("Numero de bytes");
-        Modificar_Campos.getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, -1, -1));
+        Modificar_Campos.getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
 
+        CBytes1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         CBytes1.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
-        Modificar_Campos.getContentPane().add(CBytes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, 40, -1));
+        Modificar_Campos.getContentPane().add(CBytes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 70, -1));
 
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel18.setText("Llave primaria");
-        Modificar_Campos.getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 80, 20));
+        Modificar_Campos.getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 90, 20));
 
         buttonGroup1.add(RB_Si1);
+        RB_Si1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         RB_Si1.setText("Si");
-        Modificar_Campos.getContentPane().add(RB_Si1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 230, -1, -1));
+        Modificar_Campos.getContentPane().add(RB_Si1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, -1, -1));
 
         buttonGroup1.add(RB_No1);
+        RB_No1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         RB_No1.setText("No");
-        Modificar_Campos.getContentPane().add(RB_No1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, -1, -1));
+        Modificar_Campos.getContentPane().add(RB_No1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, -1, -1));
+
+        fondo_Modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Email.png"))); // NOI18N
+        Modificar_Campos.getContentPane().add(fondo_Modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 400));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -492,12 +542,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_boton_BorrarCamposActionPerformed
 
     private void boton_ModificarCamposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_ModificarCamposMouseClicked
-        // TODO add your handling code here:
+        Campos.setVisible(false);
+        Modificar_Campos.pack();
+        Modificar_Campos.setModal(true);
+        Modificar_Campos.setLocationRelativeTo(null);
+        Modificar_Campos.setVisible(true);
     }//GEN-LAST:event_boton_ModificarCamposMouseClicked
-
-    private void boton_ModificarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_ModificarCamposActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_boton_ModificarCamposActionPerformed
 
     private void boton_CrearCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_CrearCampoMouseClicked
         Campos.setVisible(false);
@@ -505,7 +555,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         crearCampos.setModal(true);
         crearCampos.setLocationRelativeTo(null);
         crearCampos.setVisible(true);
-        
+
     }//GEN-LAST:event_boton_CrearCampoMouseClicked
 
     private void boton_ListarCampos1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_ListarCampos1MouseClicked
@@ -533,10 +583,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
         int reply = JOptionPane.showConfirmDialog(null, "Desea continuar añadiendo campos?", "Campo creado exitosamente!", JOptionPane.YES_NO_OPTION);
         // aqui hay que guardar en el archivo
-        if (reply==JOptionPane.NO_OPTION) {
+        if (reply == JOptionPane.NO_OPTION) {
             crearCampos.setVisible(false);
             Campos.setVisible(true);
-            
+
         }
         NombreCampo.setText("");
         comboTipos.setSelectedIndex(0);
@@ -545,13 +595,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         RB_No.setSelected(false);
     }//GEN-LAST:event_btn_confirmarMouseClicked
 
-    private void btn_regresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regresar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_regresar1ActionPerformed
-
     private void comboTipos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipos1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboTipos1ActionPerformed
+
+    private void btn_regresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_regresarMouseClicked
+        crearCampos.setVisible(false);
+        Campos.setVisible(true);
+    }//GEN-LAST:event_btn_regresarMouseClicked
+
+    private void btn_regresar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_regresar1MouseClicked
+        Modificar_Campos.setVisible(false);
+        Campos.setVisible(true);
+    }//GEN-LAST:event_btn_regresar1MouseClicked
 
     /**
      * @param args the command line arguments
