@@ -31,6 +31,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Archivos = new javax.swing.JDialog();
+        Fondo = new javax.swing.JLabel();
+        Campos = new javax.swing.JDialog();
+        jLabel8 = new javax.swing.JLabel();
+        Registros = new javax.swing.JDialog();
+        Indiices = new javax.swing.JDialog();
+        Estandarización = new javax.swing.JDialog();
         Boton_Archivos = new javax.swing.JButton();
         boton_Indices = new javax.swing.JButton();
         Boton_Campos = new javax.swing.JButton();
@@ -45,6 +52,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
+        Archivos.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/archives.jpg"))); // NOI18N
+        Archivos.getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 860));
+
+        Campos.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Campos.getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 350));
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -55,6 +70,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Boton_Archivos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         Boton_Archivos.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         Boton_Archivos.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/folder (1).png"))); // NOI18N
+        Boton_Archivos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Boton_ArchivosMouseClicked(evt);
+            }
+        });
         getContentPane().add(Boton_Archivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 450, 170, 110));
 
         boton_Indices.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -69,7 +89,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 boton_IndicesActionPerformed(evt);
             }
         });
-        getContentPane().add(boton_Indices, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 300, 170, 70));
+        getContentPane().add(boton_Indices, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 290, 170, 70));
 
         Boton_Campos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         Boton_Campos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/clipboard.png"))); // NOI18N
@@ -78,6 +98,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Boton_Campos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         Boton_Campos.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         Boton_Campos.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/clipboard (1).png"))); // NOI18N
+        Boton_Campos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Boton_CamposMouseClicked(evt);
+            }
+        });
         Boton_Campos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Boton_CamposActionPerformed(evt);
@@ -170,6 +195,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_boton_Registros1MouseClicked
 
+    private void Boton_ArchivosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Boton_ArchivosMouseClicked
+        Archivos.pack();
+        Archivos.setModal(true);
+        Archivos.setLocationRelativeTo(null);
+        Archivos.setVisible(true);
+    }//GEN-LAST:event_Boton_ArchivosMouseClicked
+
+    private void Boton_CamposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Boton_CamposMouseClicked
+        Campos.pack();
+        Campos.setModal(true);
+        Campos.setLocationRelativeTo(null);
+        Campos.setVisible(true);
+    }//GEN-LAST:event_Boton_CamposMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -206,8 +245,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDialog Archivos;
     private javax.swing.JButton Boton_Archivos;
     private javax.swing.JButton Boton_Campos;
+    private javax.swing.JDialog Campos;
+    private javax.swing.JDialog Estandarización;
+    private javax.swing.JLabel Fondo;
+    private javax.swing.JDialog Indiices;
+    private javax.swing.JDialog Registros;
     private javax.swing.JButton boton_Estandarizacion;
     private javax.swing.JButton boton_Indices;
     private javax.swing.JButton boton_Registros;
@@ -219,5 +264,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     // End of variables declaration//GEN-END:variables
 }
