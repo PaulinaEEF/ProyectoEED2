@@ -46,9 +46,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         boton_Registros = new javax.swing.JButton();
         boton_Registros1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -81,7 +82,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 Boton_ArchivosMouseClicked(evt);
             }
         });
-        getContentPane().add(Boton_Archivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 450, 170, 110));
+        getContentPane().add(Boton_Archivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 450, 170, 110));
 
         boton_Indices.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         boton_Indices.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/index.png"))); // NOI18N
@@ -95,7 +96,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 boton_IndicesActionPerformed(evt);
             }
         });
-        getContentPane().add(boton_Indices, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 290, 170, 70));
+        getContentPane().add(boton_Indices, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 290, 170, 70));
 
         Boton_Campos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         Boton_Campos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/clipboard.png"))); // NOI18N
@@ -114,16 +115,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 Boton_CamposActionPerformed(evt);
             }
         });
-        getContentPane().add(Boton_Campos, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 350, 190, 90));
+        getContentPane().add(Boton_Campos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, 190, 90));
 
         boton_Estandarizacion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         boton_Estandarizacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/check.png"))); // NOI18N
-        boton_Estandarizacion.setText("Estandarización");
         boton_Estandarizacion.setContentAreaFilled(false);
-        boton_Estandarizacion.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         boton_Estandarizacion.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         boton_Estandarizacion.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/check (1).png"))); // NOI18N
-        getContentPane().add(boton_Estandarizacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 370, 200, 60));
+        boton_Estandarizacion.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        getContentPane().add(boton_Estandarizacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 350, 200, 60));
 
         boton_Registros.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         boton_Registros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/register (3)_1.png"))); // NOI18N
@@ -137,7 +137,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 boton_RegistrosActionPerformed(evt);
             }
         });
-        getContentPane().add(boton_Registros, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 280, 190, 90));
+        getContentPane().add(boton_Registros, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 270, 190, 90));
 
         boton_Registros1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         boton_Registros1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (4).png"))); // NOI18N
@@ -155,13 +155,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 boton_Registros1ActionPerformed(evt);
             }
         });
-        getContentPane().add(boton_Registros1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 320, 90, 90));
+        getContentPane().add(boton_Registros1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 320, 90, 90));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoConLogo.jpeg"))); // NOI18N
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 20, 80));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 20, 100));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoConLogo.jpeg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 1320, 820));
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel10.setText("Estandarización");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 410, -1, 20));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/blue.jpg"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1180, 60));
@@ -169,14 +170,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/blue.jpg"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 0, 370, 60));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoConLogo.jpeg"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 1320, 820));
+
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoConLogo.jpeg"))); // NOI18N
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1490, 150, 60, 90));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1480, 150, 70, 90));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoConLogo.jpeg"))); // NOI18N
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1410, 30, 1280, 840));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1350, 30, 1340, 840));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoConLogo.jpeg"))); // NOI18N
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1140, 0, 1310, 900));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1140, -20, 1310, 900));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -264,6 +268,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton boton_Registros;
     private javax.swing.JButton boton_Registros1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
