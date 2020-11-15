@@ -38,6 +38,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Archivos = new javax.swing.JDialog();
         jButton1 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
+        boton_crearArchivo = new javax.swing.JButton();
+        btn_salvar = new javax.swing.JButton();
+        btn_cerrararchivo = new javax.swing.JButton();
+        btn_salir1 = new javax.swing.JButton();
         Fondo = new javax.swing.JLabel();
         Campos = new javax.swing.JDialog();
         boton_regresar = new javax.swing.JButton();
@@ -125,15 +129,57 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
-        Archivos.getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 560, 170, 70));
+        Archivos.getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 590, 170, 70));
 
         jLabel9.setFont(new java.awt.Font("Bodoni MT", 1, 24)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("ARCHIVOS");
         Archivos.getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 250, 40));
 
+        boton_crearArchivo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        boton_crearArchivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agregar-archivo (3).png"))); // NOI18N
+        boton_crearArchivo.setText("Crear archivo");
+        boton_crearArchivo.setContentAreaFilled(false);
+        boton_crearArchivo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        boton_crearArchivo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        boton_crearArchivo.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agregar-archivo (2).png"))); // NOI18N
+        Archivos.getContentPane().add(boton_crearArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 510, 190, 80));
+
+        btn_salvar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_salvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/disco-flexible.png"))); // NOI18N
+        btn_salvar.setText("Salvar archivo");
+        btn_salvar.setContentAreaFilled(false);
+        btn_salvar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btn_salvar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_salvar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/disco-flexible (1).png"))); // NOI18N
+        Archivos.getContentPane().add(btn_salvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 420, 170, 100));
+
+        btn_cerrararchivo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_cerrararchivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/archivo.png"))); // NOI18N
+        btn_cerrararchivo.setText("Cerrar archivo");
+        btn_cerrararchivo.setContentAreaFilled(false);
+        btn_cerrararchivo.setHideActionText(true);
+        btn_cerrararchivo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btn_cerrararchivo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_cerrararchivo.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/archivo (1).png"))); // NOI18N
+        Archivos.getContentPane().add(btn_cerrararchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, 170, 80));
+
+        btn_salir1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_salir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/eliminar.png"))); // NOI18N
+        btn_salir1.setText("Salir");
+        btn_salir1.setContentAreaFilled(false);
+        btn_salir1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btn_salir1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_salir1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/eliminar (1).png"))); // NOI18N
+        btn_salir1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_salir1MouseClicked(evt);
+            }
+        });
+        Archivos.getContentPane().add(btn_salir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 600, 140, 50));
+
         Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/archives2.gif"))); // NOI18N
-        Archivos.getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-80, 0, 900, 660));
+        Archivos.getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-80, 0, 890, 680));
 
         Campos.setUndecorated(true);
         Campos.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -807,6 +853,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btn_delete1MouseClicked
 
+    private void btn_salir1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_salir1MouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_btn_salir1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -874,14 +924,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton boton_Registros;
     private javax.swing.JButton boton_Salir;
     private javax.swing.JButton boton_Salir1;
+    private javax.swing.JButton boton_crearArchivo;
     private javax.swing.JButton boton_regresar;
     private javax.swing.JButton btn_aceptar1;
+    private javax.swing.JButton btn_cerrararchivo;
     private javax.swing.JButton btn_confirmar;
     private javax.swing.JButton btn_delete1;
     private javax.swing.JButton btn_regresar;
     private javax.swing.JButton btn_regresar1;
     private javax.swing.JButton btn_regresar2;
     private javax.swing.JButton btn_return;
+    private javax.swing.JButton btn_salir1;
+    private javax.swing.JButton btn_salvar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox<Object> cb_listaCampos;
