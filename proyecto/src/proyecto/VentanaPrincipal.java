@@ -697,10 +697,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_Boton_ArchivosMouseClicked
 
     private void Boton_CamposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Boton_CamposMouseClicked
-        Campos.pack();
-        Campos.setModal(true);
-        Campos.setLocationRelativeTo(null);
-        Campos.setVisible(true);
+        
+        if (GnombreArchivo != null) {
+            Campos.pack();
+            Campos.setModal(true);
+            Campos.setLocationRelativeTo(null);
+            Campos.setVisible(true);
+        }
+        
+        else{
+            JOptionPane.showMessageDialog(null, "No hay ningún archivo cargado en memoria");
+        }
     }//GEN-LAST:event_Boton_CamposMouseClicked
 
     private void boton_Salir1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_Salir1MouseClicked
@@ -879,23 +886,29 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void boton_crearArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_crearArchivoMouseClicked
         // TODO add your handling code here:
         
-        String nombreArchivo = JOptionPane.showInputDialog(null,"Escriba el nombre de Archivo:");
-        
-        if (nombreArchivo != null) {
+        if (GnombreArchivo == null) {
 
-            // write data to file
-            try ( // create a writer
-                    FileOutputStream fos = new FileOutputStream(new File(nombreArchivo))) {
-            } catch (IOException ex) {
-                ex.printStackTrace();
+            String nombreArchivo = JOptionPane.showInputDialog(null, "Escriba el nombre de Archivo:");
+
+            if (!nombreArchivo.isEmpty()) {
+
+                // write data to file
+                try ( // create a writer
+                        FileOutputStream fos = new FileOutputStream(new File(nombreArchivo))) {
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+
+                JOptionPane.showMessageDialog(null, "Archivo creado con éxito");
+
+                GnombreArchivo = nombreArchivo;
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Por favor, ingrese un nombre para poder crear el archivo");
             }
-            
-            JOptionPane.showMessageDialog(null, "Archivo creado con éxito");
-            
-            GnombreArchivo = nombreArchivo;
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Por favor, ingrese un nombre para poder crear el archivo");
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Usted ya tiene un archivo cargado, por favor cierre el actual si desea crear otro.");
         }
     }//GEN-LAST:event_boton_crearArchivoMouseClicked
 
@@ -946,6 +959,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         GnombreArchivo = null;
+        archivoFalso.getListaCampos().clear();
     }//GEN-LAST:event_btn_cerrararchivoMouseClicked
 
     /**
