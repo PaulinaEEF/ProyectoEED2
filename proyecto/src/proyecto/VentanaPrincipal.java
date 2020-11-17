@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package proyecto;
 
 import java.io.BufferedOutputStream;
@@ -294,7 +290,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         crearCampos.getContentPane().add(NombreCampo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 130, 30));
 
         comboTipos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        comboTipos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Integer", "Char", "Boolean", "String", " " }));
+        comboTipos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "int", "char" }));
         comboTipos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboTiposActionPerformed(evt);
@@ -788,16 +784,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // aqui hay que guardar en el archivo
         Campo nuevoCampo = new Campo(nombre, tipoDato, nBytes, llave);
         archivoFalso.setListaCampo(nuevoCampo);
-        if (reply == JOptionPane.NO_OPTION) {
-            crearCampos.setVisible(false);
-            Campos.setVisible(true);
-
-        }
         NombreCampo.setText("");
         comboTipos.setSelectedIndex(0);
         CBytes.setValue(0);
 //        (llave) ? RB_Si.doClick() : RB_No.doClick();
         buttonGroup1.clearSelection();
+        if (reply == JOptionPane.NO_OPTION) {
+            crearCampos.setVisible(false);
+            Campos.setVisible(true);
+
+        }
+
     }//GEN-LAST:event_btn_confirmarMouseClicked
 
     private void MDC_comboTiposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MDC_comboTiposActionPerformed
@@ -831,18 +828,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_cb_listaCamposItemStateChanged
 
     private void btn_aceptar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_aceptar1MouseClicked
-        Campo.class.cast(cb_listaCampos.getSelectedItem()).setNombre(MDC_NombreCampo.getText());
-        //algun tipo de validacion para ver si no hay mas llaves primarias supogo
-        Campo.class.cast(cb_listaCampos.getSelectedItem()).setLprimaria(MDC_RB_Si.isSelected());
-        Campo.class.cast(cb_listaCampos.getSelectedItem()).setBytes(MDC_CBytes.getValue().hashCode());
-        Campo.class.cast(cb_listaCampos.getSelectedItem()).setTipo(MDC_comboTipos.getSelectedItem().toString());
-        JOptionPane.showMessageDialog(null, "Campo(s) modificado(s)");
 
-        cb_listaCampos.setModel(new DefaultComboBoxModel<>());
-        for (Campo campo : archivoFalso.getListaCampos()) {
-            cb_listaCampos.addItem(campo);
+        if (cb_listaCampos.getSelectedIndex() < 0) {
+            JOptionPane.showMessageDialog(null, "No ha seleccionado ningún campo");
+        } else {
+            Campo.class.cast(cb_listaCampos.getSelectedItem()).setNombre(MDC_NombreCampo.getText());
+            //algun tipo de validacion para ver si no hay mas llaves primarias supogo
+            Campo.class.cast(cb_listaCampos.getSelectedItem()).setLprimaria(MDC_RB_Si.isSelected());
+            Campo.class.cast(cb_listaCampos.getSelectedItem()).setBytes(MDC_CBytes.getValue().hashCode());
+            Campo.class.cast(cb_listaCampos.getSelectedItem()).setTipo(MDC_comboTipos.getSelectedItem().toString());
+            JOptionPane.showMessageDialog(null, "Campo(s) modificado(s)");
+
+            cb_listaCampos.setModel(new DefaultComboBoxModel<>());
+            for (Campo campo : archivoFalso.getListaCampos()) {
+                cb_listaCampos.addItem(campo);
+            }
+            cb_listaCampos.setSelectedItem(null);
         }
-        cb_listaCampos.setSelectedItem(null);
+
     }//GEN-LAST:event_btn_aceptar1MouseClicked
 
     private void btn_returnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_returnMouseClicked
@@ -915,53 +918,61 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void btn_salvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_salvarMouseClicked
         // TODO add your handling code here:
+        if (GnombreArchivo == null) {
+            JOptionPane.showMessageDialog(null, "No hay ningun archivo cargado en memoria");
+        } else {
+            String metadata = GnombreArchivo;
 
-        String metadata = GnombreArchivo;
+            for (Campo campo : archivoFalso.getListaCampos()) {
+                metadata += "|"
+                        + campo.getNombre()
+                        + ":"
+                        + campo.getTipo()
+                        + ":"
+                        + campo.getBytes()
+                        + ":";
 
-        for (Campo campo : archivoFalso.getListaCampos()) {
-            metadata += "|"
-                    + campo.getNombre()
-                    + ":"
-                    + campo.getTipo()
-                    + ":"
-                    + campo.getBytes()
-                    + ":";
-
-            if (campo.isLprimaria()) {
-                metadata += "true";
-            } else {
-                metadata += "false";
+                if (campo.isLprimaria()) {
+                    metadata += "true";
+                } else {
+                    metadata += "false";
+                }
             }
+
+            try {
+                // create a writer
+                FileOutputStream fos = new FileOutputStream(new File(GnombreArchivo));
+                BufferedOutputStream writer = new BufferedOutputStream(fos);
+
+                // write data to file
+                writer.write(metadata.getBytes());
+
+                // flush remaining bytes
+                writer.flush();
+
+                // close the writer
+                writer.close();
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+
+            JOptionPane.showMessageDialog(null, "Archivo guardado con éxito");
         }
 
-        try {
-            // create a writer
-            FileOutputStream fos = new FileOutputStream(new File(GnombreArchivo));
-            BufferedOutputStream writer = new BufferedOutputStream(fos);
-
-            // write data to file
-            writer.write(metadata.getBytes());
-
-            // flush remaining bytes
-            writer.flush();
-
-            // close the writer
-            writer.close();
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-        JOptionPane.showMessageDialog(null, "Archivo guardado con éxito");
 
     }//GEN-LAST:event_btn_salvarMouseClicked
 
     private void btn_cerrararchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cerrararchivoMouseClicked
         // TODO add your handling code here:
+        if (GnombreArchivo == null) {
+            JOptionPane.showMessageDialog(null, "No hay ningun archivo cargado en memoria");
+        } else {
+            GnombreArchivo = null;
+            archivoFalso.getListaCampos().clear();
+            JOptionPane.showMessageDialog(null, "El archivo ha sido cerrado exitosamente");
+        }
 
-        GnombreArchivo = null;
-        archivoFalso.getListaCampos().clear();
-        JOptionPane.showMessageDialog(null, "El archivo ha sido cerrado exitosamente");
     }//GEN-LAST:event_btn_cerrararchivoMouseClicked
 
     /**
