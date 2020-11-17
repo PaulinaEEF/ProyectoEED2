@@ -867,7 +867,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         int row = Lista_borrar.getSelectedIndex();
         if (row < 0) {
-            JOptionPane.showConfirmDialog(null, "Campo seleccionado inválido");
+            JOptionPane.showMessageDialog(null, "Campo seleccionado inválido");
         } else {
             int response = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar este campo?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
