@@ -4,7 +4,8 @@ package proyecto;
 import java.util.ArrayList;
 
 public class Archivo /*implements Serializable*/ {
-
+    
+    boolean Primaria;
     ArrayList<Campo> ListaCampos = new ArrayList();
 
     public Archivo() {
@@ -26,4 +27,16 @@ public class Archivo /*implements Serializable*/ {
     public void setListaCampo(Campo Campo) {
         this.ListaCampos.add(Campo);
     }
+
+    public boolean hasPrimaria() {
+        return Primaria;
+    }
+
+    public void setPrimaria(boolean Primaria) {
+        this.Primaria = Primaria;
+    }
+    
+    
 }
+
+
