@@ -1,4 +1,3 @@
-
 package proyecto;
 
 import java.io.BufferedOutputStream;
@@ -305,6 +304,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         buttonGroup1.add(RB_Si);
         RB_Si.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         RB_Si.setText("Si");
+        RB_Si.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RB_SiMouseClicked(evt);
+            }
+        });
         crearCampos.getContentPane().add(RB_Si, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, -1, -1));
 
         buttonGroup1.add(RB_No);
@@ -378,6 +382,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btn_aceptar1MouseClicked(evt);
             }
         });
+        btn_aceptar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_aceptar1ActionPerformed(evt);
+            }
+        });
         Modificar_Campos.getContentPane().add(btn_aceptar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 150, 70));
 
         btn_regresar1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -414,7 +423,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Modificar_Campos.getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
 
         MDC_comboTipos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        MDC_comboTipos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Integer", "Char", "Boolean", "String", " " }));
+        MDC_comboTipos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "int", "char" }));
         MDC_comboTipos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MDC_comboTiposActionPerformed(evt);
@@ -437,6 +446,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         buttonGroup2.add(MDC_RB_Si);
         MDC_RB_Si.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         MDC_RB_Si.setText("Si");
+        MDC_RB_Si.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MDC_RB_SiMouseClicked(evt);
+            }
+        });
         Modificar_Campos.getContentPane().add(MDC_RB_Si, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, -1, -1));
 
         buttonGroup2.add(MDC_RB_No);
@@ -780,9 +794,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         String tipoDato = comboTipos.getSelectedItem().toString();
         int nBytes = CBytes.getValue().hashCode();
         boolean llave = RB_Si.isSelected();
+        if (llave == true) {
+            archivoFalso.setPrimaria(llave);
+        }
         int reply = JOptionPane.showConfirmDialog(null, "Desea continuar añadiendo campos?", "Campo creado exitosamente!", JOptionPane.YES_NO_OPTION);
-        // aqui hay que guardar en el archivo
+        // aqui hay que guardar en el 
+
         Campo nuevoCampo = new Campo(nombre, tipoDato, nBytes, llave);
+
         archivoFalso.setListaCampo(nuevoCampo);
         NombreCampo.setText("");
         comboTipos.setSelectedIndex(0);
@@ -823,6 +842,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             } else {
                 MDC_RB_No.doClick();
             }
+        } else {
+            MDC_NombreCampo.setText("");
+            MDC_comboTipos.setSelectedItem(null);
+            MDC_CBytes.setValue(0);
+            buttonGroup2.clearSelection();
+            
         }
         //algun tipo de validacion para ver si no hay mas llaves primarias supogo
     }//GEN-LAST:event_cb_listaCamposItemStateChanged
@@ -832,11 +857,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         if (cb_listaCampos.getSelectedIndex() < 0) {
             JOptionPane.showMessageDialog(null, "No ha seleccionado ningún campo");
         } else {
+            if (MDC_RB_No.isSelected() && Campo.class.cast(cb_listaCampos.getSelectedItem()).isLprimaria()) {
+                archivoFalso.setPrimaria(false);
+            } else if (MDC_RB_Si.isSelected()) {
+                archivoFalso.setPrimaria(true);
+            }
+
             Campo.class.cast(cb_listaCampos.getSelectedItem()).setNombre(MDC_NombreCampo.getText());
             //algun tipo de validacion para ver si no hay mas llaves primarias supogo
             Campo.class.cast(cb_listaCampos.getSelectedItem()).setLprimaria(MDC_RB_Si.isSelected());
             Campo.class.cast(cb_listaCampos.getSelectedItem()).setBytes(MDC_CBytes.getValue().hashCode());
             Campo.class.cast(cb_listaCampos.getSelectedItem()).setTipo(MDC_comboTipos.getSelectedItem().toString());
+
             JOptionPane.showMessageDialog(null, "Campo(s) modificado(s)");
 
             cb_listaCampos.setModel(new DefaultComboBoxModel<>());
@@ -873,7 +905,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Campo seleccionado inválido");
         } else {
             int response = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar este campo?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-
+            if (archivoFalso.getListaCampo(row).isLprimaria()) {
+                archivoFalso.setPrimaria(false);
+            }
             if (response == JOptionPane.OK_OPTION) {
                 DefaultListModel m = (DefaultListModel) Lista_borrar.getModel();
                 archivoFalso.getListaCampos().remove(row);
@@ -974,6 +1008,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btn_cerrararchivoMouseClicked
+
+    private void RB_SiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RB_SiMouseClicked
+        if (archivoFalso.hasPrimaria()) {
+            JOptionPane.showMessageDialog(null, "este archivo ya tiene un campo llave primaria");
+            RB_No.doClick();
+        }
+    }//GEN-LAST:event_RB_SiMouseClicked
+
+    private void MDC_RB_SiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MDC_RB_SiMouseClicked
+        if (archivoFalso.hasPrimaria()) {
+            JOptionPane.showMessageDialog(null, "este archivo ya tiene un campo llave primaria");
+            MDC_RB_No.doClick();
+        }
+    }//GEN-LAST:event_MDC_RB_SiMouseClicked
+
+    private void btn_aceptar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aceptar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_aceptar1ActionPerformed
 
     /**
      * @param args the command line arguments
