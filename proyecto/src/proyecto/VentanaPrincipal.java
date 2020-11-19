@@ -1174,6 +1174,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         } else {
             GnombreArchivo = null;
             archivoFalso.getListaCampos().clear();
+            archivoFalso.setPrimaria(false);
             JOptionPane.showMessageDialog(null, "El archivo ha sido cerrado exitosamente");
         }
 
