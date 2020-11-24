@@ -758,150 +758,150 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         AbrirArchivo.getContentPane().add(cb_listarArchivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, 130, 40));
 
-        jLabel27.setText("\\");
-            AbrirArchivo.getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 450));
+        jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/close-up-of-white-usb-flash-drive.jpg"))); // NOI18N
+        AbrirArchivo.getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 360));
 
-            setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-            setUndecorated(true);
-            getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-            Boton_Archivos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-            Boton_Archivos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/folder.png"))); // NOI18N
-            Boton_Archivos.setText("Archivos");
-            Boton_Archivos.setContentAreaFilled(false);
-            Boton_Archivos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-            Boton_Archivos.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-            Boton_Archivos.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/folder (1).png"))); // NOI18N
-            Boton_Archivos.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    Boton_ArchivosMouseClicked(evt);
-                }
-            });
-            getContentPane().add(Boton_Archivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 450, 170, 110));
+        Boton_Archivos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Boton_Archivos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/folder.png"))); // NOI18N
+        Boton_Archivos.setText("Archivos");
+        Boton_Archivos.setContentAreaFilled(false);
+        Boton_Archivos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Boton_Archivos.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        Boton_Archivos.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/folder (1).png"))); // NOI18N
+        Boton_Archivos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Boton_ArchivosMouseClicked(evt);
+            }
+        });
+        getContentPane().add(Boton_Archivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 450, 170, 110));
 
-            boton_Indices.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-            boton_Indices.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/index.png"))); // NOI18N
-            boton_Indices.setText("Indices");
-            boton_Indices.setContentAreaFilled(false);
-            boton_Indices.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-            boton_Indices.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-            boton_Indices.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/index (1).png"))); // NOI18N
-            boton_Indices.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    boton_IndicesMouseClicked(evt);
-                }
-            });
-            getContentPane().add(boton_Indices, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 290, 170, 70));
+        boton_Indices.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        boton_Indices.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/index.png"))); // NOI18N
+        boton_Indices.setText("Indices");
+        boton_Indices.setContentAreaFilled(false);
+        boton_Indices.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        boton_Indices.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        boton_Indices.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/index (1).png"))); // NOI18N
+        boton_Indices.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                boton_IndicesMouseClicked(evt);
+            }
+        });
+        getContentPane().add(boton_Indices, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 290, 170, 70));
 
-            Boton_Campos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-            Boton_Campos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/clipboard.png"))); // NOI18N
-            Boton_Campos.setText("Campos");
-            Boton_Campos.setContentAreaFilled(false);
-            Boton_Campos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-            Boton_Campos.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-            Boton_Campos.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/clipboard (1).png"))); // NOI18N
-            Boton_Campos.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    Boton_CamposMouseClicked(evt);
-                }
-            });
-            Boton_Campos.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    Boton_CamposActionPerformed(evt);
-                }
-            });
-            getContentPane().add(Boton_Campos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, 190, 90));
+        Boton_Campos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Boton_Campos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/clipboard.png"))); // NOI18N
+        Boton_Campos.setText("Campos");
+        Boton_Campos.setContentAreaFilled(false);
+        Boton_Campos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Boton_Campos.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        Boton_Campos.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/clipboard (1).png"))); // NOI18N
+        Boton_Campos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Boton_CamposMouseClicked(evt);
+            }
+        });
+        Boton_Campos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Boton_CamposActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Boton_Campos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, 190, 90));
 
-            boton_Estandarizacion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-            boton_Estandarizacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/check.png"))); // NOI18N
-            boton_Estandarizacion.setContentAreaFilled(false);
-            boton_Estandarizacion.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-            boton_Estandarizacion.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/check (1).png"))); // NOI18N
-            boton_Estandarizacion.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-            boton_Estandarizacion.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    boton_EstandarizacionMouseClicked(evt);
-                }
-            });
-            getContentPane().add(boton_Estandarizacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 350, 200, 60));
+        boton_Estandarizacion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        boton_Estandarizacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/check.png"))); // NOI18N
+        boton_Estandarizacion.setContentAreaFilled(false);
+        boton_Estandarizacion.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        boton_Estandarizacion.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/check (1).png"))); // NOI18N
+        boton_Estandarizacion.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        boton_Estandarizacion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                boton_EstandarizacionMouseClicked(evt);
+            }
+        });
+        getContentPane().add(boton_Estandarizacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 350, 200, 60));
 
-            boton_Registros.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-            boton_Registros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/register (3)_1.png"))); // NOI18N
-            boton_Registros.setText("Registros");
-            boton_Registros.setContentAreaFilled(false);
-            boton_Registros.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-            boton_Registros.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-            boton_Registros.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/register (4)_1.png"))); // NOI18N
-            boton_Registros.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    boton_RegistrosMouseClicked(evt);
-                }
-            });
-            getContentPane().add(boton_Registros, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 270, 190, 90));
+        boton_Registros.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        boton_Registros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/register (3)_1.png"))); // NOI18N
+        boton_Registros.setText("Registros");
+        boton_Registros.setContentAreaFilled(false);
+        boton_Registros.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        boton_Registros.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        boton_Registros.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/register (4)_1.png"))); // NOI18N
+        boton_Registros.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                boton_RegistrosMouseClicked(evt);
+            }
+        });
+        getContentPane().add(boton_Registros, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 270, 190, 90));
 
-            boton_Salir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-            boton_Salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (4).png"))); // NOI18N
-            boton_Salir.setContentAreaFilled(false);
-            boton_Salir.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-            boton_Salir.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-            boton_Salir.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (5).png"))); // NOI18N
-            boton_Salir.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    boton_SalirMouseClicked(evt);
-                }
-            });
-            boton_Salir.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    boton_SalirActionPerformed(evt);
-                }
-            });
-            getContentPane().add(boton_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 320, 90, 90));
+        boton_Salir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        boton_Salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (4).png"))); // NOI18N
+        boton_Salir.setContentAreaFilled(false);
+        boton_Salir.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        boton_Salir.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        boton_Salir.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (5).png"))); // NOI18N
+        boton_Salir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                boton_SalirMouseClicked(evt);
+            }
+        });
+        boton_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_SalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(boton_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 320, 90, 90));
 
-            jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoConLogo.jpeg"))); // NOI18N
-            getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 20, 100));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoConLogo.jpeg"))); // NOI18N
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 20, 100));
 
-            jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-            jLabel10.setText("Estandarización");
-            getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 410, -1, 20));
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel10.setText("Estandarización");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 410, -1, 20));
 
-            jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/blue.jpg"))); // NOI18N
-            getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1180, 60));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/blue.jpg"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1180, 60));
 
-            jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/blue.jpg"))); // NOI18N
-            getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 0, 370, 60));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/blue.jpg"))); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 0, 370, 60));
 
-            jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoConLogo.jpeg"))); // NOI18N
-            getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 1320, 820));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoConLogo.jpeg"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 1320, 820));
 
-            jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoConLogo.jpeg"))); // NOI18N
-            getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1480, 150, 70, 90));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoConLogo.jpeg"))); // NOI18N
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1480, 150, 70, 90));
 
-            jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoConLogo.jpeg"))); // NOI18N
-            getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1350, 30, 1340, 840));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoConLogo.jpeg"))); // NOI18N
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1350, 30, 1340, 840));
 
-            jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoConLogo.jpeg"))); // NOI18N
-            getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1140, -20, 1310, 900));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoConLogo.jpeg"))); // NOI18N
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1140, -20, 1310, 900));
 
-            boton_Salir1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-            boton_Salir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (4).png"))); // NOI18N
-            boton_Salir1.setContentAreaFilled(false);
-            boton_Salir1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-            boton_Salir1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-            boton_Salir1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (5).png"))); // NOI18N
-            boton_Salir1.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    boton_Salir1MouseClicked(evt);
-                }
-            });
-            boton_Salir1.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    boton_Salir1ActionPerformed(evt);
-                }
-            });
-            getContentPane().add(boton_Salir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 320, 90, 90));
+        boton_Salir1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        boton_Salir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (4).png"))); // NOI18N
+        boton_Salir1.setContentAreaFilled(false);
+        boton_Salir1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        boton_Salir1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        boton_Salir1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (5).png"))); // NOI18N
+        boton_Salir1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                boton_Salir1MouseClicked(evt);
+            }
+        });
+        boton_Salir1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_Salir1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(boton_Salir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 320, 90, 90));
 
-            pack();
-        }// </editor-fold>//GEN-END:initComponents
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
     private void Boton_CamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_CamposActionPerformed
         // TODO add your handling code here:
