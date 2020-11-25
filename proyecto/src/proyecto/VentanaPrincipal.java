@@ -1,13 +1,16 @@
 package proyecto;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JFileChooser;
+import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.filechooser.FileView;
@@ -27,6 +30,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public VentanaPrincipal() {
         initComponents();
 
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("jjdp Files", "jjdp", "info");
+        escogerArchivo.setFileFilter(filter);
         escogerArchivo.setCurrentDirectory(new File("."));
         setResizable(false);
         this.setExtendedState(MAXIMIZED_BOTH);
@@ -1156,6 +1161,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
             if (!nombreArchivo.isEmpty()) {
 
+                GnombreArchivo = nombreArchivo + ".jjdp";
                 // write data to file
                 try ( // create a writer
                          FileOutputStream fos = new FileOutputStream(new File(nombreArchivo))) {
@@ -1165,7 +1171,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(null, "Archivo creado con éxito");
 
-                GnombreArchivo = nombreArchivo + ".jjdp";
 
             } else {
                 JOptionPane.showMessageDialog(null, "Por favor, ingrese un nombre para poder crear el archivo");
@@ -1301,6 +1306,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //escogerArchivo es tipo Jfilechooser
         //archi es de tipo clase archivo
         //archivoo es de tipo File
+        if (GnombreArchivo != null) {
+            JOptionPane.showMessageDialog(null, "Actualmente tiene un archivo abierto");
+            return;
+        }
         Archivo archi = new Archivo();
 
         escogerArchivo.setFileView(new FileView() {
@@ -1312,14 +1321,53 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 return dirToLock.equals(f);
             }
         });
+                        
 
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("jjdp Files", "jjdp", "info");
-        escogerArchivo.setFileFilter(filter);
+        
+        escogerArchivo.setSelectedFile(new File(""));
         if (escogerArchivo.showDialog(null, "Abrir archivo") == JFileChooser.APPROVE_OPTION) {
             archivoo = escogerArchivo.getSelectedFile();
             if (archivoo.canRead()) {
                 if (archivoo.getName().endsWith(".jjdp")) {
+                    GnombreArchivo=archivoo.getName();
                     JOptionPane.showMessageDialog(null, "El archivo ha sido abierto exitosamente");
+                    try {
+                        // create a reader
+                        FileInputStream fis = new FileInputStream(archivoo);
+                        BufferedInputStream reader = new BufferedInputStream(fis);
+
+                        // read one byte at a time
+                        String metadata="";
+                        int ch;
+                        while ((ch = reader.read()) != -1) {
+                            metadata+=(char)ch;
+                        }
+                        reader.close();
+                        // close the reader
+                        
+                        String[] arMetadata = metadata.split("\\|");
+                        
+                        for (int i = 1; i < arMetadata.length; i++) {
+                            String[] arMetadata2 = arMetadata[i].split("\\:");
+                            String nombre = arMetadata2[0];
+                            String tipo = arMetadata2[1];
+                            int numBytes = (Integer.parseInt(arMetadata2[2]));
+                            boolean key;
+                            if(arMetadata2[3].equals("true")){
+                                key = true;
+                            }
+                            else{
+                                key = false;
+                            }
+                            
+                            archivoFalso.setListaCampo(new Campo(nombre, tipo, numBytes, key));
+                        }
+                        
+
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    
                 } else {
                     JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo con terminación [.jjdp]");
                 }
@@ -1362,6 +1410,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 new VentanaPrincipal().setVisible(true);
             }
