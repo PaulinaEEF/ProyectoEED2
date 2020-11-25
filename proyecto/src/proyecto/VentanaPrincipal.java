@@ -1159,12 +1159,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
             String nombreArchivo = JOptionPane.showInputDialog(null, "Escriba el nombre de Archivo:");
 
-            if (!nombreArchivo.isEmpty()) {
-
+            if (nombreArchivo != null || (nombreArchivo != null && !("".equals(nombreArchivo)))) {
                 GnombreArchivo = nombreArchivo + ".jjdp";
                 // write data to file
                 try ( // create a writer
-                         FileOutputStream fos = new FileOutputStream(new File(nombreArchivo))) {
+                         FileOutputStream fos = new FileOutputStream(new File(GnombreArchivo))) {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }

@@ -7,7 +7,7 @@ public class Archivo /*implements Serializable*/ {
     
     boolean Primaria;
     ArrayList<Campo> ListaCampos = new ArrayList();
-
+    
     public Archivo() {
 
     }
