@@ -7,6 +7,10 @@ import java.io.IOException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
+import javax.swing.filechooser.FileView;
 
 /**
  *
@@ -17,8 +21,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form VentanaPrincipal
      */
+    JFileChooser escogerArchivo = new JFileChooser();
+    File archivoo;
+
     public VentanaPrincipal() {
         initComponents();
+
+        escogerArchivo.setCurrentDirectory(new File("."));
         setResizable(false);
         this.setExtendedState(MAXIMIZED_BOTH);
         setTitle("FILE MANAGER");
@@ -166,7 +175,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 boton_abrirArchivoMouseClicked(evt);
             }
         });
-        Archivos.getContentPane().add(boton_abrirArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 500, 190, 80));
+        Archivos.getContentPane().add(boton_abrirArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 500, 190, 80));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -185,7 +194,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 boton_crearArchivoMouseClicked(evt);
             }
         });
-        Archivos.getContentPane().add(boton_crearArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 500, 190, 80));
+        Archivos.getContentPane().add(boton_crearArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 430, 190, 80));
 
         btn_salvar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_salvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/disco-flexible.png"))); // NOI18N
@@ -199,7 +208,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btn_salvarMouseClicked(evt);
             }
         });
-        Archivos.getContentPane().add(btn_salvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 420, 170, 100));
+        Archivos.getContentPane().add(btn_salvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 420, 200, 100));
 
         btn_cerrararchivo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_cerrararchivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/archivo.png"))); // NOI18N
@@ -214,7 +223,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btn_cerrararchivoMouseClicked(evt);
             }
         });
-        Archivos.getContentPane().add(btn_cerrararchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, 170, 80));
+        Archivos.getContentPane().add(btn_cerrararchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 500, 210, 80));
 
         btn_salir1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_salir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/eliminar.png"))); // NOI18N
@@ -1144,7 +1153,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         if (GnombreArchivo == null) {
 
             String nombreArchivo = JOptionPane.showInputDialog(null, "Escriba el nombre de Archivo:");
-            nombreArchivo+=".jjdp";
 
             if (!nombreArchivo.isEmpty()) {
 
@@ -1157,7 +1165,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(null, "Archivo creado con éxito");
 
-                GnombreArchivo = nombreArchivo;
+                GnombreArchivo = nombreArchivo + ".jjdp";
 
             } else {
                 JOptionPane.showMessageDialog(null, "Por favor, ingrese un nombre para poder crear el archivo");
@@ -1288,17 +1296,36 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_regresar5MouseClicked
 
     private void boton_abrirArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_abrirArchivoMouseClicked
-        // TODO add your handling code here:
-        cb_listarArchivos.setModel(new DefaultComboBoxModel<>());
-//        for (Campo campo : cb_listarArchivos.getListaCampos()) {
-//            cb_listarArchivos.addItem(campo);
-//        }
-        
-        Archivos.setVisible(false);
-        AbrirArchivo.pack();
-        AbrirArchivo.setModal(true);
-        AbrirArchivo.setLocationRelativeTo(null);
-        AbrirArchivo.setVisible(true);
+        // TODO add your handling code here:\
+
+        //escogerArchivo es tipo Jfilechooser
+        //archi es de tipo clase archivo
+        //archivoo es de tipo File
+        Archivo archi = new Archivo();
+
+        escogerArchivo.setFileView(new FileView() {
+
+            File dirToLock = new File(".");
+
+            @Override
+            public Boolean isTraversable(File f) {
+                return dirToLock.equals(f);
+            }
+        });
+
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("jjdp Files", "jjdp", "info");
+        escogerArchivo.setFileFilter(filter);
+        if (escogerArchivo.showDialog(null, "Abrir archivo") == JFileChooser.APPROVE_OPTION) {
+            archivoo = escogerArchivo.getSelectedFile();
+            if (archivoo.canRead()) {
+                if (archivoo.getName().endsWith(".jjdp")) {
+                    JOptionPane.showMessageDialog(null, "El archivo ha sido abierto exitosamente");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo con terminación [.jjdp]");
+                }
+            }
+
+        }
     }//GEN-LAST:event_boton_abrirArchivoMouseClicked
 
     /**
@@ -1315,16 +1342,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaPrincipal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaPrincipal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaPrincipal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaPrincipal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
