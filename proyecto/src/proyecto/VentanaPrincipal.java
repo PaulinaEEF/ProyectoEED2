@@ -1354,6 +1354,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             boolean key;
                             if(arMetadata2[3].equals("true")){
                                 key = true;
+                                if (!archivoFalso.hasPrimaria()) {
+                                    archivoFalso.setPrimaria(true);
+                                }
                             }
                             else{
                                 key = false;
@@ -1361,8 +1364,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             
                             archivoFalso.setListaCampo(new Campo(nombre, tipo, numBytes, key));
                         }
-                        
-
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
