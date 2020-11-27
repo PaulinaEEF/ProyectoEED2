@@ -532,7 +532,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         crearCampos.getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 120, 20));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel13.setText("Numero de bytes");
+        jLabel13.setText("Longitud del campo");
         crearCampos.getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 140, 20));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -639,7 +639,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Modificar_Campos.getContentPane().add(MDC_comboTipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 130, 20));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel17.setText("Numero de bytes");
+        jLabel17.setText("Longitud del campo");
         Modificar_Campos.getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
 
         MDC_CBytes.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -712,7 +712,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(Lista_borrar);
 
-        Borrar_campos.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 160, 220));
+        Borrar_campos.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 250, 260));
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel23.setText("Seleccione un campo");
@@ -747,7 +747,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Borrar_campos.getContentPane().add(btn_delete1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 160, 80));
 
         fondo_delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/eliminar1.png"))); // NOI18N
-        Borrar_campos.getContentPane().add(fondo_delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(-120, 0, 820, 440));
+        Borrar_campos.getContentPane().add(fondo_delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 0, 820, 440));
 
         AbrirArchivo.setUndecorated(true);
         AbrirArchivo.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -972,7 +972,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             modelo.addElement(campo);
         }
         Lista_borrar.setModel(modelo);
-
+        Lista_borrar.setCellRenderer(new CampoRenderer());
         Borrar_campos.pack();
         Borrar_campos.setModal(true);
         Borrar_campos.setLocationRelativeTo(null);
@@ -1006,9 +1006,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         DefaultListModel modelo = new DefaultListModel();
         for (Campo campo : archivoFalso.getListaCampos()) {
             modelo.addElement(campo);
+            //n = (n < campo.getNombre().length()) ? campo.getNombre().length() : n;
         }
         Lista_campos.setModel(modelo);
-
+        Lista_campos.setCellRenderer(new CampoRenderer());
         Listar_Campos.pack();
         Listar_Campos.setModal(true);
         Listar_Campos.setLocationRelativeTo(null);
@@ -1025,7 +1026,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         int nBytes = CBytes.getValue().hashCode();
         boolean llave = RB_Si.isSelected();
         if (llave == true) {
-            archivoFalso.setPrimaria(llave);
+            //archivoFalso.setPrimaria(llave);
         }
         int reply = JOptionPane.showConfirmDialog(null, "Desea continuar añadiendo campos?", "Campo creado exitosamente!", JOptionPane.YES_NO_OPTION);
         // aqui hay que guardar en el 
@@ -1066,7 +1067,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             buttonGroup2.clearSelection();
             MDC_NombreCampo.setText(campoAct.getNombre());
             MDC_comboTipos.setSelectedItem(campoAct.getTipo());
-            MDC_CBytes.setValue(campoAct.getBytes());
+            MDC_CBytes.setValue(campoAct.getLongitud());
             if (campoAct.isLprimaria()) {
                 MDC_RB_Si.doClick();
             } else {
@@ -1088,15 +1089,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No ha seleccionado ningún campo");
         } else {
             if (MDC_RB_No.isSelected() && Campo.class.cast(cb_listaCampos.getSelectedItem()).isLprimaria()) {
-                archivoFalso.setPrimaria(false);
+                //archivoFalso.setPrimaria(false);
             } else if (MDC_RB_Si.isSelected()) {
-                archivoFalso.setPrimaria(true);
+                //archivoFalso.setPrimaria(true);
             }
 
             Campo.class.cast(cb_listaCampos.getSelectedItem()).setNombre(MDC_NombreCampo.getText());
             //algun tipo de validacion para ver si no hay mas llaves primarias supogo
             Campo.class.cast(cb_listaCampos.getSelectedItem()).setLprimaria(MDC_RB_Si.isSelected());
-            Campo.class.cast(cb_listaCampos.getSelectedItem()).setBytes(MDC_CBytes.getValue().hashCode());
+            Campo.class.cast(cb_listaCampos.getSelectedItem()).setLongitud(MDC_CBytes.getValue().hashCode());
             Campo.class.cast(cb_listaCampos.getSelectedItem()).setTipo(MDC_comboTipos.getSelectedItem().toString());
 
             JOptionPane.showMessageDialog(null, "Campo(s) modificado(s)");
@@ -1136,7 +1137,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         } else {
             int response = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar este campo?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (archivoFalso.getListaCampo(row).isLprimaria()) {
-                archivoFalso.setPrimaria(false);
+                //archivoFalso.setPrimaria(false);
             }
             if (response == JOptionPane.OK_OPTION) {
                 DefaultListModel m = (DefaultListModel) Lista_borrar.getModel();
@@ -1192,7 +1193,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         + ":"
                         + campo.getTipo()
                         + ":"
-                        + campo.getBytes()
+                        + campo.getLongitud()
                         + ":";
 
                 if (campo.isLprimaria()) {
@@ -1233,7 +1234,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         } else {
             GnombreArchivo = null;
             archivoFalso.getListaCampos().clear();
-            archivoFalso.setPrimaria(false);
+            //archivoFalso.setPrimaria(false);
             JOptionPane.showMessageDialog(null, "El archivo ha sido cerrado exitosamente");
         }
 
@@ -1247,7 +1248,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_RB_SiMouseClicked
 
     private void MDC_RB_SiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MDC_RB_SiMouseClicked
-        if (archivoFalso.hasPrimaria()) {
+        if (archivoFalso.hasPrimaria() && !Campo.class.cast(cb_listaCampos.getSelectedItem()).isLprimaria()) {
             JOptionPane.showMessageDialog(null, "este archivo ya tiene un campo llave primaria");
             MDC_RB_No.doClick();
         }
@@ -1354,9 +1355,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             boolean key;
                             if(arMetadata2[3].equals("true")){
                                 key = true;
-                                if (!archivoFalso.hasPrimaria()) {
-                                    archivoFalso.setPrimaria(true);
-                                }
                             }
                             else{
                                 key = false;
@@ -1428,8 +1426,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JDialog Estandarización;
     private javax.swing.JLabel Fondo;
     private javax.swing.JDialog Indiices;
-    private javax.swing.JList<String> Lista_borrar;
-    private javax.swing.JList<String> Lista_campos;
+    private javax.swing.JList<Campo> Lista_borrar;
+    private javax.swing.JList<Campo> Lista_campos;
     private javax.swing.JDialog Listar_Campos;
     private javax.swing.JSpinner MDC_CBytes;
     private javax.swing.JTextField MDC_NombreCampo;
@@ -1476,7 +1474,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btn_xml;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JComboBox<Object> cb_listaCampos;
+    private javax.swing.JComboBox<Campo> cb_listaCampos;
     private javax.swing.JComboBox<String> cb_listarArchivos;
     private javax.swing.JComboBox<String> comboTipos;
     private javax.swing.JDialog crearCampos;

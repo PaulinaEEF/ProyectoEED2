@@ -2,10 +2,11 @@ package proyecto;
 
 //import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Archivo /*implements Serializable*/ {
     
-    boolean Primaria;
+    //boolean Primaria;
     ArrayList<Campo> ListaCampos = new ArrayList();
     
     public Archivo() {
@@ -29,12 +30,17 @@ public class Archivo /*implements Serializable*/ {
     }
 
     public boolean hasPrimaria() {
-        return Primaria;
+        for (Campo campo : ListaCampos) {
+            if (campo.isLprimaria()) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public void setPrimaria(boolean Primaria) {
+    /*public void setPrimaria(boolean Primaria) {
         this.Primaria = Primaria;
-    }
+    }*/
     
     
 }

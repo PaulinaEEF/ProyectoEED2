@@ -6,7 +6,7 @@ public class Campo {
     //ATRIBUTOS
     private String nombre;
     private String tipo;
-    private int bytes;
+    private int longitud;
     private boolean Lprimaria;
     
     //CONSTRUCTOR
@@ -17,7 +17,7 @@ public class Campo {
     public Campo(String nombre, String tipo, int bytes, boolean Lprimaria) {
         this.nombre = nombre;
         this.tipo = tipo;
-        this.bytes = bytes;
+        this.longitud = bytes;
         this.Lprimaria = Lprimaria;
     }
     
@@ -38,12 +38,12 @@ public class Campo {
         this.tipo = tipo;
     }
 
-    public int getBytes() {
-        return bytes;
+    public int getLongitud() {
+        return longitud;
     }
 
-    public void setBytes(int bytes) {
-        this.bytes = bytes;
+    public void setLongitud(int longitud) {
+        this.longitud = longitud;
     }
 
     public boolean isLprimaria() {
