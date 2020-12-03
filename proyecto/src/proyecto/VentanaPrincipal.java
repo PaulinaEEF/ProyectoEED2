@@ -14,6 +14,7 @@ import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.filechooser.FileView;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -135,6 +136,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel28 = new javax.swing.JLabel();
         cb_listarArchivos = new javax.swing.JComboBox<>();
         jLabel27 = new javax.swing.JLabel();
+        insertar_registros = new javax.swing.JDialog();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tabla_registros = new javax.swing.JTable();
+        btn_insertar = new javax.swing.JButton();
+        btn_return4 = new javax.swing.JButton();
+        jLabel29 = new javax.swing.JLabel();
         Boton_Archivos = new javax.swing.JButton();
         boton_Indices = new javax.swing.JButton();
         Boton_Campos = new javax.swing.JButton();
@@ -362,6 +369,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btn_registrar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         btn_registrar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btn_registrar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/add (5).png"))); // NOI18N
+        btn_registrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_registrarMouseClicked(evt);
+            }
+        });
         Registros.getContentPane().add(btn_registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(-50, 80, 240, 70));
 
         btn_modifica_registro.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -774,6 +786,37 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/close-up-of-white-usb-flash-drive.jpg"))); // NOI18N
         AbrirArchivo.getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 360));
+
+        insertar_registros.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tabla_registros.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane3.setViewportView(tabla_registros);
+
+        insertar_registros.getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, 190));
+
+        btn_insertar.setText("insertar");
+        btn_insertar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_insertarMouseClicked(evt);
+            }
+        });
+        insertar_registros.getContentPane().add(btn_insertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, -1, -1));
+
+        btn_return4.setText("regresar");
+        btn_return4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_return4MouseClicked(evt);
+            }
+        });
+        insertar_registros.getContentPane().add(btn_return4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 270, -1, -1));
+        insertar_registros.getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 380));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -1374,6 +1417,34 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_boton_abrirArchivoMouseClicked
 
+    private void btn_registrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_registrarMouseClicked
+        // TODO add your handling code here:
+        tabla_registros.setModel(new DefaultTableModel());
+        DefaultTableModel model = (DefaultTableModel) tabla_registros.getModel();
+        for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
+            model.addColumn(archivoFalso.getListaCampos().get(i).getNombre());
+
+        }
+        model.setNumRows(1);
+        
+        insertar_registros.pack();
+        insertar_registros.setModal(true);
+        insertar_registros.setLocationRelativeTo(null);
+        insertar_registros.setVisible(true);
+    }//GEN-LAST:event_btn_registrarMouseClicked
+
+    private void btn_insertarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_insertarMouseClicked
+        // TODO add your handling code here:
+        Object k = new Object[archivoFalso.getListaCampos().size()];
+        DefaultTableModel model = (DefaultTableModel) tabla_registros.getModel();
+        model.addRow((Object[]) k);
+    }//GEN-LAST:event_btn_insertarMouseClicked
+
+    private void btn_return4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_return4MouseClicked
+        // TODO add your handling code here:
+        insertar_registros.setVisible(false);
+    }//GEN-LAST:event_btn_return4MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1458,6 +1529,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btn_confirmar;
     private javax.swing.JButton btn_delete1;
     private javax.swing.JButton btn_excel;
+    private javax.swing.JButton btn_insertar;
     private javax.swing.JButton btn_listar;
     private javax.swing.JButton btn_modifica_registro;
     private javax.swing.JButton btn_registrar;
@@ -1468,6 +1540,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btn_regresar4;
     private javax.swing.JButton btn_regresar5;
     private javax.swing.JButton btn_return;
+    private javax.swing.JButton btn_return4;
     private javax.swing.JButton btn_rreturn;
     private javax.swing.JButton btn_salir1;
     private javax.swing.JButton btn_salvar;
@@ -1485,6 +1558,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel fondo_expor;
     private javax.swing.JLabel fondo_indice;
     private javax.swing.JLabel fondo_registros;
+    private javax.swing.JDialog insertar_registros;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -1509,6 +1583,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1518,6 +1593,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable tabla_registros;
     // End of variables declaration//GEN-END:variables
     private Archivo archivoFalso = new Archivo();//solo es prueba
     private String GnombreArchivo;
