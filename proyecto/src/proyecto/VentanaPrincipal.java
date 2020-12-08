@@ -141,6 +141,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         tabla_registros = new javax.swing.JTable();
         btn_insertar = new javax.swing.JButton();
         btn_return4 = new javax.swing.JButton();
+        jLabel30 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         Boton_Archivos = new javax.swing.JButton();
         boton_Indices = new javax.swing.JButton();
@@ -789,6 +790,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         insertar_registros.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jScrollPane3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registros", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane3.setViewportBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         tabla_registros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -799,24 +805,42 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tabla_registros);
 
-        insertar_registros.getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, 190));
+        insertar_registros.getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 440, 200));
 
+        btn_insertar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_insertar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/add (4).png"))); // NOI18N
         btn_insertar.setText("insertar");
+        btn_insertar.setContentAreaFilled(false);
+        btn_insertar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btn_insertar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_insertar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/add (5).png"))); // NOI18N
         btn_insertar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_insertarMouseClicked(evt);
             }
         });
-        insertar_registros.getContentPane().add(btn_insertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, -1, -1));
+        insertar_registros.getContentPane().add(btn_insertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, 180, 100));
 
+        btn_return4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_return4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda.png"))); // NOI18N
         btn_return4.setText("regresar");
+        btn_return4.setContentAreaFilled(false);
+        btn_return4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btn_return4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_return4.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda (1).png"))); // NOI18N
         btn_return4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_return4MouseClicked(evt);
             }
         });
-        insertar_registros.getContentPane().add(btn_return4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 270, -1, -1));
-        insertar_registros.getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 380));
+        insertar_registros.getContentPane().add(btn_return4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 370, 220, 80));
+
+        jLabel30.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel30.setText("Por favor ingrese los datos que desea");
+        insertar_registros.getContentPane().add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 270, 30));
+
+        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/inse.gif"))); // NOI18N
+        insertar_registros.getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 510));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -1585,6 +1609,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
