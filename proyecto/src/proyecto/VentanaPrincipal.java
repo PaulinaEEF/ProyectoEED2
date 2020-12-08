@@ -839,7 +839,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel30.setText("Por favor ingrese los datos que desea");
         insertar_registros.getContentPane().add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 270, 30));
 
-        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/inse.gif"))); // NOI18N
+        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ezgif.com-gif-maker.gif"))); // NOI18N
         insertar_registros.getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 510));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
