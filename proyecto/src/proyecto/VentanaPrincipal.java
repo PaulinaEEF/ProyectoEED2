@@ -97,6 +97,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        RB_SiPot = new javax.swing.JRadioButton();
+        RB_NoPot = new javax.swing.JRadioButton();
         btn_confirmar = new javax.swing.JButton();
         btn_regresar = new javax.swing.JButton();
         fondo2 = new javax.swing.JLabel();
@@ -112,9 +115,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         MDC_comboTipos = new javax.swing.JComboBox<>();
         jLabel17 = new javax.swing.JLabel();
         MDC_CBytes = new javax.swing.JSpinner();
+        jLabel32 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         MDC_RB_Si = new javax.swing.JRadioButton();
         MDC_RB_No = new javax.swing.JRadioButton();
+        MDC_RB_SiPot = new javax.swing.JRadioButton();
+        MDC_RB_NoPot = new javax.swing.JRadioButton();
         jLabel20 = new javax.swing.JLabel();
         fondo_Modificar = new javax.swing.JLabel();
         Listar_Campos = new javax.swing.JDialog();
@@ -143,6 +149,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btn_return4 = new javax.swing.JButton();
         jLabel30 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
+        BGPotIn = new javax.swing.ButtonGroup();
+        BGPotMd = new javax.swing.ButtonGroup();
         Boton_Archivos = new javax.swing.JButton();
         boton_Indices = new javax.swing.JButton();
         Boton_Campos = new javax.swing.JButton();
@@ -529,12 +537,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 RB_SiMouseClicked(evt);
             }
         });
-        crearCampos.getContentPane().add(RB_Si, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, -1, -1));
+        crearCampos.getContentPane().add(RB_Si, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, -1, -1));
 
         buttonGroup1.add(RB_No);
         RB_No.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         RB_No.setText("No");
-        crearCampos.getContentPane().add(RB_No, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, -1));
+        RB_No.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RB_NoMouseClicked(evt);
+            }
+        });
+        crearCampos.getContentPane().add(RB_No, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel11.setText("Nombre del campo");
@@ -549,8 +562,27 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         crearCampos.getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 140, 20));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel14.setText("Llave primaria");
-        crearCampos.getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 110, 30));
+        jLabel14.setText("Llave Potencial Primaria");
+        crearCampos.getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 170, 30));
+
+        jLabel31.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel31.setText("Llave primaria");
+        crearCampos.getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 110, 30));
+
+        BGPotIn.add(RB_SiPot);
+        RB_SiPot.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        RB_SiPot.setText("Si");
+        RB_SiPot.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RB_SiPotMouseClicked(evt);
+            }
+        });
+        crearCampos.getContentPane().add(RB_SiPot, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, -1, -1));
+
+        BGPotIn.add(RB_NoPot);
+        RB_NoPot.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        RB_NoPot.setText("No");
+        crearCampos.getContentPane().add(RB_NoPot, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, -1, -1));
 
         btn_confirmar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_confirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agree.png"))); // NOI18N
@@ -564,7 +596,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btn_confirmarMouseClicked(evt);
             }
         });
-        crearCampos.getContentPane().add(btn_confirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 320, 180, 80));
+        crearCampos.getContentPane().add(btn_confirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 180, 80));
 
         btn_regresar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_regresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/return (6).png"))); // NOI18N
@@ -578,7 +610,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btn_regresarMouseClicked(evt);
             }
         });
-        crearCampos.getContentPane().add(btn_regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, 200, 80));
+        crearCampos.getContentPane().add(btn_regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 200, 80));
 
         fondo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/camp.jpg"))); // NOI18N
         crearCampos.getContentPane().add(fondo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 440));
@@ -659,6 +691,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         MDC_CBytes.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         Modificar_Campos.getContentPane().add(MDC_CBytes, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 70, -1));
 
+        jLabel32.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel32.setText("Llave Potencial primaria");
+        Modificar_Campos.getContentPane().add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 150, 20));
+
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel18.setText("Llave primaria");
         Modificar_Campos.getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 90, 20));
@@ -677,6 +713,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         MDC_RB_No.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         MDC_RB_No.setText("No");
         Modificar_Campos.getContentPane().add(MDC_RB_No, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 230, -1, -1));
+
+        BGPotMd.add(MDC_RB_SiPot);
+        MDC_RB_SiPot.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        MDC_RB_SiPot.setText("Si");
+        MDC_RB_SiPot.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MDC_RB_SiPotMouseClicked(evt);
+            }
+        });
+        Modificar_Campos.getContentPane().add(MDC_RB_SiPot, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, -1, -1));
+
+        BGPotMd.add(MDC_RB_NoPot);
+        MDC_RB_NoPot.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        MDC_RB_NoPot.setText("No");
+        Modificar_Campos.getContentPane().add(MDC_RB_NoPot, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 280, -1, -1));
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/seleccionar3.jpg"))); // NOI18N
         Modificar_Campos.getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 400));
@@ -1092,13 +1143,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         String tipoDato = comboTipos.getSelectedItem().toString();
         int nBytes = CBytes.getValue().hashCode();
         boolean llave = RB_Si.isSelected();
+        boolean llavePot = RB_SiPot.isSelected();
         if (llave == true) {
             //archivoFalso.setPrimaria(llave);
         }
         int reply = JOptionPane.showConfirmDialog(null, "Desea continuar añadiendo campos?", "Campo creado exitosamente!", JOptionPane.YES_NO_OPTION);
         // aqui hay que guardar en el 
 
-        Campo nuevoCampo = new Campo(nombre, tipoDato, nBytes, llave);
+        Campo nuevoCampo = new Campo(nombre, tipoDato, nBytes, llave, llavePot);
 
         archivoFalso.setListaCampo(nuevoCampo);
         NombreCampo.setText("");
@@ -1139,6 +1191,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 MDC_RB_Si.doClick();
             } else {
                 MDC_RB_No.doClick();
+            }
+            if (campoAct.isLPotprimaria()) {
+                MDC_RB_SiPot.doClick();
+            } else {
+                MDC_RB_NoPot.doClick();
             }
         } else {
             MDC_NombreCampo.setText("");
@@ -1264,6 +1321,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         + ":";
 
                 if (campo.isLprimaria()) {
+                    metadata += "true";
+                } else {
+                    metadata += "false";
+                }
+                metadata += ":";
+                if (campo.isLPotprimaria()) {
                     metadata += "true";
                 } else {
                     metadata += "false";
@@ -1419,15 +1482,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             String nombre = arMetadata2[0];
                             String tipo = arMetadata2[1];
                             int numBytes = (Integer.parseInt(arMetadata2[2]));
-                            boolean key;
-                            if(arMetadata2[3].equals("true")){
-                                key = true;
-                            }
-                            else{
-                                key = false;
-                            }
-                            
-                            archivoFalso.setListaCampo(new Campo(nombre, tipo, numBytes, key));
+                            boolean key, keyPot;
+                            key = arMetadata2[3].equals("true");
+                            keyPot = arMetadata2[4].equals("true");
+                            archivoFalso.setListaCampo(new Campo(nombre, tipo, numBytes, key, keyPot));
                         }
                     } catch (IOException ex) {
                         ex.printStackTrace();
@@ -1468,6 +1526,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         insertar_registros.setVisible(false);
     }//GEN-LAST:event_btn_return4MouseClicked
+
+    private void RB_SiPotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RB_SiPotMouseClicked
+        if (RB_Si.isSelected()) {
+            JOptionPane.showMessageDialog(null, "Este campo ya es llave primaria");
+            RB_NoPot.doClick();
+        }
+    }//GEN-LAST:event_RB_SiPotMouseClicked
+
+    private void RB_NoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RB_NoMouseClicked
+
+    }//GEN-LAST:event_RB_NoMouseClicked
+
+    private void MDC_RB_SiPotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MDC_RB_SiPotMouseClicked
+        if (MDC_RB_Si.isSelected()) {
+            JOptionPane.showMessageDialog(null, "Este campo ya es llave primaria");
+            RB_NoPot.doClick();
+        }
+    }//GEN-LAST:event_MDC_RB_SiPotMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1513,6 +1589,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog AbrirArchivo;
     private javax.swing.JDialog Archivos;
+    private javax.swing.ButtonGroup BGPotIn;
+    private javax.swing.ButtonGroup BGPotMd;
     private javax.swing.JDialog Borrar_campos;
     private javax.swing.JButton Boton_Archivos;
     private javax.swing.JButton Boton_Campos;
@@ -1527,12 +1605,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JSpinner MDC_CBytes;
     private javax.swing.JTextField MDC_NombreCampo;
     private javax.swing.JRadioButton MDC_RB_No;
+    private javax.swing.JRadioButton MDC_RB_NoPot;
     private javax.swing.JRadioButton MDC_RB_Si;
+    private javax.swing.JRadioButton MDC_RB_SiPot;
     private javax.swing.JComboBox<String> MDC_comboTipos;
     private javax.swing.JDialog Modificar_Campos;
     private javax.swing.JTextField NombreCampo;
     private javax.swing.JRadioButton RB_No;
+    private javax.swing.JRadioButton RB_NoPot;
     private javax.swing.JRadioButton RB_Si;
+    private javax.swing.JRadioButton RB_SiPot;
     private javax.swing.JDialog Registros;
     private javax.swing.JButton boton_BorrarCampos;
     private javax.swing.JButton boton_CrearCampo;
@@ -1610,6 +1692,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
