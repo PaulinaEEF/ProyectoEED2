@@ -8,17 +8,27 @@ public class Campo {
     private String tipo;
     private int longitud;
     private boolean Lprimaria;
+    private boolean LPotprimaria;
+
+    public Campo(String nombre, String tipo, int longitud, boolean Lprimaria, boolean LPotprimaria) {
+        this.nombre = nombre;
+        this.tipo = tipo;
+        this.longitud = longitud;
+        this.Lprimaria = Lprimaria;
+        this.LPotprimaria = LPotprimaria;
+    }
+
+    public boolean isLPotprimaria() {
+        return LPotprimaria;
+    }
+
+    public void setLPotprimaria(boolean LPotprimaria) {
+        this.LPotprimaria = LPotprimaria;
+    }
     
     //CONSTRUCTOR
     public Campo() {
         
-    }
-
-    public Campo(String nombre, String tipo, int bytes, boolean Lprimaria) {
-        this.nombre = nombre;
-        this.tipo = tipo;
-        this.longitud = bytes;
-        this.Lprimaria = Lprimaria;
     }
     
     //GETTERS Y SETTERS
