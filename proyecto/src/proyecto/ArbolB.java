@@ -56,25 +56,25 @@ public class ArbolB {
         return m;
     }
 
-    public NodoIndice B_Tree_Search(Nodo x, int k) {
+    public NodoIndice B_Tree_Search(Nodo x, String k, long p) {
 
         int i = 0;
 
-        while (i < x.getN() && k > x.getLlaves().get(i).getRRN()) {
+        while (i < x.getN() && k.compareTo(x.getLlaves().get(i).getLlave()) > 0) {
             i++;
         }
 
-        if (i < x.getN() && k == x.getLlaves().get(i).getRRN()) {
+        if (i < x.getN() && k.compareTo(x.getLlaves().get(i).getLlave()) == 0) {
             return new NodoIndice(x, i);
         }
         if (x.isLeaf()) {
             return null;
         } else {
-            return B_Tree_Search(x.getHijos().get(i), k);
+            return B_Tree_Search(x.getHijos().get(i),k,p);
         }
     }
 
-    public void insert(int k) {
+    public void insert(String k, long pos) {
         Nodo r = raiz;
         //System.out.println(r.getLlaves().size());
         //System.out.println(raiz.getLlaves().size());
@@ -85,9 +85,9 @@ public class ArbolB {
             s.setN(0);
             s.getHijos().set(0, r);
             B_Tree_Split_Child(s, 0, r);
-            B_Tree_Insert_NonFull(s, k);
+            B_Tree_Insert_NonFull(s,k,pos);
         } else {
-            B_Tree_Insert_NonFull(r, k);
+            B_Tree_Insert_NonFull(r,k,pos);
         }
     }
 
@@ -114,28 +114,28 @@ public class ArbolB {
 
     }
 
-    public void B_Tree_Insert_NonFull(Nodo x, int k) {
+    public void B_Tree_Insert_NonFull(Nodo x, String k, long p) {
         int i = x.getN() - 1;
         if (x.isLeaf()) {
-            while (i >= 0 && k < x.getLlaves().get(i).getRRN()) {
+            while (i >= 0 && k.compareTo(x.getLlaves().get(i).getLlave()) < 0) {
                 i--;
             }
-            x.getLlaves().add(i + 1, k);
+            x.getLlaves().add(i + 1, new LlavePos(k, p));
             x.getLlaves().remove(this.upperBKeys());
             x.setN(x.getN() + 1);
         } else {
-            while (i >= 0 && k < x.getLlaves().get(i).getRRN()) {
+            while (i >= 0 && k.compareTo(x.getLlaves().get(i).getLlave()) < 0) {
                 i--;
             }
             i++;
 
             if (x.getHijos().get(i).getN() == this.upperBKeys()) {
                 B_Tree_Split_Child(x, i, x.getHijos().get(i));
-                if (k > x.getLlaves().get(i).getRRN()) {
+                if (k.compareTo(x.getLlaves().get(i).getLlave()) > 0) {
                     i++;
                 }
             }
-            B_Tree_Insert_NonFull(x.getHijos().get(i), k);
+            B_Tree_Insert_NonFull(x.getHijos().get(i),k,p);
         }
 
     }

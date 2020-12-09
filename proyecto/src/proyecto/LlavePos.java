@@ -12,11 +12,11 @@ package proyecto;
 public class LlavePos {
     
     private String llave;
-    private long RRN;
+    private long pos;
 
     public LlavePos(String llave, long pos) {
         this.llave = llave;
-        this.RRN = pos;
+        this.pos = pos;
     }
 
     public String getLlave() {
@@ -27,17 +27,17 @@ public class LlavePos {
         this.llave = llave;
     }
 
-    public long getRRN() {
-        return RRN;
+    public long getPos() {
+        return pos;
     }
 
-    public void setRRN(long RRN) {
-        this.RRN = RRN;
+    public void setPos(long pos) {
+        this.pos = pos;
     }
 
     @Override
     public String toString() {
-        return "Nodo{" + "llave=" + llave + ", pos=" + RRN + '}';
+        return "Nodo{" + "llave=" + llave + ", pos=" + pos + '}';
     }
     
 }
