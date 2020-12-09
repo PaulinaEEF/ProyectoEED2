@@ -6,10 +6,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JFileChooser;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
@@ -146,6 +148,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tabla_registros = new javax.swing.JTable();
         btn_insertar = new javax.swing.JButton();
+        btn_insertar1 = new javax.swing.JButton();
         btn_return4 = new javax.swing.JButton();
         jLabel30 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
@@ -853,186 +856,218 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             new String [] {
 
             }
-        ));
-        jScrollPane3.setViewportView(tabla_registros);
-
-        insertar_registros.getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 440, 200));
-
-        btn_insertar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn_insertar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/add (4).png"))); // NOI18N
-        btn_insertar.setText("insertar");
-        btn_insertar.setContentAreaFilled(false);
-        btn_insertar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        btn_insertar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btn_insertar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/add (5).png"))); // NOI18N
-        btn_insertar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_insertarMouseClicked(evt);
+        )   {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
             }
-        });
-        insertar_registros.getContentPane().add(btn_insertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, 180, 100));
+        }
 
-        btn_return4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn_return4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda.png"))); // NOI18N
-        btn_return4.setText("regresar");
-        btn_return4.setContentAreaFilled(false);
-        btn_return4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        btn_return4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btn_return4.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda (1).png"))); // NOI18N
-        btn_return4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_return4MouseClicked(evt);
-            }
-        });
-        insertar_registros.getContentPane().add(btn_return4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 370, 220, 80));
+    );
+    jScrollPane3.setViewportView(tabla_registros);
 
-        jLabel30.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel30.setText("Por favor ingrese los datos que desea");
-        insertar_registros.getContentPane().add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 270, 30));
+    insertar_registros.getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 440, 200));
 
-        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ezgif.com-gif-maker.gif"))); // NOI18N
-        insertar_registros.getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 510));
+    btn_insertar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+    btn_insertar.setForeground(new java.awt.Color(255, 255, 255));
+    btn_insertar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/add (4).png"))); // NOI18N
+    btn_insertar.setText("Finalizar");
+    btn_insertar.setContentAreaFilled(false);
+    btn_insertar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    btn_insertar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+    btn_insertar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/add (5).png"))); // NOI18N
+    btn_insertar.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            btn_insertarMouseClicked(evt);
+        }
+    });
+    btn_insertar.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btn_insertarActionPerformed(evt);
+        }
+    });
+    insertar_registros.getContentPane().add(btn_insertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 410, 180, 100));
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+    btn_insertar1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+    btn_insertar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/add (4).png"))); // NOI18N
+    btn_insertar1.setText("insertar");
+    btn_insertar1.setContentAreaFilled(false);
+    btn_insertar1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    btn_insertar1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+    btn_insertar1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/add (5).png"))); // NOI18N
+    btn_insertar1.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            btn_insertar1MouseClicked(evt);
+        }
+    });
+    btn_insertar1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btn_insertar1ActionPerformed(evt);
+        }
+    });
+    insertar_registros.getContentPane().add(btn_insertar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, 180, 100));
 
-        Boton_Archivos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        Boton_Archivos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/folder.png"))); // NOI18N
-        Boton_Archivos.setText("Archivos");
-        Boton_Archivos.setContentAreaFilled(false);
-        Boton_Archivos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Boton_Archivos.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        Boton_Archivos.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/folder (1).png"))); // NOI18N
-        Boton_Archivos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Boton_ArchivosMouseClicked(evt);
-            }
-        });
-        getContentPane().add(Boton_Archivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 450, 170, 110));
+    btn_return4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+    btn_return4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda.png"))); // NOI18N
+    btn_return4.setText("regresar");
+    btn_return4.setContentAreaFilled(false);
+    btn_return4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    btn_return4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+    btn_return4.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda (1).png"))); // NOI18N
+    btn_return4.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            btn_return4MouseClicked(evt);
+        }
+    });
+    insertar_registros.getContentPane().add(btn_return4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 370, 220, 80));
 
-        boton_Indices.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        boton_Indices.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/index.png"))); // NOI18N
-        boton_Indices.setText("Indices");
-        boton_Indices.setContentAreaFilled(false);
-        boton_Indices.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        boton_Indices.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        boton_Indices.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/index (1).png"))); // NOI18N
-        boton_Indices.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                boton_IndicesMouseClicked(evt);
-            }
-        });
-        getContentPane().add(boton_Indices, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 290, 170, 70));
+    jLabel30.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+    jLabel30.setText("Por favor ingrese los datos que desea");
+    insertar_registros.getContentPane().add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 270, 30));
 
-        Boton_Campos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        Boton_Campos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/clipboard.png"))); // NOI18N
-        Boton_Campos.setText("Campos");
-        Boton_Campos.setContentAreaFilled(false);
-        Boton_Campos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Boton_Campos.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        Boton_Campos.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/clipboard (1).png"))); // NOI18N
-        Boton_Campos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Boton_CamposMouseClicked(evt);
-            }
-        });
-        Boton_Campos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton_CamposActionPerformed(evt);
-            }
-        });
-        getContentPane().add(Boton_Campos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, 190, 90));
+    jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ezgif.com-gif-maker.gif"))); // NOI18N
+    insertar_registros.getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 510));
 
-        boton_Estandarizacion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        boton_Estandarizacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/check.png"))); // NOI18N
-        boton_Estandarizacion.setContentAreaFilled(false);
-        boton_Estandarizacion.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        boton_Estandarizacion.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/check (1).png"))); // NOI18N
-        boton_Estandarizacion.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        boton_Estandarizacion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                boton_EstandarizacionMouseClicked(evt);
-            }
-        });
-        getContentPane().add(boton_Estandarizacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 350, 200, 60));
+    setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+    setUndecorated(true);
+    getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        boton_Registros.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        boton_Registros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/register (3)_1.png"))); // NOI18N
-        boton_Registros.setText("Registros");
-        boton_Registros.setContentAreaFilled(false);
-        boton_Registros.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        boton_Registros.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        boton_Registros.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/register (4)_1.png"))); // NOI18N
-        boton_Registros.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                boton_RegistrosMouseClicked(evt);
-            }
-        });
-        getContentPane().add(boton_Registros, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 270, 190, 90));
+    Boton_Archivos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+    Boton_Archivos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/folder.png"))); // NOI18N
+    Boton_Archivos.setText("Archivos");
+    Boton_Archivos.setContentAreaFilled(false);
+    Boton_Archivos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    Boton_Archivos.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+    Boton_Archivos.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/folder (1).png"))); // NOI18N
+    Boton_Archivos.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            Boton_ArchivosMouseClicked(evt);
+        }
+    });
+    getContentPane().add(Boton_Archivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 450, 170, 110));
 
-        boton_Salir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        boton_Salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (4).png"))); // NOI18N
-        boton_Salir.setContentAreaFilled(false);
-        boton_Salir.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        boton_Salir.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        boton_Salir.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (5).png"))); // NOI18N
-        boton_Salir.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                boton_SalirMouseClicked(evt);
-            }
-        });
-        boton_Salir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boton_SalirActionPerformed(evt);
-            }
-        });
-        getContentPane().add(boton_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 320, 90, 90));
+    boton_Indices.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+    boton_Indices.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/index.png"))); // NOI18N
+    boton_Indices.setText("Indices");
+    boton_Indices.setContentAreaFilled(false);
+    boton_Indices.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    boton_Indices.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+    boton_Indices.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/index (1).png"))); // NOI18N
+    boton_Indices.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            boton_IndicesMouseClicked(evt);
+        }
+    });
+    getContentPane().add(boton_Indices, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 290, 170, 70));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoConLogo.jpeg"))); // NOI18N
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 20, 100));
+    Boton_Campos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+    Boton_Campos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/clipboard.png"))); // NOI18N
+    Boton_Campos.setText("Campos");
+    Boton_Campos.setContentAreaFilled(false);
+    Boton_Campos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    Boton_Campos.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+    Boton_Campos.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/clipboard (1).png"))); // NOI18N
+    Boton_Campos.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            Boton_CamposMouseClicked(evt);
+        }
+    });
+    Boton_Campos.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            Boton_CamposActionPerformed(evt);
+        }
+    });
+    getContentPane().add(Boton_Campos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, 190, 90));
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel10.setText("Estandarización");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 410, -1, 20));
+    boton_Estandarizacion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+    boton_Estandarizacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/check.png"))); // NOI18N
+    boton_Estandarizacion.setContentAreaFilled(false);
+    boton_Estandarizacion.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+    boton_Estandarizacion.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/check (1).png"))); // NOI18N
+    boton_Estandarizacion.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+    boton_Estandarizacion.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            boton_EstandarizacionMouseClicked(evt);
+        }
+    });
+    getContentPane().add(boton_Estandarizacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 350, 200, 60));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/blue.jpg"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1180, 60));
+    boton_Registros.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+    boton_Registros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/register (3)_1.png"))); // NOI18N
+    boton_Registros.setText("Registros");
+    boton_Registros.setContentAreaFilled(false);
+    boton_Registros.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    boton_Registros.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+    boton_Registros.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/register (4)_1.png"))); // NOI18N
+    boton_Registros.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            boton_RegistrosMouseClicked(evt);
+        }
+    });
+    getContentPane().add(boton_Registros, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 270, 190, 90));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/blue.jpg"))); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 0, 370, 60));
+    boton_Salir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+    boton_Salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (4).png"))); // NOI18N
+    boton_Salir.setContentAreaFilled(false);
+    boton_Salir.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    boton_Salir.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+    boton_Salir.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (5).png"))); // NOI18N
+    boton_Salir.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            boton_SalirMouseClicked(evt);
+        }
+    });
+    boton_Salir.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            boton_SalirActionPerformed(evt);
+        }
+    });
+    getContentPane().add(boton_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 320, 90, 90));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoConLogo.jpeg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 1320, 820));
+    jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoConLogo.jpeg"))); // NOI18N
+    getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 20, 100));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoConLogo.jpeg"))); // NOI18N
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1480, 150, 70, 90));
+    jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+    jLabel10.setText("Estandarización");
+    getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 410, -1, 20));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoConLogo.jpeg"))); // NOI18N
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1350, 30, 1340, 840));
+    jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/blue.jpg"))); // NOI18N
+    getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1180, 60));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoConLogo.jpeg"))); // NOI18N
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1140, -20, 1310, 900));
+    jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/blue.jpg"))); // NOI18N
+    getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 0, 370, 60));
 
-        boton_Salir1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        boton_Salir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (4).png"))); // NOI18N
-        boton_Salir1.setContentAreaFilled(false);
-        boton_Salir1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        boton_Salir1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        boton_Salir1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (5).png"))); // NOI18N
-        boton_Salir1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                boton_Salir1MouseClicked(evt);
-            }
-        });
-        boton_Salir1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boton_Salir1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(boton_Salir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 320, 90, 90));
+    jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoConLogo.jpeg"))); // NOI18N
+    getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 1320, 820));
 
-        pack();
+    jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoConLogo.jpeg"))); // NOI18N
+    getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1480, 150, 70, 90));
+
+    jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoConLogo.jpeg"))); // NOI18N
+    getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1350, 30, 1340, 840));
+
+    jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondoConLogo.jpeg"))); // NOI18N
+    getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1140, -20, 1310, 900));
+
+    boton_Salir1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+    boton_Salir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (4).png"))); // NOI18N
+    boton_Salir1.setContentAreaFilled(false);
+    boton_Salir1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    boton_Salir1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+    boton_Salir1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit (5).png"))); // NOI18N
+    boton_Salir1.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            boton_Salir1MouseClicked(evt);
+        }
+    });
+    boton_Salir1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            boton_Salir1ActionPerformed(evt);
+        }
+    });
+    getContentPane().add(boton_Salir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 320, 90, 90));
+
+    pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void Boton_CamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_CamposActionPerformed
@@ -1516,10 +1551,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_registrarMouseClicked
 
     private void btn_insertarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_insertarMouseClicked
-        // TODO add your handling code here:
-        Object k = new Object[archivoFalso.getListaCampos().size()];
-        DefaultTableModel model = (DefaultTableModel) tabla_registros.getModel();
-        model.addRow((Object[]) k);
+        
     }//GEN-LAST:event_btn_insertarMouseClicked
 
     private void btn_return4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_return4MouseClicked
@@ -1544,6 +1576,53 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             RB_NoPot.doClick();
         }
     }//GEN-LAST:event_MDC_RB_SiPotMouseClicked
+
+    private void btn_insertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_insertarActionPerformed
+
+    private void btn_insertar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_insertar1MouseClicked
+        DefaultTableModel model = (DefaultTableModel) tabla_registros.getModel();
+        //super funcion secreta que me actualize el dqu
+        tabla_registros.getCellEditor().stopCellEditing();
+        if (model.getRowCount() != 0) {
+            for (int i = 0; i < model.getColumnCount(); i++) {//se puede poner otro for para rows pero es feo pero asi soy feliz         
+                if (model.getValueAt(model.getRowCount() - 1, i) == null) {
+                    JOptionPane.showMessageDialog(null, "No puede dejar ningun campo vacio!");
+                    return;
+                }
+                if (model.getValueAt(model.getRowCount() - 1, i).toString().length() > archivoFalso.getListaCampo(i).getLongitud()) {
+                    JOptionPane.showMessageDialog(null, "En el campo \""
+                    + archivoFalso.getListaCampo(i).getNombre() + "\" se esta pasando de la longitud maxima"
+                    + "que es " + archivoFalso.getListaCampo(i).getLongitud());
+                    model.setValueAt("", model.getRowCount() - 1, i);
+                    return;
+                }
+                if ("int".equals(archivoFalso.getListaCampo(i).getTipo())) {
+                    try {
+                        Integer.parseInt(model.getValueAt(model.getRowCount() - 1, i).toString());
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null, "En el campo \"" + 
+                        archivoFalso.getListaCampo(i).getNombre() + 
+                        "\" esta ingresando caracteres y solo se permiten enteros!");
+                        return;
+                    }
+                }
+            }
+        }
+        Object k = new Object[archivoFalso.getListaCampos().size()];
+        JTextField f = new JTextField();
+        f.setEditable(false);
+        for (int i = 0; i < tabla_registros.getColumnModel().getColumnCount(); i++) {
+            tabla_registros.getColumnModel().getColumn(i).setCellEditor(new DefaultCellEditor(f));
+        }
+        model.addRow((Object[]) k);
+        
+    }//GEN-LAST:event_btn_insertar1MouseClicked
+
+    private void btn_insertar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_insertar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1636,6 +1715,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btn_delete1;
     private javax.swing.JButton btn_excel;
     private javax.swing.JButton btn_insertar;
+    private javax.swing.JButton btn_insertar1;
     private javax.swing.JButton btn_listar;
     private javax.swing.JButton btn_modifica_registro;
     private javax.swing.JButton btn_registrar;
