@@ -181,6 +181,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         btn_regresar6 = new javax.swing.JButton();
         ffondo_buscar = new javax.swing.JLabel();
+        eliminar_registro = new javax.swing.JDialog();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        listar_registros = new javax.swing.JDialog();
+        jLabel42 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton7 = new javax.swing.JButton();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        jDialog1 = new javax.swing.JDialog();
         Boton_Archivos = new javax.swing.JButton();
         boton_Indices = new javax.swing.JButton();
         Boton_Campos = new javax.swing.JButton();
@@ -436,6 +449,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btn_borrarRegistro.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         btn_borrarRegistro.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btn_borrarRegistro.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/borrar (1).png"))); // NOI18N
+        btn_borrarRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_borrarRegistroMouseClicked(evt);
+            }
+        });
         Registros.getContentPane().add(btn_borrarRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 90, 210, 60));
 
         btn_listar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -445,6 +463,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btn_listar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         btn_listar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btn_listar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/lista-de-la-compra (1).png"))); // NOI18N
+        btn_listar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_listarMouseClicked(evt);
+            }
+        });
         Registros.getContentPane().add(btn_listar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 190, 210, 70));
 
         btn_buscar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -887,6 +910,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/close-up-of-white-usb-flash-drive.jpg"))); // NOI18N
         AbrirArchivo.getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 360));
 
+        insertar_registros.setUndecorated(true);
         insertar_registros.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registros", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
@@ -896,7 +920,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jScrollPane3.setViewportView(tabla_registros);
 
-        insertar_registros.getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 440, 200));
+        insertar_registros.getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 440, 210));
 
         btn_insertar.setBackground(new java.awt.Color(0, 0, 0));
         btn_insertar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -911,7 +935,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btn_insertarMouseClicked(evt);
             }
         });
-        insertar_registros.getContentPane().add(btn_insertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 380, 290, 100));
+        insertar_registros.getContentPane().add(btn_insertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 380, 280, 100));
 
         btn_insertar1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_insertar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/add (4).png"))); // NOI18N
@@ -944,14 +968,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btn_return4MouseClicked(evt);
             }
         });
-        insertar_registros.getContentPane().add(btn_return4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 490, 220, 80));
+        insertar_registros.getContentPane().add(btn_return4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 480, 220, 60));
 
         jLabel30.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel30.setText("Por favor ingrese los datos que desea seleccionando la celda correspondiente en la tabla");
         insertar_registros.getContentPane().add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 660, 30));
 
         jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ezgif.com-gif-maker.gif"))); // NOI18N
-        insertar_registros.getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 560));
+        insertar_registros.getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 540));
 
         Modificar_Registros.setUndecorated(true);
         Modificar_Registros.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1039,6 +1063,82 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         ffondo_buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/search.gif"))); // NOI18N
         buscar_registros.getContentPane().add(ffondo_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 360));
+
+        eliminar_registro.setUndecorated(true);
+        eliminar_registro.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(255, 255, 255));
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/borrar.png"))); // NOI18N
+        jButton5.setText("Borrar registro");
+        jButton5.setContentAreaFilled(false);
+        jButton5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jButton5.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/borrar (1).png"))); // NOI18N
+        eliminar_registro.getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 200, 60));
+
+        jButton6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(255, 255, 255));
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda.png"))); // NOI18N
+        jButton6.setText("Regresar");
+        jButton6.setContentAreaFilled(false);
+        jButton6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jButton6.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda (1).png"))); // NOI18N
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
+        });
+        eliminar_registro.getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, 160, 80));
+
+        jLabel40.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel40.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel40.setText("Seleccione el registro que desea eliminar");
+        eliminar_registro.getContentPane().add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        jLabel39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/delete.gif"))); // NOI18N
+        eliminar_registro.getContentPane().add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 400));
+
+        listar_registros.setUndecorated(true);
+        listar_registros.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel42.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel42.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel42.setText("Listado de registros actuales");
+        listar_registros.getContentPane().add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, 290, 30));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane5.setViewportView(jTable1);
+
+        listar_registros.getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 520, 210));
+
+        jButton7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda.png"))); // NOI18N
+        jButton7.setText("Regresar");
+        jButton7.setContentAreaFilled(false);
+        jButton7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jButton7.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda (1).png"))); // NOI18N
+        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton7MouseClicked(evt);
+            }
+        });
+        listar_registros.getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 480, 200, 70));
+
+        jLabel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/checklist.gif"))); // NOI18N
+        listar_registros.getContentPane().add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 800, 590));
+
+        jLabel43.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/checklist.gif"))); // NOI18N
+        listar_registros.getContentPane().add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 590));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -1792,6 +1892,32 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Registros.setVisible(true);
     }//GEN-LAST:event_btn_regresar6MouseClicked
 
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        eliminar_registro.setVisible(false);
+        Registros.setVisible(true);
+    }//GEN-LAST:event_jButton6MouseClicked
+
+    private void btn_borrarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_borrarRegistroMouseClicked
+        Registros.setVisible(false);
+        eliminar_registro.pack();
+        eliminar_registro.setModal(true);
+        eliminar_registro.setLocationRelativeTo(null);
+        eliminar_registro.setVisible(true);
+    }//GEN-LAST:event_btn_borrarRegistroMouseClicked
+
+    private void btn_listarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_listarMouseClicked
+        Registros.setVisible(false);
+        listar_registros.pack();
+        listar_registros.setModal(true);
+        listar_registros.setLocationRelativeTo(null);
+        listar_registros.setVisible(true);
+    }//GEN-LAST:event_btn_listarMouseClicked
+
+    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
+      listar_registros.setVisible(false);
+      Registros.setVisible(true);
+    }//GEN-LAST:event_jButton7MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1911,6 +2037,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_listarArchivos;
     private javax.swing.JComboBox<String> comboTipos;
     private javax.swing.JDialog crearCampos;
+    private javax.swing.JDialog eliminar_registro;
     private javax.swing.JLabel ffondo_buscar;
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel fondo2;
@@ -1924,6 +2051,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1956,7 +2087,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1966,6 +2102,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JDialog listar_registros;
     private javax.swing.JTable tabla_modificar;
     private javax.swing.JTable tabla_registros;
     // End of variables declaration//GEN-END:variables
