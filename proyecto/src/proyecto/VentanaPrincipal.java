@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -881,11 +882,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             btn_insertarMouseClicked(evt);
         }
     });
-    btn_insertar.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            btn_insertarActionPerformed(evt);
-        }
-    });
     insertar_registros.getContentPane().add(btn_insertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 410, 180, 100));
 
     btn_insertar1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -1330,7 +1326,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(null, "Archivo creado con éxito");
 
-
             } else {
                 JOptionPane.showMessageDialog(null, "Por favor, ingrese un nombre para poder crear el archivo");
             }
@@ -1486,15 +1481,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 return dirToLock.equals(f);
             }
         });
-                        
 
-        
         escogerArchivo.setSelectedFile(new File(""));
         if (escogerArchivo.showDialog(null, "Abrir archivo") == JFileChooser.APPROVE_OPTION) {
             archivoo = escogerArchivo.getSelectedFile();
             if (archivoo.canRead()) {
                 if (archivoo.getName().endsWith(".jjdp")) {
-                    GnombreArchivo=archivoo.getName();
+                    GnombreArchivo = archivoo.getName();
                     JOptionPane.showMessageDialog(null, "El archivo ha sido abierto exitosamente");
                     try {
                         // create a reader
@@ -1502,16 +1495,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         BufferedInputStream reader = new BufferedInputStream(fis);
 
                         // read one byte at a time
-                        String metadata="";
+                        String metadata = "";
                         int ch;
                         while ((ch = reader.read()) != -1) {
-                            metadata+=(char)ch;
+                            metadata += (char) ch;
                         }
                         reader.close();
                         // close the reader
-                        
+
                         String[] arMetadata = metadata.split("\\|");
-                        
+
                         for (int i = 1; i < arMetadata.length; i++) {
                             String[] arMetadata2 = arMetadata[i].split("\\:");
                             String nombre = arMetadata2[0];
@@ -1525,7 +1518,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
-                    
+
                 } else {
                     JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo con terminación [.jjdp]");
                 }
@@ -1543,7 +1536,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         }
         model.setNumRows(1);
-        
+
         insertar_registros.pack();
         insertar_registros.setModal(true);
         insertar_registros.setLocationRelativeTo(null);
@@ -1551,7 +1544,39 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_registrarMouseClicked
 
     private void btn_insertarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_insertarMouseClicked
-        
+        ArrayList<String> registross = new ArrayList();
+        DefaultTableModel model = (DefaultTableModel) tabla_registros.getModel();
+        String guardar = "";
+       // int length=0;
+        for (int i = 0; i < model.getRowCount(); i++) {
+            guardar = "";
+            for (int j = 0; j < model.getColumnCount(); j++) {
+                guardar+=model.getValueAt(i, j).toString()+"|";
+                //length+=guardar.length();
+                
+            }
+            guardar+=fill(guardar.length())+"\n";
+            registross.add(guardar);
+             try {
+                // create a writer
+                FileOutputStream fos = new FileOutputStream(new File(GnombreArchivo));
+                BufferedOutputStream writer = new BufferedOutputStream(fos);
+
+                // write data to file
+                writer.write(guardar.getBytes());
+
+                // flush remaining bytes
+                writer.flush();
+
+                // close the writer
+                writer.close();
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            
+
+        }
     }//GEN-LAST:event_btn_insertarMouseClicked
 
     private void btn_return4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_return4MouseClicked
@@ -1577,10 +1602,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_MDC_RB_SiPotMouseClicked
 
-    private void btn_insertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_insertarActionPerformed
-
     private void btn_insertar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_insertar1MouseClicked
         DefaultTableModel model = (DefaultTableModel) tabla_registros.getModel();
         //super funcion secreta que me actualize el dqu
@@ -1593,8 +1614,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 }
                 if (model.getValueAt(model.getRowCount() - 1, i).toString().length() > archivoFalso.getListaCampo(i).getLongitud()) {
                     JOptionPane.showMessageDialog(null, "En el campo \""
-                    + archivoFalso.getListaCampo(i).getNombre() + "\" se esta pasando de la longitud maxima"
-                    + "que es " + archivoFalso.getListaCampo(i).getLongitud());
+                            + archivoFalso.getListaCampo(i).getNombre() + "\" se esta pasando de la longitud maxima"
+                            + "que es " + archivoFalso.getListaCampo(i).getLongitud());
                     model.setValueAt("", model.getRowCount() - 1, i);
                     return;
                 }
@@ -1602,9 +1623,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     try {
                         Integer.parseInt(model.getValueAt(model.getRowCount() - 1, i).toString());
                     } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(null, "En el campo \"" + 
-                        archivoFalso.getListaCampo(i).getNombre() + 
-                        "\" esta ingresando caracteres y solo se permiten enteros!");
+                        JOptionPane.showMessageDialog(null, "En el campo \""
+                                + archivoFalso.getListaCampo(i).getNombre()
+                                + "\" esta ingresando caracteres y solo se permiten enteros!");
                         return;
                     }
                 }
@@ -1617,7 +1638,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             tabla_registros.getColumnModel().getColumn(i).setCellEditor(new DefaultCellEditor(f));
         }
         model.addRow((Object[]) k);
-        
+
     }//GEN-LAST:event_btn_insertar1MouseClicked
 
     private void btn_insertar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertar1ActionPerformed
@@ -1787,4 +1808,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private Archivo archivoFalso = new Archivo();//solo es prueba
     private String GnombreArchivo;
+    
+    public String fill(int n){
+        int lengthT=0;
+        for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
+            lengthT+=archivoFalso.getListaCampo(i).getLongitud();
+        }
+        
+        String spaces="";
+        for (int i = n; i < lengthT; i++) {
+            spaces+=" ";
+        }
+        return spaces;
+    }
 }
