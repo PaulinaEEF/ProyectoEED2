@@ -407,7 +407,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btn_rreturnMouseClicked(evt);
             }
         });
-        Registros.getContentPane().add(btn_rreturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 310, 170, 70));
+        Registros.getContentPane().add(btn_rreturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 310, 170, 70));
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -454,7 +454,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btn_borrarRegistroMouseClicked(evt);
             }
         });
-        Registros.getContentPane().add(btn_borrarRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 90, 210, 60));
+        Registros.getContentPane().add(btn_borrarRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 190, 210, 60));
 
         btn_listar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_listar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/lista-de-la-compra.png"))); // NOI18N
@@ -468,7 +468,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btn_listarMouseClicked(evt);
             }
         });
-        Registros.getContentPane().add(btn_listar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 190, 210, 70));
+        Registros.getContentPane().add(btn_listar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 90, 210, 70));
 
         btn_buscar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/browsing.png"))); // NOI18N
@@ -1809,6 +1809,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void btn_return4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_return4MouseClicked
         // TODO add your handling code here:
         insertar_registros.setVisible(false);
+        Registros.setVisible(true);
     }//GEN-LAST:event_btn_return4MouseClicked
 
     private void RB_SiPotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RB_SiPotMouseClicked
