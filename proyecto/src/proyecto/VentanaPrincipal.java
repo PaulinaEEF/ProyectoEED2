@@ -15,6 +15,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JFileChooser;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -1780,8 +1781,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void btn_insertarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_insertarMouseClicked
         ArrayList<String> registross = new ArrayList();
         DefaultTableModel model = (DefaultTableModel) tabla_registros.getModel();
-        if (model.getValueAt(model.getRowCount() - 1, 0) == null) {
-            model.removeRow(model.getRowCount() - 1);
+        if (!validarIngresoTable(tabla_registros)) {
             return;
         }
         String guardar = "";
@@ -1791,7 +1791,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             for (int j = 0; j < model.getColumnCount(); j++) {
                 guardar += model.getValueAt(i, j).toString() + "|";
                 //length+=guardar.length();
-
             }
             guardar += fill(guardar.length()) + "\n";
             registross.add(guardar);
@@ -1802,7 +1801,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) tabla_registros.getModel();
         for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
             modelo.addColumn(archivoFalso.getListaCampos().get(i).getNombre());
-
         }
         modelo.setNumRows(1);
     }//GEN-LAST:event_btn_insertarMouseClicked
@@ -1832,36 +1830,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_MDC_RB_SiPotMouseClicked
 
     private void btn_insertar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_insertar1MouseClicked
-        DefaultTableModel model = (DefaultTableModel) tabla_registros.getModel();
-        //super funcion secreta que me actualize el dqu
-        tabla_registros.getCellEditor().stopCellEditing();
-        if (model.getRowCount() != 0) {
-            for (int i = 0; i < model.getColumnCount(); i++) {//se puede poner otro for para rows pero es feo pero asi soy feliz         
-                if (model.getValueAt(model.getRowCount() - 1, i) == null) {
-                    JOptionPane.showMessageDialog(null, "No puede dejar ningun campo vacio!");
-                    return;
-                }
-                if (model.getValueAt(model.getRowCount() - 1, i).toString().length() > archivoFalso.getListaCampo(i).getLongitud()) {
-                    JOptionPane.showMessageDialog(null, "En el campo \""
-                            + archivoFalso.getListaCampo(i).getNombre() + "\" se esta pasando de la longitud maxima"
-                            + "que es " + archivoFalso.getListaCampo(i).getLongitud());
-                    model.setValueAt("", model.getRowCount() - 1, i);
-                    return;
-                }
-                if ("int".equals(archivoFalso.getListaCampo(i).getTipo())) {
-                    try {
-                        Integer.parseInt(model.getValueAt(model.getRowCount() - 1, i).toString());
-                    } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(null, "En el campo \""
-                                + archivoFalso.getListaCampo(i).getNombre()
-                                + "\" esta ingresando caracteres y solo se permiten enteros!");
-                        return;
-                    }
-                }
-            }
+        DefaultTableModel model = (DefaultTableModel) tabla_modificar.getModel();
+        if (validarIngresoTable(tabla_modificar)) {
+            Object k = new Object[archivoFalso.getListaCampos().size()];
+            model.addRow((Object[]) k);
         }
-        Object k = new Object[archivoFalso.getListaCampos().size()];
-        model.addRow((Object[]) k);
     }//GEN-LAST:event_btn_insertar1MouseClicked
 
     private void btn_insertar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertar1ActionPerformed
@@ -2120,14 +2093,49 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
 
         String spaces = "";
-        for (int i = n; i < lengthT; i++) {
+        for (int i = n; i < lengthT + archivoFalso.getListaCampos().size(); i++) {
             spaces += " ";
         }
         return spaces;
     }
+    
+    private boolean validarIngresoTable(JTable tabla) {
+        DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+        //super funcion secreta que me actualize el dqu
+        tabla.getCellEditor().stopCellEditing();
+        if (model.getRowCount() != 0) {
+            for (int i = 0; i < model.getColumnCount(); i++) {//se puede poner otro for para rows pero es feo pero asi soy feliz         
+                if (model.getValueAt(model.getRowCount() - 1, i) == null) {
+                    JOptionPane.showMessageDialog(null, "No puede dejar ningun campo vacio!");
+                    return false;
+                }
+                if (model.getValueAt(model.getRowCount() - 1, i).toString().length() > archivoFalso.getListaCampo(i).getLongitud()) {
+                    JOptionPane.showMessageDialog(null, "En el campo \""
+                            + archivoFalso.getListaCampo(i).getNombre() + "\" se esta pasando de la longitud maxima"
+                            + "que es " + archivoFalso.getListaCampo(i).getLongitud());
+                    model.setValueAt("", model.getRowCount() - 1, i);
+                    return false;
+                }
+                if ("int".equals(archivoFalso.getListaCampo(i).getTipo())) {
+                    try {
+                        Integer.parseInt(model.getValueAt(model.getRowCount() - 1, i).toString());
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null, "En el campo \""
+                                + archivoFalso.getListaCampo(i).getNombre()
+                                + "\" esta ingresando caracteres y solo se permiten enteros!");
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
 
     private boolean hasRecords() {
+        System.out.println(archivoFalso.getSizeMetadata());
+        System.out.println(new File(GnombreArchivo).length());
         return new File(GnombreArchivo).length() > archivoFalso.getSizeMetadata();
+        
     }
 
     private void guardarRegistro(String registro) {
