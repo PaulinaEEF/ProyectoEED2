@@ -1081,7 +1081,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_Boton_ArchivosMouseClicked
 
     private void Boton_CamposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Boton_CamposMouseClicked
-
+        if (hasRecords()) {
+            JOptionPane.showMessageDialog(null, "Etse archivo ya cuenta con registros, por lo tanto algunas opciones se encuentran deshabilitadas");
+            boton_CrearCampo.setEnabled(false);
+            boton_ModificarCampos.setEnabled(false);
+            boton_BorrarCampos.setEnabled(false);
+        } else {
+            boton_CrearCampo.setEnabled(true);
+            boton_ModificarCampos.setEnabled(true);
+            boton_BorrarCampos.setEnabled(true);
+        }
         if (GnombreArchivo != null) {
             Campos.pack();
             Campos.setModal(true);
@@ -1109,39 +1118,44 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_boton_regresarActionPerformed
 
     private void boton_BorrarCamposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_BorrarCamposMouseClicked
-        Campos.setVisible(false);
+        if (boton_BorrarCampos.isEnabled()) {
+            Campos.setVisible(false);
 
-        DefaultListModel modelo = new DefaultListModel();
-        for (Campo campo : archivoFalso.getListaCampos()) {
-            modelo.addElement(campo);
+            DefaultListModel modelo = new DefaultListModel();
+            for (Campo campo : archivoFalso.getListaCampos()) {
+                modelo.addElement(campo);
+            }
+            Lista_borrar.setModel(modelo);
+            Lista_borrar.setCellRenderer(new CampoRenderer());
+            Borrar_campos.pack();
+            Borrar_campos.setModal(true);
+            Borrar_campos.setLocationRelativeTo(null);
+            Borrar_campos.setVisible(true);
         }
-        Lista_borrar.setModel(modelo);
-        Lista_borrar.setCellRenderer(new CampoRenderer());
-        Borrar_campos.pack();
-        Borrar_campos.setModal(true);
-        Borrar_campos.setLocationRelativeTo(null);
-        Borrar_campos.setVisible(true);
     }//GEN-LAST:event_boton_BorrarCamposMouseClicked
 
     private void boton_ModificarCamposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_ModificarCamposMouseClicked
-        cb_listaCampos.setModel(new DefaultComboBoxModel<>());
-        for (Campo campo : archivoFalso.getListaCampos()) {
-            cb_listaCampos.addItem(campo);
+        if (boton_ModificarCampos.isEnabled()) {
+            cb_listaCampos.setModel(new DefaultComboBoxModel<>());
+            for (Campo campo : archivoFalso.getListaCampos()) {
+                cb_listaCampos.addItem(campo);
+            }
+            Campos.setVisible(false);
+            Modificar_Campos.pack();
+            Modificar_Campos.setModal(true);
+            Modificar_Campos.setLocationRelativeTo(null);
+            Modificar_Campos.setVisible(true);
         }
-        Campos.setVisible(false);
-        Modificar_Campos.pack();
-        Modificar_Campos.setModal(true);
-        Modificar_Campos.setLocationRelativeTo(null);
-        Modificar_Campos.setVisible(true);
     }//GEN-LAST:event_boton_ModificarCamposMouseClicked
 
     private void boton_CrearCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_CrearCampoMouseClicked
-        Campos.setVisible(false);
-        crearCampos.pack();
-        crearCampos.setModal(true);
-        crearCampos.setLocationRelativeTo(null);
-        crearCampos.setVisible(true);
-
+        if (boton_CrearCampo.isEnabled()) {
+            Campos.setVisible(false);
+            crearCampos.pack();
+            crearCampos.setModal(true);
+            crearCampos.setLocationRelativeTo(null);
+            crearCampos.setVisible(true);
+        }
     }//GEN-LAST:event_boton_CrearCampoMouseClicked
 
     private void boton_ListarCampos1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_ListarCampos1MouseClicked
@@ -1312,6 +1326,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
             if (nombreArchivo != null || (nombreArchivo != null && !("".equals(nombreArchivo)))) {
                 GnombreArchivo = nombreArchivo + ".jjdp";
+                archivoFalso = new Archivo(GnombreArchivo);
                 // write data to file
                 try ( // create a writer
                          FileOutputStream fos = new FileOutputStream(new File(GnombreArchivo))) {
@@ -1501,7 +1516,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         new InputStreamReader(reader, StandardCharsets.UTF_8));
                         metadata = r.readLine();
                         String[] arMetadata = metadata.split("\\|");
-
+                        archivoFalso = new Archivo(GnombreArchivo);
                         for (int i = 1; i < arMetadata.length; i++) {
                             String[] arMetadata2 = arMetadata[i].split("\\:");
                             String nombre = arMetadata2[0];
@@ -1543,6 +1558,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void btn_insertarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_insertarMouseClicked
         ArrayList<String> registross = new ArrayList();
         DefaultTableModel model = (DefaultTableModel) tabla_registros.getModel();
+        if (model.getValueAt(model.getRowCount() - 1, 0) == null) {
+            model.removeRow(model.getRowCount() - 1);
+            return;
+        }
         String guardar = "";
        // int length=0;
         for (int i = 0; i < model.getRowCount(); i++) {
@@ -1554,26 +1573,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
             guardar+=fill(guardar.length())+"\n";
             registross.add(guardar);
-             try {
-                // create a writer
-                FileOutputStream fos = new FileOutputStream(new File(GnombreArchivo));
-                BufferedOutputStream writer = new BufferedOutputStream(fos);
-
-                // write data to file
-                writer.write(guardar.getBytes());
-
-                // flush remaining bytes
-                writer.flush();
-
-                // close the writer
-                writer.close();
-
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            
+            guardarRegistro(guardar);            
+        }
+        JOptionPane.showMessageDialog(null, "Guardado Exitoso!");
+        tabla_registros.setModel(new DefaultTableModel());
+        DefaultTableModel modelo = (DefaultTableModel) tabla_registros.getModel();
+        for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
+            modelo.addColumn(archivoFalso.getListaCampos().get(i).getNombre());
 
         }
+        modelo.setNumRows(1);
     }//GEN-LAST:event_btn_insertarMouseClicked
 
     private void btn_return4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_return4MouseClicked
@@ -1811,5 +1820,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             spaces+=" ";
         }
         return spaces;
+    }
+    
+    private boolean hasRecords() {
+        return new File(GnombreArchivo).length() > archivoFalso.getSizeMetadata();
+    }
+    
+    private void guardarRegistro(String registro){
+        if (archivoFalso.getAvailList().isEmpty()) {
+            try {
+                // create a writer
+                FileOutputStream fos = new FileOutputStream(new File (GnombreArchivo), true);
+                BufferedOutputStream writer = new BufferedOutputStream(fos);
+                try {
+                    fos.write(registro.getBytes());
+                } finally {
+                    fos.close();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        } //else buscar en avail list pero falta para eso :(
     }
 }
