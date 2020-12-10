@@ -1302,17 +1302,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_Boton_ArchivosMouseClicked
 
     private void Boton_CamposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Boton_CamposMouseClicked
-        if (hasRecords()) {
-            JOptionPane.showMessageDialog(null, "El archivo que ha seleccionado ya cuenta con registros, por lo tanto algunas opciones se encuentran deshabilitadas");
-            boton_CrearCampo.setEnabled(false);
-            boton_ModificarCampos.setEnabled(false);
-            boton_BorrarCampos.setEnabled(false);
-        } else {
-            boton_CrearCampo.setEnabled(true);
-            boton_ModificarCampos.setEnabled(true);
-            boton_BorrarCampos.setEnabled(true);
-        }
+
         if (GnombreArchivo != null) {
+            if (hasRecords()) {
+                JOptionPane.showMessageDialog(null, "El archivo que ha seleccionado ya cuenta con registros, por lo tanto algunas opciones se encuentran deshabilitadas");
+                boton_CrearCampo.setEnabled(false);
+                boton_ModificarCampos.setEnabled(false);
+                boton_BorrarCampos.setEnabled(false);
+            } else {
+                boton_CrearCampo.setEnabled(true);
+                boton_ModificarCampos.setEnabled(true);
+                boton_BorrarCampos.setEnabled(true);
+            }
             Campos.pack();
             Campos.setModal(true);
             Campos.setLocationRelativeTo(null);
@@ -1915,8 +1916,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_listarMouseClicked
 
     private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
-      listar_registros.setVisible(false);
-      Registros.setVisible(true);
+        listar_registros.setVisible(false);
+        Registros.setVisible(true);
     }//GEN-LAST:event_jButton7MouseClicked
 
     /**
