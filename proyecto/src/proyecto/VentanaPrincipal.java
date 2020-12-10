@@ -1652,10 +1652,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_aceptar1ActionPerformed
 
     private void boton_RegistrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_RegistrosMouseClicked
-        Registros.pack();
-        Registros.setModal(true);
-        Registros.setLocationRelativeTo(null);
-        Registros.setVisible(true);
+        if (GnombreArchivo != null) {
+            Registros.pack();
+            Registros.setModal(true);
+            Registros.setLocationRelativeTo(null);
+            Registros.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "No hay ningún archivo cargado en memoria");
+        }
+
     }//GEN-LAST:event_boton_RegistrosMouseClicked
 
     private void btn_rreturnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_rreturnMouseClicked
@@ -2098,7 +2103,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
         return spaces;
     }
-    
+
     private boolean validarIngresoTable(JTable tabla) {
         DefaultTableModel model = (DefaultTableModel) tabla.getModel();
         //super funcion secreta que me actualize el dqu
@@ -2135,7 +2140,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         System.out.println(archivoFalso.getSizeMetadata());
         System.out.println(new File(GnombreArchivo).length());
         return new File(GnombreArchivo).length() > archivoFalso.getSizeMetadata();
-        
+
     }
 
     private void guardarRegistro(String registro) {
