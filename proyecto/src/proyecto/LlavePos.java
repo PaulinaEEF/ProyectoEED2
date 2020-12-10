@@ -37,7 +37,7 @@ public class LlavePos {
 
     @Override
     public String toString() {
-        return "Nodo{" + "llave=" + llave + ", pos=" + pos + '}';
+        return "{" + "llave=" + llave + ", pos=" + pos + '}';
     }
     
 }

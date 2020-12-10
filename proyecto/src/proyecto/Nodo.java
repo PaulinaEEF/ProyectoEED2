@@ -15,7 +15,7 @@ public class Nodo {
     
      //boolean esHoja;
     ArrayList<LlavePos> llaves;
-    ArrayList<Nodo> hijos;
+    ArrayList<Integer> hijos;
     int n;
     boolean leaf;
 
@@ -24,7 +24,7 @@ public class Nodo {
         hijos = new ArrayList<>();
         for (int i = 0; i < m-1; i++) {
             llaves.add(null);
-            hijos.add(null);
+            hijos.add(-1);
         }
         hijos.add(null);
         n = 0;
@@ -71,11 +71,11 @@ public class Nodo {
         this.llaves = llaves;
     }
 
-    public ArrayList<Nodo> getHijos() {
+    public ArrayList<Integer> getHijos() {
         return hijos;
     }
 
-    public void setHijos(ArrayList<Nodo> hijos) {
+    public void setHijos(ArrayList<Integer> hijos) {
         this.hijos = hijos;
     }
 

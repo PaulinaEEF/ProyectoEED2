@@ -5,6 +5,8 @@
  */
 package proyecto;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author daba5
@@ -12,20 +14,24 @@ package proyecto;
 public class ArbolB {
     
     int m;// orden del arbol
-    Nodo raiz;
+    int raiz;
+    ArrayList<Nodo> nodos;
 
     public ArbolB(int orden) {
+        nodos = new ArrayList<Nodo>();
         this.m = orden;
-        raiz = new Nodo(m);
+        nodos.add(new Nodo(m));
+        raiz = 0;
         //this.t = (int) Math.ceil((orden + 1) / 2);// responsabilizar a Jose.
+        
     }
 
-    public ArbolB(int orden, String llave, long pos) {
+    /*public ArbolB(int orden, String llave, long pos) {
         //this.t = (int) Math.floor((orden + 1) / 2);// responsabilizar a Jose.
         this.m = orden;
         raiz = new Nodo(m, llave, pos);
 
-    }
+    }*/
 
     public int getM() {
         return m;
@@ -35,11 +41,11 @@ public class ArbolB {
         this.m = m;
     }
 
-    public Nodo getRaiz() {
+    public int getRaiz() {
         return raiz;
     }
 
-    public void setRaiz(Nodo raiz) {
+    public void setRaiz(int raiz) {
         this.raiz = raiz;
     }
 
@@ -56,9 +62,10 @@ public class ArbolB {
         return m;
     }
 
-    public NodoIndice B_Tree_Search(Nodo x, String k, long p) {
+    public NodoIndice B_Tree_Search(int ix, String k) {
 
         int i = 0;
+        Nodo x = nodos.get((int) ix);
 
         while (i < x.getN() && k.compareTo(x.getLlaves().get(i).getLlave()) > 0) {
             i++;
@@ -70,29 +77,36 @@ public class ArbolB {
         if (x.isLeaf()) {
             return null;
         } else {
-            return B_Tree_Search(x.getHijos().get(i),k,p);
+            return B_Tree_Search(x.getHijos().get(i),k);
         }
     }
 
-    public void insert(String k, long pos) {
-        Nodo r = raiz;
+    public void insert(String k, long p) {
+        int ir = raiz;
+        Nodo r = nodos.get(this.getRaiz());
         //System.out.println(r.getLlaves().size());
         //System.out.println(raiz.getLlaves().size());
         if (r.getN() == upperBKeys()) {
+            int is = nodos.size();
             Nodo s = new Nodo(m);
-            raiz = s;
+            nodos.add(s);
+            raiz = is;
             s.setLeaf(false);
             s.setN(0);
-            s.getHijos().set(0, r);
-            B_Tree_Split_Child(s, 0, r);
-            B_Tree_Insert_NonFull(s,k,pos);
+            s.getHijos().set(0, ir);
+            B_Tree_Split_Child(is, 0, ir);
+            B_Tree_Insert_NonFull(is,k,p);
         } else {
-            B_Tree_Insert_NonFull(r,k,pos);
+            B_Tree_Insert_NonFull(ir,k,p);
         }
     }
 
-    public void B_Tree_Split_Child(Nodo x, int i, Nodo y) {
+    public void B_Tree_Split_Child(int ix, int i, int iy) {
+        int iz = nodos.size();
         Nodo z = new Nodo(m);
+        nodos.add(z);
+        Nodo y = nodos.get(iy);
+        Nodo x = nodos.get(ix);
         z.setLeaf(y.isLeaf());
         z.setN(this.upperBKeys() - this.lowerBKeys() - 1);
         for (int j = 0; j < z.getN(); j++) {
@@ -104,7 +118,7 @@ public class ArbolB {
             }
         }
         y.setN(this.lowerBKeys());
-        x.getHijos().add(i + 1, z);
+        x.getHijos().add(i + 1, iz);
         x.getHijos().remove(m);
 
         x.getLlaves().add(i, y.getLlaves().get(this.lowerBKeys()));
@@ -114,7 +128,8 @@ public class ArbolB {
 
     }
 
-    public void B_Tree_Insert_NonFull(Nodo x, String k, long p) {
+    public void B_Tree_Insert_NonFull(int ix, String k, long p) {
+        Nodo x = nodos.get(ix);
         int i = x.getN() - 1;
         if (x.isLeaf()) {
             while (i >= 0 && k.compareTo(x.getLlaves().get(i).getLlave()) < 0) {
@@ -129,8 +144,8 @@ public class ArbolB {
             }
             i++;
 
-            if (x.getHijos().get(i).getN() == this.upperBKeys()) {
-                B_Tree_Split_Child(x, i, x.getHijos().get(i));
+            if (nodos.get(x.getHijos().get(i)).getN() == this.upperBKeys()) {
+                B_Tree_Split_Child(ix, i, x.getHijos().get(i));
                 if (k.compareTo(x.getLlaves().get(i).getLlave()) > 0) {
                     i++;
                 }
@@ -140,7 +155,8 @@ public class ArbolB {
 
     }
 
-    public void imprimir_arbol(Nodo nodo_actual, int num) {
+    public void imprimir_arbol(int ina, int num) {
+        Nodo nodo_actual = nodos.get(ina);
         //se debe iniciar num en 0 a la hora de llamar el metodo
         String indent = new String(new char[1024]).replace('\0', ' ');
         for (int i = 0; i < nodo_actual.getN(); i++) {
