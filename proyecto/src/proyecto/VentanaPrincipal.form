@@ -1623,9 +1623,6 @@
           <SubComponents>
             <Component class="javax.swing.JTable" name="tabla_registros">
               <Properties>
-                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;&#xa;    },&#xa;    new String [] {&#xa;&#xa;    }&#xa;)   {&#xa;    @Override&#xa;    public boolean isCellEditable(int row, int column) {&#xa;        return false;&#xa;    }&#xa;}&#xa;&#xa;&#xa;" type="code"/>
-                </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0"/>
                 </Property>
@@ -1633,6 +1630,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;    public boolean isCellEditable(int row, int column){&#xa;        return row == this.getRowCount() - 1;&#xa;    }&#xa;};&#xa;&#xa;"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
