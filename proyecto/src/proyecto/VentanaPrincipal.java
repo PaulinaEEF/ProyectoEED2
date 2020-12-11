@@ -1656,7 +1656,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void boton_RegistrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_RegistrosMouseClicked
         if (GnombreArchivo != null) {
             if (!archivoFalso.getListaCampos().isEmpty()) {
-                if (controlGuardado != 0) {
+                if (new File(GnombreArchivo).length() > 0) {
                     Registros.pack();
                     Registros.setModal(true);
                     Registros.setLocationRelativeTo(null);
