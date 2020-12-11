@@ -1786,7 +1786,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void btn_insertarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_insertarMouseClicked
         ArrayList<String> registross = new ArrayList();
         DefaultTableModel model = (DefaultTableModel) tabla_registros.getModel();
-        if (!validarIngresoTable(tabla_registros)) {
+        if (!validarIngresoTable(tabla_registros, true)) {
             return;
         }
         String guardar = "";
@@ -1835,8 +1835,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_MDC_RB_SiPotMouseClicked
 
     private void btn_insertar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_insertar1MouseClicked
-        DefaultTableModel model = (DefaultTableModel) tabla_modificar.getModel();
-        if (validarIngresoTable(tabla_modificar)) {
+        DefaultTableModel model = (DefaultTableModel) tabla_registros.getModel();
+        if (validarIngresoTable(tabla_registros, false)) {
             Object k = new Object[archivoFalso.getListaCampos().size()];
             model.addRow((Object[]) k);
         }
@@ -2104,20 +2104,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         return spaces;
     }
 
-    private boolean validarIngresoTable(JTable tabla) {
+    private boolean validarIngresoTable(JTable tabla, boolean guardar) {
         DefaultTableModel model = (DefaultTableModel) tabla.getModel();
         //super funcion secreta que me actualize el dqu
-        tabla.getCellEditor().stopCellEditing();
+        if (tabla.isEditing()) {
+            tabla.getCellEditor().stopCellEditing();
+        }
         if (model.getRowCount() != 0) {
             for (int i = 0; i < model.getColumnCount(); i++) {//se puede poner otro for para rows pero es feo pero asi soy feliz         
                 if (model.getValueAt(model.getRowCount() - 1, i) == null) {
-                    JOptionPane.showMessageDialog(null, "No puede dejar ningun campo vacio!");
-                    return false;
+                    if (guardar) {
+                        model.removeRow(model.getRowCount() - 1);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No puede dejar ningun campo vacio!");
+                        return false;
+                   }
                 }
                 if (model.getValueAt(model.getRowCount() - 1, i).toString().length() > archivoFalso.getListaCampo(i).getLongitud()) {
                     JOptionPane.showMessageDialog(null, "En el campo \""
                             + archivoFalso.getListaCampo(i).getNombre() + "\" se esta pasando de la longitud maxima"
-                            + "que es " + archivoFalso.getListaCampo(i).getLongitud());
+                            + " que es " + archivoFalso.getListaCampo(i).getLongitud());
                     model.setValueAt("", model.getRowCount() - 1, i);
                     return false;
                 }
