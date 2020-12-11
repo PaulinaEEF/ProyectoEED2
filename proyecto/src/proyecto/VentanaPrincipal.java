@@ -1569,10 +1569,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void btn_salvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_salvarMouseClicked
         // TODO add your handling code here:
-        controlGuardado++;
+
         if (GnombreArchivo == null) {
             JOptionPane.showMessageDialog(null, "No hay ningun archivo cargado en memoria");
         } else {
+            controlGuardado++;
             String metadata = GnombreArchivo;
 
             for (Campo campo : archivoFalso.getListaCampos()) {
