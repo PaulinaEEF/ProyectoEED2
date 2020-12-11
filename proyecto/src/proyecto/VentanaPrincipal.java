@@ -1569,6 +1569,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void btn_salvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_salvarMouseClicked
         // TODO add your handling code here:
+        controlGuardado++;
         if (GnombreArchivo == null) {
             JOptionPane.showMessageDialog(null, "No hay ningun archivo cargado en memoria");
         } else {
@@ -1653,12 +1654,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void boton_RegistrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_RegistrosMouseClicked
         if (GnombreArchivo != null) {
-            Registros.pack();
-            Registros.setModal(true);
-            Registros.setLocationRelativeTo(null);
-            Registros.setVisible(true);
+            if (!archivoFalso.getListaCampos().isEmpty()) {
+                if (controlGuardado != 0) {
+                    Registros.pack();
+                    Registros.setModal(true);
+                    Registros.setLocationRelativeTo(null);
+                    Registros.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Para registrar debe de guardar los campos en el archivo.");
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "El archivo debe de tener 1 o mas campos para tener registros.");
+            }
+
         } else {
-            JOptionPane.showMessageDialog(null, "No hay ningún archivo cargado en memoria");
+            JOptionPane.showMessageDialog(null, "No hay ningún archivo cargado en memoria.");
         }
 
     }//GEN-LAST:event_boton_RegistrosMouseClicked
@@ -2118,7 +2129,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     } else {
                         JOptionPane.showMessageDialog(null, "No puede dejar ningun campo vacio!");
                         return false;
-                   }
+                    }
                 }
                 if (model.getValueAt(model.getRowCount() - 1, i).toString().length() > archivoFalso.getListaCampo(i).getLongitud()) {
                     JOptionPane.showMessageDialog(null, "En el campo \""
@@ -2165,4 +2176,5 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         } //else buscar en avail list pero falta para eso :(
     }
+    int controlGuardado = 0;
 }
