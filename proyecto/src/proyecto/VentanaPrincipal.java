@@ -5,12 +5,17 @@ import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
+import java.io.RandomAccessFile;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -173,6 +178,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         tabla_modificar = new javax.swing.JTable();
         jLabel35 = new javax.swing.JLabel();
+        Modificar_Buscar = new javax.swing.JButton();
+        modificar_textfield = new javax.swing.JTextField();
+        Modificar_Label = new javax.swing.JLabel();
         btn_modif = new javax.swing.JButton();
         btn_returnnn = new javax.swing.JButton();
         FModificar = new javax.swing.JLabel();
@@ -993,19 +1001,44 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jScrollPane4.setViewportView(tabla_modificar);
         tabla_modificar.getAccessibleContext().setAccessibleName("");
 
-        Modificar_Registros.getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 450, 170));
+        Modificar_Registros.getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 570, 130));
 
         jLabel35.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel35.setText("Por favor, seleccione el registro que desea editar");
-        Modificar_Registros.getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, 300, 20));
+        Modificar_Registros.getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 300, 20));
+
+        Modificar_Buscar.setText("jButton8");
+        Modificar_Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Modificar_BuscarMouseClicked(evt);
+            }
+        });
+        Modificar_Registros.getContentPane().add(Modificar_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 40, -1, -1));
+
+        modificar_textfield.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificar_textfieldActionPerformed(evt);
+            }
+        });
+        Modificar_Registros.getContentPane().add(modificar_textfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 160, -1));
+
+        Modificar_Label.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        Modificar_Label.setText("jLabel44");
+        Modificar_Registros.getContentPane().add(Modificar_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 120, -1));
 
         btn_modif.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_modif.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/document.png"))); // NOI18N
         btn_modif.setText("Modificar registro");
         btn_modif.setContentAreaFilled(false);
+        btn_modif.setEnabled(false);
         btn_modif.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         btn_modif.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btn_modif.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/document (1).png"))); // NOI18N
+        btn_modif.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_modifMouseClicked(evt);
+            }
+        });
         Modificar_Registros.getContentPane().add(btn_modif, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 220, 90));
 
         btn_returnnn.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -1882,10 +1915,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void btn_modifica_registroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_modifica_registroMouseClicked
         Registros.setVisible(false);
+        Modificar_Label.setText(archivoFalso.getListaCampo(getPosKey()).getNombre());
+        tabla_modificar.setModel(new DefaultTableModel());
+        DefaultTableModel model = (DefaultTableModel) tabla_modificar.getModel();
+        for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
+            model.addColumn(archivoFalso.getListaCampos().get(i).getNombre());
+        }
         Modificar_Registros.pack();
         Modificar_Registros.setModal(true);
         Modificar_Registros.setLocationRelativeTo(null);
         Modificar_Registros.setVisible(true);
+        tabla_modificar.setModel(new DefaultTableModel());
     }//GEN-LAST:event_btn_modifica_registroMouseClicked
 
     private void btn_buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_buscarMouseClicked
@@ -1926,6 +1966,63 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         listar_registros.setVisible(false);
         Registros.setVisible(true);
     }//GEN-LAST:event_jButton7MouseClicked
+
+    private void modificar_textfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificar_textfieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_modificar_textfieldActionPerformed
+
+    private void Modificar_BuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Modificar_BuscarMouseClicked
+        DefaultTableModel model = (DefaultTableModel)tabla_modificar.getModel();
+        if ("".equals(modificar_textfield.getText())) {
+            JOptionPane.showMessageDialog(null, "Favor ingrese el valor que desea buscar");
+        } else if (model.getRowCount() != 1) {
+            NodoIndice nodoInd = arbolDeIndexacion.B_Tree_Search(0, modificar_textfield.getText());
+            if (nodoInd == null) {
+                JOptionPane.showMessageDialog(null, "No se encontro ningun registro con ese valor");
+                modificar_textfield.setText("");
+                return;
+            }
+            long Rrn = nodoInd.getNodo().getLlaves().get(nodoInd.getIndice()).getPos();
+            try {
+                String data = readRecord(Math.toIntExact(Rrn));
+                String arr[] = data.split("\\|");
+                Object arr2[] = new Object[arr.length - 1];
+                for (int i = 0; i < model.getColumnCount(); i++) {
+                    arr2[i] = arr[i];
+                }
+                model.addRow(arr2);
+                btn_modif.setEnabled(true);
+            } catch (IOException ex) {
+                Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_Modificar_BuscarMouseClicked
+
+    private void btn_modifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_modifMouseClicked
+        if (btn_modifica_registro.isEnabled()) {
+            if (validarIngresoTable(tabla_modificar, false)) {
+                DefaultTableModel model = (DefaultTableModel) tabla_modificar.getModel();
+                //borrar del arbol
+                arbolDeIndexacion.insert(model.getValueAt(0, getPosKey()).toString(), rrnModi);
+                String guardar = "";
+                // int length=0;
+
+                guardar = "";
+                for (int j = 0; j < model.getColumnCount(); j++) {
+                    guardar += model.getValueAt(0, j).toString() + "|";
+                    //length+=guardar.length();
+                }
+                model.removeRow(0);
+                try {
+                    rewrite(guardar);
+                    JOptionPane.showConfirmDialog(null, "Registro modificado exitosamente");
+                    modificar_textfield.setText("");
+                } catch (IOException ex) {
+                    Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_btn_modifMouseClicked
 
     /**
      * @param args the command line arguments
@@ -2003,7 +2100,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JRadioButton MDC_RB_Si;
     private javax.swing.JRadioButton MDC_RB_SiPot;
     private javax.swing.JComboBox<String> MDC_comboTipos;
+    private javax.swing.JButton Modificar_Buscar;
     private javax.swing.JDialog Modificar_Campos;
+    private javax.swing.JLabel Modificar_Label;
     private javax.swing.JDialog Modificar_Registros;
     private javax.swing.JTextField NombreCampo;
     private javax.swing.JRadioButton RB_No;
@@ -2125,12 +2224,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable1;
     private javax.swing.JDialog listar_registros;
+    private javax.swing.JTextField modificar_textfield;
     private javax.swing.JTable tabla_modificar;
     private javax.swing.JTable tabla_registros;
     // End of variables declaration//GEN-END:variables
     private Archivo archivoFalso = new Archivo();//solo es prueba
     private String GnombreArchivo;
     private ArbolB arbolDeIndexacion = new ArbolB(6);
+    private int rrnModi = 0;
 
     public String fill(int n) {
         int lengthT = 0;
@@ -2143,6 +2244,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             spaces += " ";
         }
         return spaces;
+    }
+    
+    private void rewrite(String data) throws FileNotFoundException, IOException {
+        File archivo = new File(GnombreArchivo);
+        RandomAccessFile raf = new RandomAccessFile(archivo, "rw");
+        raf.seek(rrnModi * recordSize() + archivoFalso.getSizeMetadata());
+        raf.write((data + fill(data.length()) + "\n").getBytes());
+        raf.close();
+    }
+    
+    private String readRecord(int RRN) throws FileNotFoundException, IOException {
+        File archivo = new File(GnombreArchivo);
+        FileReader fr = new FileReader(archivo);
+        String x = "";
+        RandomAccessFile af = new RandomAccessFile(archivo, "r");
+        af.seek(((RRN - 1) * recordSize()) + archivoFalso.getSizeMetadata());
+        x = af.readLine();
+        af.close();
+        fr.close();
+        return x;
     }
     
     public void escribirArchivo(String nombre) {
