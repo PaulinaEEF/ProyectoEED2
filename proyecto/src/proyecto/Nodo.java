@@ -78,6 +78,15 @@ public class Nodo {
     public void setHijos(ArrayList<Integer> hijos) {
         this.hijos = hijos;
     }
+    public int Find(String k) {
+      for (int i = 0; i < this.n; i++) {
+        if (this.getLlaves().get(i).getLlave().equals(k)) {
+          return i;
+        }
+      }
+      return -1;
+    };
+
 
     /*public boolean leaf() {
         return hijos.isEmpty();
