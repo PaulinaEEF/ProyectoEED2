@@ -55,7 +55,7 @@ public class ArbolB {
 
     public int lowerBKeys() {
 
-        return m / 2;
+        return Math.max((m/2)-1, 1);
     }
 
     public int UpperBChild() {
