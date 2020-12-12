@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
@@ -1292,6 +1293,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_boton_SalirActionPerformed
 
     private void boton_SalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_SalirMouseClicked
+        escribirArchivo(GnombreArchivo);
+        arbolDeIndexacion.imprimir_arbol(0, 0);
         System.exit(0);
     }//GEN-LAST:event_boton_SalirMouseClicked
 
@@ -1656,6 +1659,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void boton_RegistrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_RegistrosMouseClicked
         if (GnombreArchivo != null) {
             if (!archivoFalso.getListaCampos().isEmpty()) {
+                if (new File(GnombreArchivo).length() < archivoFalso.getSizeMetadata()) {
+                    JOptionPane.showMessageDialog(null, "Tiene cambios sin guardar en los campos. Favor guarde el archivo antes de ");
+                    return;
+                }
                 if (new File(GnombreArchivo).length() > 0) {
                     Registros.pack();
                     Registros.setModal(true);
@@ -1664,6 +1671,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 } else {
                     JOptionPane.showMessageDialog(null, "Para registrar debe de guardar los campos en el archivo.");
                 }
+                
 
             } else {
                 JOptionPane.showMessageDialog(null, "El archivo debe de tener 1 o mas campos para tener registros.");
@@ -1767,10 +1775,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             keyPot = arMetadata2[4].equals("true");
                             archivoFalso.setListaCampo(new Campo(nombre, tipo, numBytes, key, keyPot));
                         }
+                        
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
-
+                    try {
+                        arbolDeIndexacion = arbolDeIndexacion.cargarArchivo(GnombreArchivo);
+                    } catch (Exception e) {
+                        arbolDeIndexacion = new ArbolB(6);
+                    }
+                    if (arbolDeIndexacion == null) {
+                        arbolDeIndexacion = new ArbolB(6);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo con terminación [.jjdp]");
                 }
@@ -1812,6 +1828,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             guardar += fill(guardar.length()) + "\n";
             registross.add(guardar);
             guardarRegistro(guardar);
+            arbolDeIndexacion.insert(model.getValueAt(i, getPosKey()).toString(), getRrn());
         }
         JOptionPane.showMessageDialog(null, "Guardado Exitoso!");
         tabla_registros.setModel(new DefaultTableModel());
@@ -2113,6 +2130,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private Archivo archivoFalso = new Archivo();//solo es prueba
     private String GnombreArchivo;
+    private ArbolB arbolDeIndexacion = new ArbolB(6);
 
     public String fill(int n) {
         int lengthT = 0;
@@ -2125,6 +2143,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             spaces += " ";
         }
         return spaces;
+    }
+    
+    public void escribirArchivo(String nombre) {
+        FileOutputStream fw = null;
+        ObjectOutputStream bw = null;
+        try {
+            fw = new FileOutputStream(nombre + "keyTree");
+            bw = new ObjectOutputStream(fw);
+            bw.writeObject(arbolDeIndexacion);
+            bw.flush();
+        } catch (Exception ex) {
+        } finally {
+            try {
+                bw.close();
+                fw.close();
+            } catch (Exception ex) {
+            }
+        }
     }
 
     private boolean validarIngresoTable(JTable tabla, boolean guardar) {
@@ -2164,12 +2200,36 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
         return true;
     }
+    
+    private int getPosKey() {
+        for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
+            if (archivoFalso.getListaCampo(i).isLprimaria()) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
     private boolean hasRecords() {
         System.out.println(archivoFalso.getSizeMetadata());
         System.out.println(new File(GnombreArchivo).length());
         return new File(GnombreArchivo).length() > archivoFalso.getSizeMetadata();
 
+    }
+    
+    private int recordSize() {
+        int length = 0;
+        for (Campo campo : archivoFalso.getListaCampos()) {
+            length += campo.getLongitud();
+        }
+        return length + archivoFalso.getListaCampos().size() + 1;
+    }
+    
+    private int getRrn() {
+        if (archivoFalso.getAvailList().isEmpty()) {
+            return (int) ((new File(GnombreArchivo).length() - archivoFalso.getSizeMetadata())/recordSize());
+        }
+        return (int)archivoFalso.getAvailList().removeFirst();
     }
 
     private void guardarRegistro(String registro) {

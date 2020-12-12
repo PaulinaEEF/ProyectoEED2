@@ -8,11 +8,11 @@ import java.util.LinkedList;
 public class Archivo /*implements Serializable*/ {
     
     //boolean Primaria;
-    LinkedList AvailList = new LinkedList();
-    ArrayList<Campo> ListaCampos = new ArrayList();
-    ArrayList<String> registros = new ArrayList();
+    private LinkedList AvailList = new LinkedList();
+    private ArrayList<Campo> ListaCampos = new ArrayList();
+    private ArrayList<String> registros = new ArrayList();
     
-    String nombre;
+    private String nombre;
 
     public Archivo() {
 

@@ -5,13 +5,14 @@
  */
 package proyecto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author daba5
  */
-public class Nodo {
+public class Nodo implements Serializable{
     
      //boolean esHoja;
     ArrayList<LlavePos> llaves;

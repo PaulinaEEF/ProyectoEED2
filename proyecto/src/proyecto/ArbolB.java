@@ -5,17 +5,25 @@
  */
 package proyecto;
 
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author daba5
  */
-public class ArbolB {
+public class ArbolB implements  Serializable {
     
     int m;// orden del arbol
     int raiz;
     ArrayList<Nodo> nodos;
+    private static final long serialVersionUID = 6529685098267757690L;
 
     public ArbolB(int orden) {
         nodos = new ArrayList<Nodo>();
@@ -173,5 +181,28 @@ public class ArbolB {
             imprimir_arbol(nodo_actual.getHijos().get(nodo_actual.getN()), num + 1);
         }
     }
+    
+    public ArbolB cargarArchivo(String nombre) {
+        File archivo = new File(nombre + "keyTree");
+        try {
+            if (archivo.exists()) {
+                FileInputStream entrada = new FileInputStream(archivo);
+                ObjectInputStream objeto = new ObjectInputStream(entrada);
+                try {
+                    ArbolB arbolTemp = (ArbolB) objeto.readObject();
+                    return arbolTemp;
+                } catch (EOFException e) {
+                    //encontro el final del archivo
+                }
+                objeto.close();
+                entrada.close();
+            }            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
+    
     
 }

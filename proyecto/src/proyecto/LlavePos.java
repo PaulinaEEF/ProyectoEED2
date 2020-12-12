@@ -5,11 +5,13 @@
  */
 package proyecto;
 
+import java.io.Serializable;
+
 /**
  *
  * @author daba5
  */
-public class LlavePos {
+public class LlavePos implements Serializable {
     
     private String llave;
     private long pos;
