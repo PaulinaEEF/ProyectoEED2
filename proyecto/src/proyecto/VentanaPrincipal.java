@@ -1451,7 +1451,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         Campo nuevoCampo = new Campo(nombre, tipoDato, nBytes, llave, llavePot);
 
-        archivoFalso.setListaCampo(nuevoCampo);
+        archivoFalso.getListaCampos().add(nuevoCampo);
         NombreCampo.setText("");
         comboTipos.setSelectedIndex(0);
         CBytes.setValue(0);
@@ -1806,7 +1806,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             boolean key, keyPot;
                             key = arMetadata2[3].equals("true");
                             keyPot = arMetadata2[4].equals("true");
-                            archivoFalso.setListaCampo(new Campo(nombre, tipo, numBytes, key, keyPot));
+                            archivoFalso.getListaCampos().add(new Campo(nombre, tipo, numBytes, key, keyPot));
                         }
                         
                     } catch (IOException ex) {
@@ -1852,13 +1852,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
         String guardar = "";
         // int length=0;
+        String espacio = new String(new char[1024]).replace('\0',' ');
+        int num = -1;
         for (int i = 0; i < model.getRowCount(); i++) {
             guardar = "";
             for (int j = 0; j < model.getColumnCount(); j++) {
-                guardar += model.getValueAt(i, j).toString() + "|";
+                num = archivoFalso.getListaCampo(j).getLongitud() - model.getValueAt(i, j).toString().length();
+                if(archivoFalso.getListaCampo(j).getTipo().equals("int"))
+                    guardar += espacio.substring(0, num).replace(' ', '0') + model.getValueAt(i, j).toString();
+                else
+                    guardar += model.getValueAt(i, j).toString() + espacio.substring(0, num);
                 //length+=guardar.length();
             }
-            guardar += fill(guardar.length()) + "\n";
+            guardar += "\n";
             registross.add(guardar);
             guardarRegistro(guardar);
             arbolDeIndexacion.insert(model.getValueAt(i, getPosKey()).toString(), getRrn());
@@ -1985,10 +1991,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             long Rrn = nodoInd.getNodo().getLlaves().get(nodoInd.getIndice()).getPos();
             try {
                 String data = readRecord(Math.toIntExact(Rrn));
-                String arr[] = data.split("\\|");
-                Object arr2[] = new Object[arr.length - 1];
+                Object arr2[] = new Object[archivoFalso.getListaCampos().size()];
+                int offset = 0;
                 for (int i = 0; i < model.getColumnCount(); i++) {
-                    arr2[i] = arr[i];
+                    int lc = archivoFalso.getListaCampo(i).getLongitud();
+                    arr2[i] = data.substring(offset, offset + lc);
+                    offset += lc;
                 }
                 model.addRow(arr2);
                 btn_modif.setEnabled(true);
@@ -2006,12 +2014,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 arbolDeIndexacion.insert(model.getValueAt(0, getPosKey()).toString(), rrnModi);
                 String guardar = "";
                 // int length=0;
-
+                int num = -1;
+                String espacio = new String(new char[1024]).replace('\0', ' ');
                 guardar = "";
                 for (int j = 0; j < model.getColumnCount(); j++) {
-                    guardar += model.getValueAt(0, j).toString() + "|";
+                    num = archivoFalso.getListaCampo(j).getLongitud() - model.getValueAt(0, j).toString().length();
+                    if (archivoFalso.getListaCampo(j).getTipo().equals("int"))
+                        guardar += espacio.substring(0, num).replace(' ', '0') + model.getValueAt(0, j).toString();
+                    else
+                        guardar += model.getValueAt(0, j).toString() + espacio.substring(0, num);
                     //length+=guardar.length();
                 }
+                guardar += "\n";
                 model.removeRow(0);
                 try {
                     rewrite(guardar);
@@ -2237,7 +2251,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private ArbolB arbolDeIndexacion = new ArbolB(6);
     private int rrnModi = 0;
 
-    public String fill(int n) {
+    /*public String fill(int n) {
         int lengthT = 0;
         for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
             lengthT += archivoFalso.getListaCampo(i).getLongitud();
@@ -2248,13 +2262,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             spaces += " ";
         }
         return spaces;
-    }
+    }*/
     
     private void rewrite(String data) throws FileNotFoundException, IOException {
         File archivo = new File(GnombreArchivo);
         RandomAccessFile raf = new RandomAccessFile(archivo, "rw");
         raf.seek(rrnModi * recordSize() + archivoFalso.getSizeMetadata());
-        raf.write((data + fill(data.length()) + "\n").getBytes());
+        raf.write((data).getBytes());
         raf.close();
     }
     
@@ -2263,7 +2277,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         FileReader fr = new FileReader(archivo);
         String x = "";
         RandomAccessFile af = new RandomAccessFile(archivo, "r");
-        af.seek(((RRN - 1) * recordSize()) + archivoFalso.getSizeMetadata());
+        af.seek(((RRN) * recordSize()) + archivoFalso.getSizeMetadata());
         x = af.readLine();
         af.close();
         fr.close();
@@ -2347,7 +2361,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         for (Campo campo : archivoFalso.getListaCampos()) {
             length += campo.getLongitud();
         }
-        return length + archivoFalso.getListaCampos().size() + 1;
+        return length + 1;
     }
     
     private int getRrn() {

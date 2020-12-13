@@ -51,9 +51,9 @@ public class Archivo /*implements Serializable*/ {
         return ListaCampos.get(pos);
     }
 
-    public void setListaCampo(Campo Campo) {
+    /*public void setListaCampo(Campo Campo) {
         this.ListaCampos.add(Campo);
-    }
+    }*/
 
     public boolean hasPrimaria() {
         for (Campo campo : ListaCampos) {
