@@ -3,18 +3,25 @@ package proyecto;
 //import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 public class Archivo /*implements Serializable*/ {
     
     //boolean Primaria;
-    ArrayList<Campo> ListaCampos = new ArrayList();
-    ArrayList<String> registros = new ArrayList();
+    private LinkedList AvailList = new LinkedList();
+    private ArrayList<Campo> ListaCampos = new ArrayList();
+    private ArrayList<String> registros = new ArrayList();
     
-    String nombre;
-    
+    private String nombre;
+
     public Archivo() {
 
     }
+
+    public Archivo(String nombre) {
+        this.nombre = nombre;
+    }
+    
 
     public String getNombre() {
         return nombre;
@@ -57,6 +64,11 @@ public class Archivo /*implements Serializable*/ {
         return false;
     }
     
+    
+    public LinkedList getAvailList() {
+        return AvailList;
+    }
+    
     public int getSizeMetadata() {
         String metadata = nombre;
 
@@ -74,9 +86,14 @@ public class Archivo /*implements Serializable*/ {
             } else {
                 metadata += "false";
             }
+            metadata += ":";
+            if (campo.isLPotprimaria()) {
+                metadata += "true";
+            } else {
+                metadata += "false";
+            }
         }
-        
-        return metadata.length();          
+        return metadata.length() + 1;//mas uno por \n(confirmado por fuentes confiables)          
     }
 
     /*public void setPrimaria(boolean Primaria) {
