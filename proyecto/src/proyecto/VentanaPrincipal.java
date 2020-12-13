@@ -2057,7 +2057,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        /*ArbolB ab = new ArbolB(8);
+        /*ArbolB ab = new ArbolB(4);
         String letras = "abcdefghijklmnopqrstuvwxyz";
         
         for (int i = 0; i < 26; i++) {
@@ -2067,7 +2067,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ab.imprimir_arbol(ab.getRaiz(), 0);
         System.out.println("");
         System.out.println(ab.B_Tree_Search(ab.getRaiz(), "m"));
-        */
+        
+        ab.Remove("h");
+        System.out.println("");
+        ab.imprimir_arbol(ab.getRaiz(), 0);*/
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
