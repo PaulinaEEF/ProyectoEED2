@@ -14,6 +14,7 @@ import java.io.ObjectOutputStream;
 import java.io.RandomAccessFile;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultCellEditor;
@@ -192,7 +193,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btn_regresar6 = new javax.swing.JButton();
         ffondo_buscar = new javax.swing.JLabel();
         eliminar_registro = new javax.swing.JDialog();
-        jButton5 = new javax.swing.JButton();
+        cb_camposLlave = new javax.swing.JComboBox<>();
+        Eliminar_textfield = new javax.swing.JTextField();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tabla_eliminar = new javax.swing.JTable();
+        Eliminar_Buscar = new javax.swing.JButton();
+        Eliminar_Borrar = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jLabel40 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
@@ -1102,15 +1108,52 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         eliminar_registro.setUndecorated(true);
         eliminar_registro.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/borrar.png"))); // NOI18N
-        jButton5.setText("Borrar registro");
-        jButton5.setContentAreaFilled(false);
-        jButton5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jButton5.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/borrar (1).png"))); // NOI18N
-        eliminar_registro.getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 200, 60));
+        cb_camposLlave.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cb_camposLlave.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_camposLlaveItemStateChanged(evt);
+            }
+        });
+        eliminar_registro.getContentPane().add(cb_camposLlave, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 140, -1));
+        eliminar_registro.getContentPane().add(Eliminar_textfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 130, -1));
+
+        tabla_eliminar.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane6.setViewportView(tabla_eliminar);
+
+        eliminar_registro.getContentPane().add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 580, 170));
+
+        Eliminar_Buscar.setText("jButton8");
+        Eliminar_Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Eliminar_BuscarMouseClicked(evt);
+            }
+        });
+        eliminar_registro.getContentPane().add(Eliminar_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, -1, -1));
+
+        Eliminar_Borrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Eliminar_Borrar.setForeground(new java.awt.Color(255, 255, 255));
+        Eliminar_Borrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/borrar.png"))); // NOI18N
+        Eliminar_Borrar.setText("Borrar registro");
+        Eliminar_Borrar.setContentAreaFilled(false);
+        Eliminar_Borrar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Eliminar_Borrar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        Eliminar_Borrar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/borrar (1).png"))); // NOI18N
+        Eliminar_Borrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Eliminar_BorrarMouseClicked(evt);
+            }
+        });
+        eliminar_registro.getContentPane().add(Eliminar_Borrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 200, 60));
 
         jButton6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
@@ -1125,7 +1168,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 jButton6MouseClicked(evt);
             }
         });
-        eliminar_registro.getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, 160, 80));
+        eliminar_registro.getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, 160, 80));
 
         jLabel40.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel40.setForeground(new java.awt.Color(255, 255, 255));
@@ -1133,7 +1176,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         eliminar_registro.getContentPane().add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jLabel39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/delete.gif"))); // NOI18N
-        eliminar_registro.getContentPane().add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 400));
+        eliminar_registro.getContentPane().add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 460));
 
         listar_registros.setUndecorated(true);
         listar_registros.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1633,6 +1676,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     metadata += "false";
                 }
             }
+            metadata += '|';
+            if (archivoFalso.getAvailList().isEmpty()) {
+                metadata += rrnAsString(-1);
+            } else {
+                metadata += rrnAsString(Integer.parseInt(archivoFalso.getAvailList().getFirst().toString()));
+            }
             metadata += "\n";//Responsabilizar a Jose
             try {
                 // create a writer
@@ -1713,7 +1762,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "No hay ningún archivo cargado en memoria.");
         }
-
+        try {
+            System.out.println(readRecord((int)archivoFalso.getAvailList().peek()));
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_boton_RegistrosMouseClicked
 
     private void btn_rreturnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_rreturnMouseClicked
@@ -1798,7 +1851,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         metadata = r.readLine();
                         String[] arMetadata = metadata.split("\\|");
                         archivoFalso = new Archivo(GnombreArchivo);
-                        for (int i = 1; i < arMetadata.length; i++) {
+                        for (int i = 1; i < arMetadata.length - 1; i++) {
                             String[] arMetadata2 = arMetadata[i].split("\\:");
                             String nombre = arMetadata2[0];
                             String tipo = arMetadata2[1];
@@ -1808,7 +1861,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             keyPot = arMetadata2[4].equals("true");
                             archivoFalso.setListaCampo(new Campo(nombre, tipo, numBytes, key, keyPot));
                         }
-
+                        System.out.println(arMetadata[arMetadata.length - 1]);
+                        loadAvailList(arMetadata[arMetadata.length - 1]);
+                        
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -1959,9 +2014,27 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void btn_borrarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_borrarRegistroMouseClicked
         Registros.setVisible(false);
+        DefaultTableModel modelo = new DefaultTableModel();
+        tabla_eliminar.setModel(new DefaultTableModel());
+        DefaultTableModel model = (DefaultTableModel) tabla_eliminar.getModel();
+        for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
+            model.addColumn(archivoFalso.getListaCampos().get(i).getNombre());
+        }
+        tabla_registros.setModel(modelo);
         eliminar_registro.pack();
         eliminar_registro.setModal(true);
         eliminar_registro.setLocationRelativeTo(null);
+        for (Campo campo : archivoFalso.getListaCampos()) {
+            if (campo.isLprimaria()) {
+                cb_camposLlave.addItem(campo);
+                break;
+            }
+        }
+        for (Campo campo : archivoFalso.getListaCampos()) {
+            if (campo.isLPotprimaria()) {
+                cb_camposLlave.addItem(campo);
+            }
+        }
         eliminar_registro.setVisible(true);
     }//GEN-LAST:event_btn_borrarRegistroMouseClicked
 
@@ -2027,7 +2100,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 }
                 model.removeRow(0);
                 try {
-                    rewrite(guardar);
+                    rewrite(guardar, rrnModi);
                     JOptionPane.showMessageDialog(null, "Registro modificado exitosamente");
                     modificar_textfield.setText("");
                     modificar_textfield.setEditable(true);
@@ -2038,6 +2111,73 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btn_modifMouseClicked
+
+    private void cb_camposLlaveItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_camposLlaveItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_camposLlaveItemStateChanged
+
+    private void Eliminar_BuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Eliminar_BuscarMouseClicked
+        if (Eliminar_textfield.getText().equals("") || cb_camposLlave.getSelectedItem() == null) {
+            return;
+        }
+        
+        DefaultTableModel model = (DefaultTableModel)tabla_eliminar.getModel();
+        if (cb_camposLlave.getSelectedIndex() == 0) {
+            NodoIndice nodoInd = arbolDeIndexacion.B_Tree_Search(0, Eliminar_textfield.getText());
+            if (nodoInd == null) {
+                JOptionPane.showMessageDialog(null, "No se encontro ningun registro con ese valor");
+                Eliminar_textfield.setText("");
+                return;
+            }
+            rrnEli = Math.toIntExact(nodoInd.getNodo().getLlaves().get(nodoInd.getIndice()).getPos());
+            try {
+                String data = readRecord(Math.toIntExact(rrnEli));
+                System.out.println(data);
+                String arr[] = data.split("\\|");
+                Object arr2[] = new Object[arr.length - 1];
+                for (int i = 0; i < model.getColumnCount(); i++) {
+                    arr2[i] = arr[i];
+                }
+                model.addRow(arr2);
+                Eliminar_textfield.setEditable(false);
+                Eliminar_Borrar.setEnabled(true);
+                cb_camposLlave.setEnabled(false);
+            } catch (IOException ex) {
+                Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_Eliminar_BuscarMouseClicked
+
+    private void Eliminar_BorrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Eliminar_BorrarMouseClicked
+        if (Eliminar_Borrar.isEnabled()) {
+            if (Campo.class.cast(cb_camposLlave.getSelectedItem()).isLprimaria()) {
+                String data = "";
+                try {
+                    data = readRecord(rrnEli);
+                } catch (IOException ex) {
+                    Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                char [] data2 = data.toCharArray();
+                data2[0] = '|';
+                data2[1] = '*';
+                String rrnString = rrnAsString(rrnEli);
+                for (int i = 0; i < rrnString.length(); i++) {
+                    data2[2 + i] = rrnString.charAt(i);
+                }
+                try {
+                    arbolDeIndexacion.Remove(tabla_eliminar.getValueAt(0, getPosKey()).toString());
+                    rewrite(new String(data2), rrnEli);
+                    archivoFalso.getAvailList().add(rrnEli);
+                } catch (IOException ex) {
+                    Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            Eliminar_textfield.setEditable(true);
+            cb_camposLlave.setEnabled(true);
+            Eliminar_Borrar.setEnabled(false);
+        }
+        
+    }//GEN-LAST:event_Eliminar_BorrarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -2094,7 +2234,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
     }
-
+//<editor-fold defaultstate="collapsed" desc=" Variables que me estorban">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog AbrirArchivo;
     private javax.swing.JDialog Archivos;
@@ -2105,6 +2245,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton Boton_Campos;
     private javax.swing.JSpinner CBytes;
     private javax.swing.JDialog Campos;
+    private javax.swing.JButton Eliminar_Borrar;
+    private javax.swing.JButton Eliminar_Buscar;
+    private javax.swing.JTextField Eliminar_textfield;
     private javax.swing.JDialog Estandarización;
     private javax.swing.JLabel FModificar;
     private javax.swing.JLabel Fondo;
@@ -2171,6 +2314,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JDialog buscar_registros;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JComboBox<Campo> cb_camposLlave;
     private javax.swing.JComboBox<Campo> cb_listaCampos;
     private javax.swing.JComboBox<String> cb_listarArchivos;
     private javax.swing.JComboBox<String> comboTipos;
@@ -2189,7 +2333,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JDialog jDialog1;
@@ -2241,16 +2384,40 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable jTable1;
     private javax.swing.JDialog listar_registros;
     private javax.swing.JTextField modificar_textfield;
+    private javax.swing.JTable tabla_eliminar;
     private javax.swing.JTable tabla_modificar;
     private javax.swing.JTable tabla_registros;
     // End of variables declaration//GEN-END:variables
+    //</editor-fold>
+    
+    
     private Archivo archivoFalso = new Archivo();//solo es prueba
     private String GnombreArchivo;
     private ArbolB arbolDeIndexacion = new ArbolB(6);
     private int rrnModi = 0;
+    private int rrnEli = 0;
+    
+    private String rrnAsString(int rrn) {
+        String rrnString = "";
+        rrnString += rrn;
+        for (int i = rrnString.length(); i < 5; i++) {
+            rrnString += '.';
+        }
+        return rrnString;
+    }
+    
+    private int StringtoRrn(String rrn) {
+        int n = rrn.indexOf('.');
+        if (n == -1) {
+            n = rrn.length();
+        }
+        String newRrn = rrn.substring(0, n);
+        return Integer.parseInt(newRrn);
+    }
 
     public String fill(int n) {
         int lengthT = 0;
@@ -2265,10 +2432,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         return spaces;
     }
 
-    private void rewrite(String data) throws FileNotFoundException, IOException {
+    private void rewrite(String data, int rrn) throws FileNotFoundException, IOException {
         File archivo = new File(GnombreArchivo);
         RandomAccessFile raf = new RandomAccessFile(archivo, "rw");
-        raf.seek((rrnModi - 1) * recordSize() + archivoFalso.getSizeMetadata());
+        raf.seek((rrn - 1) * recordSize() + archivoFalso.getSizeMetadata());
         raf.write((data + fill(data.length()) + "\n").getBytes());
         raf.close();
     }
@@ -2354,7 +2521,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         System.out.println(archivoFalso.getSizeMetadata());
         System.out.println(new File(GnombreArchivo).length());
         return new File(GnombreArchivo).length() > archivoFalso.getSizeMetadata();
-
+    }
+    
+    private void loadAvailList(String head) throws IOException {
+        int rrn = StringtoRrn(head);
+        String data;
+        while (rrn != -1) {
+            archivoFalso.getAvailList().add(rrn);
+            data =  readRecord(rrn);
+            rrn = StringtoRrn(data.substring(2, 2 + 5));
+        }
     }
 
     private int recordSize() {

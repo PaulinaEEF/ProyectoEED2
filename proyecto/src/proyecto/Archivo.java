@@ -93,7 +93,7 @@ public class Archivo /*implements Serializable*/ {
                 metadata += "false";
             }
         }
-        return metadata.length() + 1;//mas uno por \n(confirmado por fuentes confiables)          
+        return metadata.length() + 1 + 6;//mas uno por \n(confirmado por fuentes confiables)          
     }
 
     /*public void setPrimaria(boolean Primaria) {
