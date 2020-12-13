@@ -1447,7 +1447,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             //archivoFalso.setPrimaria(llave);
         }
         int reply = JOptionPane.showConfirmDialog(null, "Desea continuar añadiendo campos?", "Campo creado exitosamente!", JOptionPane.YES_NO_OPTION);
-        // aqui hay que guardar en el 
+        // aqui hay que guardar en el
 
         Campo nuevoCampo = new Campo(nombre, tipoDato, nBytes, llave, llavePot);
 
@@ -1704,7 +1704,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 } else {
                     JOptionPane.showMessageDialog(null, "Para registrar debe de guardar los campos en el archivo.");
                 }
-                
+
 
             } else {
                 JOptionPane.showMessageDialog(null, "El archivo debe de tener 1 o mas campos para tener registros.");
@@ -1808,7 +1808,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             keyPot = arMetadata2[4].equals("true");
                             archivoFalso.setListaCampo(new Campo(nombre, tipo, numBytes, key, keyPot));
                         }
-                        
+
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -1852,6 +1852,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
         String guardar = "";
         // int length=0;
+        boolean omitidos = false;
         for (int i = 0; i < model.getRowCount(); i++) {
             guardar = "";
             for (int j = 0; j < model.getColumnCount(); j++) {
@@ -1859,11 +1860,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 //length+=guardar.length();
             }
             guardar += fill(guardar.length()) + "\n";
-            registross.add(guardar);
-            guardarRegistro(guardar);
-            arbolDeIndexacion.insert(model.getValueAt(i, getPosKey()).toString(), getRrn());
+            if (arbolDeIndexacion.B_Tree_Search(0, model.getValueAt(i, getPosKey()).toString()) != null) {
+                omitidos = true;
+            } else {
+                registross.add(guardar);
+                guardarRegistro(guardar);
+                arbolDeIndexacion.insert(model.getValueAt(i, getPosKey()).toString(), getRrn());
+            }
         }
-        JOptionPane.showMessageDialog(null, "Guardado Exitoso!");
+        String message;
+        if (omitidos) {
+            message = "Algunos registros fueron omitidos porque ya habia un registro con la misma llave primaria almacenado en el archvo.";
+        } else {
+            message = "Guardado Exitoso";
+        }
+        JOptionPane.showMessageDialog(null, message);
         tabla_registros.setModel(new DefaultTableModel());
         DefaultTableModel modelo = (DefaultTableModel) tabla_registros.getModel();
         for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
@@ -1982,15 +1993,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 modificar_textfield.setText("");
                 return;
             }
-            long Rrn = nodoInd.getNodo().getLlaves().get(nodoInd.getIndice()).getPos();
+            rrnModi = Math.toIntExact(nodoInd.getNodo().getLlaves().get(nodoInd.getIndice()).getPos());
             try {
-                String data = readRecord(Math.toIntExact(Rrn));
+                String data = readRecord(Math.toIntExact(rrnModi));
+                System.out.println(data);
                 String arr[] = data.split("\\|");
                 Object arr2[] = new Object[arr.length - 1];
                 for (int i = 0; i < model.getColumnCount(); i++) {
                     arr2[i] = arr[i];
                 }
                 model.addRow(arr2);
+                modificar_textfield.setEditable(false);
                 btn_modif.setEnabled(true);
             } catch (IOException ex) {
                 Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -1999,10 +2012,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_Modificar_BuscarMouseClicked
 
     private void btn_modifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_modifMouseClicked
-        if (btn_modifica_registro.isEnabled()) {
+        if (btn_modif.isEnabled()) {
             if (validarIngresoTable(tabla_modificar, false)) {
                 DefaultTableModel model = (DefaultTableModel) tabla_modificar.getModel();
-                //borrar del arbol
+                arbolDeIndexacion.Remove(modificar_textfield.getText());
                 arbolDeIndexacion.insert(model.getValueAt(0, getPosKey()).toString(), rrnModi);
                 String guardar = "";
                 // int length=0;
@@ -2015,8 +2028,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 model.removeRow(0);
                 try {
                     rewrite(guardar);
-                    JOptionPane.showConfirmDialog(null, "Registro modificado exitosamente");
+                    JOptionPane.showMessageDialog(null, "Registro modificado exitosamente");
                     modificar_textfield.setText("");
+                    modificar_textfield.setEditable(true);
+                    btn_modif.setEnabled(false);
                 } catch (IOException ex) {
                     Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -2031,7 +2046,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -2059,19 +2074,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         /*ArbolB ab = new ArbolB(4);
         String letras = "abcdefghijklmnopqrstuvwxyz";
-        
+
         for (int i = 0; i < 26; i++) {
             ab.insert(letras.substring(i,i+1), i);
         }
-        
+
         ab.imprimir_arbol(ab.getRaiz(), 0);
         System.out.println("");
         System.out.println(ab.B_Tree_Search(ab.getRaiz(), "m"));
-        
+
         ab.Remove("h");
         System.out.println("");
         ab.imprimir_arbol(ab.getRaiz(), 0);*/
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
@@ -2249,15 +2264,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
         return spaces;
     }
-    
+
     private void rewrite(String data) throws FileNotFoundException, IOException {
         File archivo = new File(GnombreArchivo);
         RandomAccessFile raf = new RandomAccessFile(archivo, "rw");
-        raf.seek(rrnModi * recordSize() + archivoFalso.getSizeMetadata());
+        raf.seek((rrnModi - 1) * recordSize() + archivoFalso.getSizeMetadata());
         raf.write((data + fill(data.length()) + "\n").getBytes());
         raf.close();
     }
-    
+
     private String readRecord(int RRN) throws FileNotFoundException, IOException {
         File archivo = new File(GnombreArchivo);
         FileReader fr = new FileReader(archivo);
@@ -2269,7 +2284,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         fr.close();
         return x;
     }
-    
+
     public void escribirArchivo(String nombre) {
         FileOutputStream fw = null;
         ObjectOutputStream bw = null;
@@ -2295,7 +2310,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             tabla.getCellEditor().stopCellEditing();
         }
         if (model.getRowCount() != 0) {
-            for (int i = 0; i < model.getColumnCount(); i++) {//se puede poner otro for para rows pero es feo pero asi soy feliz         
+            for (int i = 0; i < model.getColumnCount(); i++) {//se puede poner otro for para rows pero es feo pero asi soy feliz
                 if (model.getValueAt(model.getRowCount() - 1, i) == null) {
                     if (guardar) {
                         model.removeRow(model.getRowCount() - 1);
@@ -2325,7 +2340,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
         return true;
     }
-    
+
     private int getPosKey() {
         for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
             if (archivoFalso.getListaCampo(i).isLprimaria()) {
@@ -2341,7 +2356,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         return new File(GnombreArchivo).length() > archivoFalso.getSizeMetadata();
 
     }
-    
+
     private int recordSize() {
         int length = 0;
         for (Campo campo : archivoFalso.getListaCampos()) {
@@ -2349,7 +2364,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
         return length + archivoFalso.getListaCampos().size() + 1;
     }
-    
+
     private int getRrn() {
         if (archivoFalso.getAvailList().isEmpty()) {
             return (int) ((new File(GnombreArchivo).length() - archivoFalso.getSizeMetadata())/recordSize());
