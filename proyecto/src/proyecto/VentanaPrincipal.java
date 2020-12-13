@@ -1370,7 +1370,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void boton_SalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_SalirMouseClicked
         escribirArchivo(GnombreArchivo);
-        arbolDeIndexacion.imprimir_arbol(0, 0);
+        try {
+            writeAvailList();
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         System.exit(0);
     }//GEN-LAST:event_boton_SalirMouseClicked
 
@@ -1680,7 +1684,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             if (archivoFalso.getAvailList().isEmpty()) {
                 metadata += rrnAsString(-1);
             } else {
-                metadata += rrnAsString(Integer.parseInt(archivoFalso.getAvailList().getFirst().toString()));
+                metadata += rrnAsString(Integer.parseInt(archivoFalso.getAvailList().peekLast().toString()));
             }
             metadata += "\n";//Responsabilizar a Jose
             try {
@@ -1762,11 +1766,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "No hay ningún archivo cargado en memoria.");
         }
-        try {
-            System.out.println(readRecord((int)archivoFalso.getAvailList().peek()));
-        } catch (IOException ex) {
-            Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
     }//GEN-LAST:event_boton_RegistrosMouseClicked
 
     private void btn_rreturnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_rreturnMouseClicked
@@ -2160,14 +2160,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 char [] data2 = data.toCharArray();
                 data2[0] = '|';
                 data2[1] = '*';
-                String rrnString = rrnAsString(rrnEli);
+                String rrnString;
+                if (archivoFalso.getAvailList().isEmpty()) {
+                    rrnString = rrnAsString(-1);
+                } else {
+                    rrnString = rrnAsString((int)archivoFalso.getAvailList().getFirst());
+                }
                 for (int i = 0; i < rrnString.length(); i++) {
                     data2[2 + i] = rrnString.charAt(i);
                 }
                 try {
                     arbolDeIndexacion.Remove(tabla_eliminar.getValueAt(0, getPosKey()).toString());
                     rewrite(new String(data2), rrnEli);
-                    archivoFalso.getAvailList().add(rrnEli);
+                    archivoFalso.getAvailList().add(0, rrnEli);
                 } catch (IOException ex) {
                     Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -2418,6 +2423,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         String newRrn = rrn.substring(0, n);
         return Integer.parseInt(newRrn);
     }
+    
+    
 
     public String fill(int n) {
         int lengthT = 0;
@@ -2468,6 +2475,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             } catch (Exception ex) {
             }
         }
+    }
+    
+    private void writeAvailList() throws FileNotFoundException, IOException {
+        File file = new File(GnombreArchivo);
+        RandomAccessFile ra = new RandomAccessFile(file, "rw");
+        ra.seek(archivoFalso.getSizeMetadata() - 6);
+        String x;
+        if (archivoFalso.getAvailList().isEmpty()) {
+            x = rrnAsString(-1);
+        } else {
+            x = rrnAsString((int) archivoFalso.getAvailList().peekFirst());
+        }
+        ra.write(x.getBytes());
+        ra.close();
     }
 
     private boolean validarIngresoTable(JTable tabla, boolean guardar) {
@@ -2527,7 +2548,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         int rrn = StringtoRrn(head);
         String data;
         while (rrn != -1) {
-            archivoFalso.getAvailList().add(rrn);
+            archivoFalso.getAvailList().add(0, rrn);
             data =  readRecord(rrn);
             rrn = StringtoRrn(data.substring(2, 2 + 5));
         }
