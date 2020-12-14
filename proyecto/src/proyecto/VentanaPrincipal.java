@@ -561,6 +561,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btn_excel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         btn_excel.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btn_excel.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/excel (1).png"))); // NOI18N
+        btn_excel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_excelMouseClicked(evt);
+            }
+        });
         Estandarización.getContentPane().add(btn_excel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, 220, 80));
 
         btn_xml.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -1369,10 +1374,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_boton_SalirActionPerformed
 
     private void boton_SalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_SalirMouseClicked
-        escribirArchivo(GnombreArchivo);
-        arbolDeIndexacion.imprimir_arbol(0, 0);
         try {
-            writeAvailList();
+            if(GnombreArchivo!=null){
+                escribirArchivo(GnombreArchivo);
+                writeAvailList();
+                arbolDeIndexacion.imprimir_arbol(0, 0);
+            }
         } catch (IOException ex) {
             Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -2189,6 +2196,147 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_Eliminar_BorrarMouseClicked
+
+    private void btn_excelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_excelMouseClicked
+        // TODO add your handling code here:
+//        if (GnombreArchivo != null) {
+//            JOptionPane.showMessageDialog(null, "Actualmente tiene un archivo abierto");
+//            return;
+//        }
+        Archivo archi = new Archivo();
+
+        escogerArchivo.setFileView(new FileView() {
+
+            File dirToLock = new File(".");
+
+            @Override
+            public Boolean isTraversable(File f) {
+                return dirToLock.equals(f);
+            }
+        });
+
+        escogerArchivo.setSelectedFile(new File(""));
+        if (escogerArchivo.showDialog(null, "Seleccione archivo a exportar") == JFileChooser.APPROVE_OPTION) {
+            archivoo = escogerArchivo.getSelectedFile();
+            if (archivoo.canRead()) {
+                if (archivoo.getName().endsWith(".jjdp")) {
+                    GnombreArchivo = archivoo.getName();
+                    JOptionPane.showMessageDialog(null, "El archivo ha sido abierto exitosamente");
+                    try {
+                        // create a reader
+
+                        FileInputStream fis = new FileInputStream(archivoo);
+                        BufferedInputStream reader = new BufferedInputStream(fis);
+
+//                        // read one byte at a time
+                        String metadata = "";
+//                        int ch;
+//                        while ((ch = reader.read()) != -1) {
+//                            metadata += (char) ch;
+//                        }
+//                        reader.close();
+//                        // close the reader
+                        BufferedReader r = new BufferedReader(new InputStreamReader(reader, StandardCharsets.UTF_8));
+                        metadata = r.readLine();
+                        String[] arMetadata = metadata.split("\\|");
+                        archivoFalso = new Archivo(GnombreArchivo);
+                        for (int i = 1; i < arMetadata.length - 1; i++) {
+                            String[] arMetadata2 = arMetadata[i].split("\\:");
+                            String nombre = arMetadata2[0];
+                            String tipo = arMetadata2[1];
+                            int numBytes = (Integer.parseInt(arMetadata2[2]));
+                            boolean key, keyPot;
+                            key = arMetadata2[3].equals("true");
+                            keyPot = arMetadata2[4].equals("true");
+                            archivoFalso.setListaCampo(new Campo(nombre, tipo, numBytes, key, keyPot));
+                        }
+                        System.out.println(arMetadata[arMetadata.length - 1]);
+                        loadAvailList(arMetadata[arMetadata.length - 1]);
+                        XSSFWorkbook workbook = new XSSFWorkbook();
+                        String nHoja = JOptionPane.showInputDialog(null, "Nombre para la hoja de Excel");
+                        if (nHoja.equals("")) {
+                            JOptionPane.showMessageDialog(null, "Debe de escribir un nombre para la hoja");
+                           // nHoja = JOptionPane.showInputDialog(null, "Nombre para la hoja de Excel");
+                          return;
+                        }
+
+                        //Create a blank sheet
+                        XSSFSheet spreadsheet = workbook.createSheet(nHoja);
+                        //Create row object
+                        XSSFRow row;
+                        Object[] campoos = new Object[archivoFalso.getListaCampos().size()];
+                        Map< String, Object[]> empinfo = new TreeMap<>();
+                        for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
+                            campoos[i] = archivoFalso.getListaCampo(i).getNombre();
+                        }
+                        empinfo.put("1", campoos);
+
+                        /////////////////////////////////////////////////////////
+                        int contador = 0;
+                        Scanner sc = null;
+                        if (archivoo.exists()) {
+                            try {
+
+                                sc = new Scanner(archivoo);
+                                // sc.useDelimiter("\\|");
+
+                                while (sc.hasNext()) {
+                                    int con = contador + 2;
+
+                                    String m = sc.next();
+                                    String[] tokens = m.split("\\|");
+                                    if (contador != 0) {
+                                        empinfo.put("" + con, tokens);
+                                        for (int i = 0; i < tokens.length; i++) {
+                                            System.out.print(tokens[i]);
+
+                                        }
+                                        System.out.println("");
+                                    }
+                                    contador++;
+                                }
+                            } catch (Exception ex) {
+                            }
+                            sc.close();
+                        }//FIN IF
+                        ////////////////////////////////////////////////////////
+                        Set< String> keyid = empinfo.keySet();
+                        int rowid = 0;
+
+                        for (String key : keyid) {
+                            row = spreadsheet.createRow(rowid++);
+                            Object[] objectArr = empinfo.get(key);
+                            int cellid = 0;
+
+                            for (Object obj : objectArr) {
+                                Cell cell = row.createCell(cellid++);
+                                cell.setCellValue((String) obj);
+                            }
+                        }
+                        //Write the workbook in file system
+                        String nombreArchivo = JOptionPane.showInputDialog(null, "Nombre para su archivo a exportar");
+                        FileOutputStream out = new FileOutputStream(
+                                new File("./" + nombreArchivo + ".xlsx"));
+
+                        workbook.write(out);
+                        out.close();
+                        JOptionPane.showMessageDialog(null, "Archivo exportado exitosamente");
+                        GnombreArchivo = null;
+                        archivoFalso.getListaCampos().clear();
+                        //archivoFalso.setPrimaria(false);
+
+                        //System.out.println("Writesheet.xlsx written successfully");
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo con terminación [.jjdp]");
+                }
+            }
+
+        }
+    }//GEN-LAST:event_btn_excelMouseClicked
 
     /**
      * @param args the command line arguments
