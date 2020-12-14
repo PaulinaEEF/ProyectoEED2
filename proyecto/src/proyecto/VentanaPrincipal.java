@@ -1370,6 +1370,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void boton_SalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_SalirMouseClicked
         escribirArchivo(GnombreArchivo);
+        arbolDeIndexacion.imprimir_arbol(0, 0);
         try {
             writeAvailList();
         } catch (IOException ex) {
@@ -1656,7 +1657,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         if (GnombreArchivo == null) {
             JOptionPane.showMessageDialog(null, "No hay ningun archivo cargado en memoria");
         } else {
-            controlGuardado++;
             String metadata = GnombreArchivo;
 
             for (Campo campo : archivoFalso.getListaCampos()) {
@@ -1744,6 +1744,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void boton_RegistrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_RegistrosMouseClicked
         if (GnombreArchivo != null) {
+            for (int i = 0; i < archivoFalso.getAvailList().size(); i++) {
+                    System.out.println((int)archivoFalso.getAvailList().get(i));
+                }
             if (!archivoFalso.getListaCampos().isEmpty()) {
                 if (new File(GnombreArchivo).length() < archivoFalso.getSizeMetadata()) {
                     JOptionPane.showMessageDialog(null, "Tiene cambios sin guardar en los campos. Favor guarde el archivo antes de ");
@@ -1762,7 +1765,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "El archivo debe de tener 1 o mas campos para tener registros.");
             }
-
+            
         } else {
             JOptionPane.showMessageDialog(null, "No hay ningún archivo cargado en memoria.");
         }
@@ -2067,9 +2070,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 return;
             }
             rrnModi = Math.toIntExact(nodoInd.getNodo().getLlaves().get(nodoInd.getIndice()).getPos());
+            System.out.println(rrnModi);
             try {
                 String data = readRecord(Math.toIntExact(rrnModi));
                 System.out.println(data);
+                
                 String arr[] = data.split("\\|");
                 Object arr2[] = new Object[arr.length - 1];
                 for (int i = 0; i < model.getColumnCount(); i++) {
@@ -2164,7 +2169,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 if (archivoFalso.getAvailList().isEmpty()) {
                     rrnString = rrnAsString(-1);
                 } else {
-                    rrnString = rrnAsString((int)archivoFalso.getAvailList().getFirst());
+                    rrnString = rrnAsString((int)archivoFalso.getAvailList().peekFirst());
                 }
                 for (int i = 0; i < rrnString.length(); i++) {
                     data2[2 + i] = rrnString.charAt(i);
@@ -2172,13 +2177,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 try {
                     arbolDeIndexacion.Remove(tabla_eliminar.getValueAt(0, getPosKey()).toString());
                     rewrite(new String(data2), rrnEli);
-                    archivoFalso.getAvailList().add(0, rrnEli);
                 } catch (IOException ex) {
                     Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             Eliminar_textfield.setEditable(true);
             cb_camposLlave.setEnabled(true);
+            Eliminar_Buscar.setEnabled(true);
+            archivoFalso.getAvailList().add(0, rrnEli);
             Eliminar_Borrar.setEnabled(false);
         }
         
@@ -2548,7 +2554,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         int rrn = StringtoRrn(head);
         String data;
         while (rrn != -1) {
-            archivoFalso.getAvailList().add(0, rrn);
+            archivoFalso.getAvailList().add(rrn);
             data =  readRecord(rrn);
             rrn = StringtoRrn(data.substring(2, 2 + 5));
         }
@@ -2566,7 +2572,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         if (archivoFalso.getAvailList().isEmpty()) {
             return (int) ((new File(GnombreArchivo).length() - archivoFalso.getSizeMetadata())/recordSize());
         }
-        return (int)archivoFalso.getAvailList().removeFirst();
+        return (int)archivoFalso.getAvailList().peekFirst();
     }
 
     private void guardarRegistro(String registro) {
@@ -2583,7 +2589,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-        } //else buscar en avail list pero falta para eso :(
+        } else {
+            try {
+                RandomAccessFile raf = new RandomAccessFile(new File(GnombreArchivo), "rw");
+                raf.seek(((int)archivoFalso.getAvailList().removeFirst() - 1) * recordSize() + archivoFalso.getSizeMetadata());
+                System.out.println("\n");
+                for (int i = 0; i < archivoFalso.getAvailList().size(); i++) {
+                    System.out.println((int)archivoFalso.getAvailList().get(i));
+                }
+                raf.write(registro.getBytes());
+                raf.close();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
-    int controlGuardado = 0;
 }
