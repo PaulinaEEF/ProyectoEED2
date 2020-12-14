@@ -2076,7 +2076,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 System.out.println(data);
                 
                 String arr[] = data.split("\\|");
-                Object arr2[] = new Object[arr.length - 1];
+                Object arr2[] = new Object[model.getColumnCount()];
                 for (int i = 0; i < model.getColumnCount(); i++) {
                     arr2[i] = arr[i];
                 }
@@ -2139,7 +2139,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 String data = readRecord(Math.toIntExact(rrnEli));
                 System.out.println(data);
                 String arr[] = data.split("\\|");
-                Object arr2[] = new Object[arr.length - 1];
+                Object arr2[] = new Object[model.getColumnCount()];
                 for (int i = 0; i < model.getColumnCount(); i++) {
                     arr2[i] = arr[i];
                 }
