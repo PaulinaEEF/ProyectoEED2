@@ -34,10 +34,22 @@ import java.util.Scanner;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.*;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  *
@@ -583,6 +595,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btn_xml.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         btn_xml.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btn_xml.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/xml-file (1).png"))); // NOI18N
+        btn_xml.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_xmlMouseClicked(evt);
+            }
+        });
         Estandarización.getContentPane().add(btn_xml, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 320, 210, 80));
 
         btn_regresar4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -1383,7 +1400,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void boton_SalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_SalirMouseClicked
         try {
-            if(GnombreArchivo!=null){
+            if (GnombreArchivo != null) {
                 escribirArchivo(GnombreArchivo);
                 writeAvailList();
                 arbolDeIndexacion.imprimir_arbol(0, 0);
@@ -1760,8 +1777,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void boton_RegistrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_RegistrosMouseClicked
         if (GnombreArchivo != null) {
             for (int i = 0; i < archivoFalso.getAvailList().size(); i++) {
-                    System.out.println((int)archivoFalso.getAvailList().get(i));
-                }
+                System.out.println((int) archivoFalso.getAvailList().get(i));
+            }
             if (!archivoFalso.getListaCampos().isEmpty()) {
                 if (new File(GnombreArchivo).length() < archivoFalso.getSizeMetadata()) {
                     JOptionPane.showMessageDialog(null, "Tiene cambios sin guardar en los campos. Favor guarde el archivo antes de ");
@@ -1776,15 +1793,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Para registrar debe de guardar los campos en el archivo.");
                 }
 
-
             } else {
                 JOptionPane.showMessageDialog(null, "El archivo debe de tener 1 o mas campos para tener registros.");
             }
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "No hay ningún archivo cargado en memoria.");
         }
-        
+
     }//GEN-LAST:event_boton_RegistrosMouseClicked
 
     private void btn_rreturnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_rreturnMouseClicked
@@ -1881,7 +1897,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         }
                         System.out.println(arMetadata[arMetadata.length - 1]);
                         loadAvailList(arMetadata[arMetadata.length - 1]);
-                        
+
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -2074,7 +2090,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_modificar_textfieldActionPerformed
 
     private void Modificar_BuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Modificar_BuscarMouseClicked
-        DefaultTableModel model = (DefaultTableModel)tabla_modificar.getModel();
+        DefaultTableModel model = (DefaultTableModel) tabla_modificar.getModel();
         if ("".equals(modificar_textfield.getText())) {
             JOptionPane.showMessageDialog(null, "Favor ingrese el valor que desea buscar");
         } else if (model.getRowCount() != 1) {
@@ -2089,7 +2105,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             try {
                 String data = readRecord(Math.toIntExact(rrnModi));
                 System.out.println(data);
-                
+
                 String arr[] = data.split("\\|");
                 Object arr2[] = new Object[model.getColumnCount()];
                 for (int i = 0; i < model.getColumnCount(); i++) {
@@ -2140,8 +2156,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         if (Eliminar_textfield.getText().equals("") || cb_camposLlave.getSelectedItem() == null) {
             return;
         }
-        
-        DefaultTableModel model = (DefaultTableModel)tabla_eliminar.getModel();
+
+        DefaultTableModel model = (DefaultTableModel) tabla_eliminar.getModel();
         if (cb_camposLlave.getSelectedIndex() == 0) {
             NodoIndice nodoInd = arbolDeIndexacion.B_Tree_Search(0, Eliminar_textfield.getText());
             if (nodoInd == null) {
@@ -2177,14 +2193,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 } catch (IOException ex) {
                     Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                char [] data2 = data.toCharArray();
+                char[] data2 = data.toCharArray();
                 data2[0] = '|';
                 data2[1] = '*';
                 String rrnString;
                 if (archivoFalso.getAvailList().isEmpty()) {
                     rrnString = rrnAsString(-1);
                 } else {
-                    rrnString = rrnAsString((int)archivoFalso.getAvailList().peekFirst());
+                    rrnString = rrnAsString((int) archivoFalso.getAvailList().peekFirst());
                 }
                 for (int i = 0; i < rrnString.length(); i++) {
                     data2[2 + i] = rrnString.charAt(i);
@@ -2202,7 +2218,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             archivoFalso.getAvailList().add(0, rrnEli);
             Eliminar_Borrar.setEnabled(false);
         }
-        
+
     }//GEN-LAST:event_Eliminar_BorrarMouseClicked
 
     private void btn_excelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_excelMouseClicked
@@ -2264,8 +2280,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         String nHoja = JOptionPane.showInputDialog(null, "Nombre para la hoja de Excel");
                         if (nHoja.equals("")) {
                             JOptionPane.showMessageDialog(null, "Debe de escribir un nombre para la hoja");
-                           // nHoja = JOptionPane.showInputDialog(null, "Nombre para la hoja de Excel");
-                          return;
+                            // nHoja = JOptionPane.showInputDialog(null, "Nombre para la hoja de Excel");
+                            return;
                         }
 
                         //Create a blank sheet
@@ -2346,6 +2362,104 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_excelMouseClicked
 
+    private void btn_xmlMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_xmlMouseClicked
+        // TODO add your handling code here:\
+
+        //escogerArchivo es tipo Jfilechooser
+        //archi es de tipo clase archivo
+        //archivoo es de tipo File
+        if (GnombreArchivo != null) {
+            JOptionPane.showMessageDialog(null, "Actualmente tiene un archivo abierto");
+            return;
+        }
+        Archivo archi = new Archivo();
+
+        escogerArchivo.setFileView(new FileView() {
+
+            File dirToLock = new File(".");
+
+            @Override
+            public Boolean isTraversable(File f) {
+                return dirToLock.equals(f);
+            }
+        });
+
+        escogerArchivo.setSelectedFile(new File(""));
+        if (escogerArchivo.showDialog(null, "Seleccione un archivo") == JFileChooser.APPROVE_OPTION) {
+            archivoo = escogerArchivo.getSelectedFile();
+            if (archivoo.canRead()) {
+                if (archivoo.getName().endsWith(".jjdp")) {
+                    GnombreArchivo = archivoo.getName();
+                    JOptionPane.showMessageDialog(null, "Archivo seleccionado correcto.");
+                    try {
+                        // create a reader
+                        FileInputStream fis = new FileInputStream(archivoo);
+                        BufferedInputStream reader = new BufferedInputStream(fis);
+
+//                        // read one byte at a time
+                        String metadata = "";
+//                        int ch;
+//                        while ((ch = reader.read()) != -1) {
+//                            metadata += (char) ch;
+//                        }
+//                        reader.close();
+//                        // close the reader
+                        BufferedReader r = new BufferedReader(
+                                new InputStreamReader(reader, StandardCharsets.UTF_8));
+                        metadata = r.readLine();
+                        String[] arMetadata = metadata.split("\\|");
+                        archivoFalso = new Archivo(GnombreArchivo);
+                        for (int i = 1; i < arMetadata.length - 1; i++) {
+                            String[] arMetadata2 = arMetadata[i].split("\\:");
+                            String nombre = arMetadata2[0];
+                            String tipo = arMetadata2[1];
+                            int numBytes = (Integer.parseInt(arMetadata2[2]));
+                            boolean key, keyPot;
+                            key = arMetadata2[3].equals("true");
+                            keyPot = arMetadata2[4].equals("true");
+                            archivoFalso.setListaCampo(new Campo(nombre, tipo, numBytes, key, keyPot));
+                        }
+                        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+                        DocumentBuilder builder;
+                        try {
+                            builder = factory.newDocumentBuilder();
+                            Document doc = builder.newDocument();
+                            doc.setXmlStandalone(true);
+                            Element rootElement = doc.createElement("Campos");
+                            doc.appendChild(rootElement);
+                            for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
+                                Element Campo = doc.createElement("Campo");
+                                Campo.setAttribute(archivoFalso.getListaCampos().get(i).getNombre(), "" + archivoFalso.getListaCampos().get(i).getTipo());
+                                rootElement.appendChild(Campo);
+                            }
+                            
+                            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                            Transformer transformer = transformerFactory.newTransformer();
+                            DOMSource dom = new DOMSource(doc);
+                            String ss = archivoo.getAbsolutePath();
+                            ss = ss.substring(0, ss.length()-5);
+                            StreamResult result = new StreamResult(new File(ss + ".xml"));
+                            JOptionPane.showMessageDialog(null, "Espere un momento");
+                            transformer.transform(dom, result);
+                            JOptionPane.showMessageDialog(this, "Exportación exitosa");
+                            GnombreArchivo = null;
+                            archivoFalso.getListaCampos().clear();
+                        } catch (ParserConfigurationException | TransformerException ex) {
+                            Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    } catch (IOException ex) {
+                        JOptionPane.showMessageDialog(null, ex);
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo con terminación [.jjdp]");
+                }
+            }
+
+        }
+    }//GEN-LAST:event_btn_xmlMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -2379,7 +2493,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        /*ArbolB ab = new ArbolB(4);
+ /*ArbolB ab = new ArbolB(4);
         String letras = "abcdefghijklmnopqrstuvwxyz";
 
         for (int i = 0; i < 26; i++) {
@@ -2393,7 +2507,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ab.Remove("h");
         System.out.println("");
         ab.imprimir_arbol(ab.getRaiz(), 0);*/
-
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
@@ -2560,14 +2673,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTable tabla_registros;
     // End of variables declaration//GEN-END:variables
     //</editor-fold>
-    
-    
+
     private Archivo archivoFalso = new Archivo();//solo es prueba
     private String GnombreArchivo;
     private ArbolB arbolDeIndexacion = new ArbolB(6);
     private int rrnModi = 0;
     private int rrnEli = 0;
-    
+
     private String rrnAsString(int rrn) {
         String rrnString = "";
         rrnString += rrn;
@@ -2576,7 +2688,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
         return rrnString;
     }
-    
+
     private int StringtoRrn(String rrn) {
         int n = rrn.indexOf('.');
         if (n == -1) {
@@ -2585,8 +2697,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         String newRrn = rrn.substring(0, n);
         return Integer.parseInt(newRrn);
     }
-    
-    
 
     public String fill(int n) {
         int lengthT = 0;
@@ -2638,7 +2748,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         }
     }
-    
+
     private void writeAvailList() throws FileNotFoundException, IOException {
         File file = new File(GnombreArchivo);
         RandomAccessFile ra = new RandomAccessFile(file, "rw");
@@ -2705,13 +2815,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         System.out.println(new File(GnombreArchivo).length());
         return new File(GnombreArchivo).length() > archivoFalso.getSizeMetadata();
     }
-    
+
     private void loadAvailList(String head) throws IOException {
         int rrn = StringtoRrn(head);
         String data;
         while (rrn != -1) {
             archivoFalso.getAvailList().add(rrn);
-            data =  readRecord(rrn);
+            data = readRecord(rrn);
             rrn = StringtoRrn(data.substring(2, 2 + 5));
         }
     }
@@ -2726,9 +2836,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private int getRrn() {
         if (archivoFalso.getAvailList().isEmpty()) {
-            return (int) ((new File(GnombreArchivo).length() - archivoFalso.getSizeMetadata())/recordSize());
+            return (int) ((new File(GnombreArchivo).length() - archivoFalso.getSizeMetadata()) / recordSize());
         }
-        return (int)archivoFalso.getAvailList().peekFirst();
+        return (int) archivoFalso.getAvailList().peekFirst();
     }
 
     private void guardarRegistro(String registro) {
@@ -2748,10 +2858,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         } else {
             try {
                 RandomAccessFile raf = new RandomAccessFile(new File(GnombreArchivo), "rw");
-                raf.seek(((int)archivoFalso.getAvailList().removeFirst() - 1) * recordSize() + archivoFalso.getSizeMetadata());
+                raf.seek(((int) archivoFalso.getAvailList().removeFirst() - 1) * recordSize() + archivoFalso.getSizeMetadata());
                 System.out.println("\n");
                 for (int i = 0; i < archivoFalso.getAvailList().size(); i++) {
-                    System.out.println((int)archivoFalso.getAvailList().get(i));
+                    System.out.println((int) archivoFalso.getAvailList().get(i));
                 }
                 raf.write(registro.getBytes());
                 raf.close();
