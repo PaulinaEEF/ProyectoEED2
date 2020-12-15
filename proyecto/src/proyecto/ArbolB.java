@@ -398,6 +398,18 @@ public class ArbolB implements  Serializable {
         }
     }
     
+    public void traverseKeysInOrder (int inode, ArrayList<Long> lista) {
+        if (inode >= 0) {
+            Nodo node = nodos.get(inode);
+
+            for (int i = 0; i < node.getN(); i++) {
+                traverseKeysInOrder(node.getHijos().get(i), lista);
+                lista.add(node.getLlaves().get(i).getPos());
+            }
+            traverseKeysInOrder(node.getHijos().get(node.getN()), lista);
+        }
+    }
+    
     public ArbolB cargarArchivo(String nombre) {
         File archivo = new File(nombre + "keyTree");
         try {
