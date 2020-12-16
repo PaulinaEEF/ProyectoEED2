@@ -50,6 +50,9 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import java.lang.*;
+import java.io.*;
+import java.util.*;
 
 /**
  *
@@ -1949,12 +1952,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 //length+=guardar.length();
             }
             guardar += fill(guardar.length()) + "\n";
-            if (arbolDeIndexacion.B_Tree_Search(0, model.getValueAt(i, getPosKey()).toString()) != null) {
+            int pk = getPosKey();
+            String llave = model.getValueAt(i, pk).toString();
+            if (archivoFalso.getListaCampo(pk).getTipo().equals("int")) {
+                int num = archivoFalso.getListaCampo(pk).getLongitud() - llave.length();
+                llave = espacios.substring(0, num) + llave;
+            }
+            if (arbolDeIndexacion.B_Tree_Search(0, llave) != null) {
                 omitidos = true;
             } else {
                 registross.add(guardar);
                 guardarRegistro(guardar);
-                arbolDeIndexacion.insert(model.getValueAt(i, getPosKey()).toString(), getRrn());
+                arbolDeIndexacion.insert(llave, getRrn());
             }
         }
         String message;
@@ -2159,7 +2168,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         DefaultTableModel model = (DefaultTableModel) tabla_eliminar.getModel();
         if (cb_camposLlave.getSelectedIndex() == 0) {
-            NodoIndice nodoInd = arbolDeIndexacion.B_Tree_Search(0, Eliminar_textfield.getText());
+            int pk = getPosKey();
+            String llave = Eliminar_textfield.getText();
+            if (archivoFalso.getListaCampo(pk).getTipo().equals("int")) {
+                int num = archivoFalso.getListaCampo(pk).getLongitud() - llave.length();
+                llave = espacios.substring(0, num) + llave;
+            }
+            NodoIndice nodoInd = arbolDeIndexacion.B_Tree_Search(0, llave);
             if (nodoInd == null) {
                 JOptionPane.showMessageDialog(null, "No se encontro ningun registro con ese valor");
                 Eliminar_textfield.setText("");
@@ -2206,7 +2221,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     data2[2 + i] = rrnString.charAt(i);
                 }
                 try {
-                    arbolDeIndexacion.Remove(tabla_eliminar.getValueAt(0, getPosKey()).toString());
+                    int pk = getPosKey();
+                    String llave = tabla_eliminar.getValueAt(0, pk).toString();
+                    if (archivoFalso.getListaCampo(pk).getTipo().equals("int")) {
+                        int num = archivoFalso.getListaCampo(pk).getLongitud() - llave.length();
+                        llave = espacios.substring(0, num) + llave;
+                    }
+                    arbolDeIndexacion.Remove(llave);
                     rewrite(new String(data2), rrnEli);
                 } catch (IOException ex) {
                     Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -2493,20 +2514,30 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
- /*ArbolB ab = new ArbolB(4);
+        /*ArbolB ab = new ArbolB(4);
         String letras = "abcdefghijklmnopqrstuvwxyz";
+        StringBuilder letras1 = new StringBuilder();
+        letras1.append(letras);
+        letras = letras1.reverse().toString();
 
         for (int i = 0; i < 26; i++) {
-            ab.insert(letras.substring(i,i+1), i);
+            //ab.insert(letras.substring(i,i+1), i);
+            ab.insert(Integer.toString(i), i);
         }
 
         ab.imprimir_arbol(ab.getRaiz(), 0);
-        System.out.println("");
-        System.out.println(ab.B_Tree_Search(ab.getRaiz(), "m"));
+        //System.out.println("");
+        //System.out.println(ab.B_Tree_Search(ab.getRaiz(), "m"));
 
-        ab.Remove("h");
+        //ab.Remove("h");
         System.out.println("");
-        ab.imprimir_arbol(ab.getRaiz(), 0);*/
+        //ab.imprimir_arbol(ab.getRaiz(), 0);
+        
+        ArrayList<Long> lista = new ArrayList<>();
+        ab.traverseKeysInOrder(ab.getRaiz(), lista);
+        
+        System.out.println(lista.toString());
+        */
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
@@ -2679,6 +2710,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private ArbolB arbolDeIndexacion = new ArbolB(6);
     private int rrnModi = 0;
     private int rrnEli = 0;
+    private String espacios = new String(new char[1024]).replace('\0', ' ');
 
     private String rrnAsString(int rrn) {
         String rrnString = "";
