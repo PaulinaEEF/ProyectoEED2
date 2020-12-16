@@ -228,8 +228,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         listar_registros = new javax.swing.JDialog();
         jLabel42 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabla_listarRegistros = new javax.swing.JTable();
         jButton7 = new javax.swing.JButton();
+        btn_siguientes = new javax.swing.JButton();
+        btn_anteriores = new javax.swing.JButton();
         jLabel41 = new javax.swing.JLabel();
         jLabel43 = new javax.swing.JLabel();
         jDialog1 = new javax.swing.JDialog();
@@ -1219,7 +1221,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel42.setText("Listado de registros actuales");
         listar_registros.getContentPane().add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, 290, 30));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla_listarRegistros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -1227,7 +1229,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane5.setViewportView(jTable1);
+        jScrollPane5.setViewportView(tabla_listarRegistros);
 
         listar_registros.getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 520, 210));
 
@@ -1243,7 +1245,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 jButton7MouseClicked(evt);
             }
         });
-        listar_registros.getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 480, 200, 70));
+        listar_registros.getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 490, 200, 70));
+
+        btn_siguientes.setText("Siguientes");
+        btn_siguientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_siguientesMouseClicked(evt);
+            }
+        });
+        listar_registros.getContentPane().add(btn_siguientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 510, -1, -1));
+
+        btn_anteriores.setText("Anteriores");
+        btn_anteriores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_anterioresMouseClicked(evt);
+            }
+        });
+        listar_registros.getContentPane().add(btn_anteriores, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 510, -1, -1));
 
         jLabel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/checklist.gif"))); // NOI18N
         listar_registros.getContentPane().add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 800, 590));
@@ -2082,16 +2100,35 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_borrarRegistroMouseClicked
 
     private void btn_listarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_listarMouseClicked
+        tabla_listarRegistros.setModel(new DefaultTableModel());
+        DefaultTableModel model = (DefaultTableModel) tabla_listarRegistros.getModel();
+        for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
+            model.addColumn(archivoFalso.getListaCampos().get(i).getNombre());
+        }
+        model.setNumRows(1);
+        
+        lower = 0;
+        upper = 10;
+        sortedRRN = new ArrayList<Long>();
+        
+        arbolDeIndexacion.traverseKeysInOrder(arbolDeIndexacion.getRaiz(), sortedRRN);
+        
+        llenarTablaListar();
+        
         Registros.setVisible(false);
         listar_registros.pack();
         listar_registros.setModal(true);
         listar_registros.setLocationRelativeTo(null);
-        listar_registros.setVisible(true);
+        listar_registros.setVisible(true);     
     }//GEN-LAST:event_btn_listarMouseClicked
 
     private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
         listar_registros.setVisible(false);
         Registros.setVisible(true);
+        
+        lower = 0;
+        upper = 10;
+        sortedRRN = new ArrayList<Long>();
     }//GEN-LAST:event_jButton7MouseClicked
 
     private void modificar_textfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificar_textfieldActionPerformed
@@ -2103,7 +2140,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         if ("".equals(modificar_textfield.getText())) {
             JOptionPane.showMessageDialog(null, "Favor ingrese el valor que desea buscar");
         } else if (model.getRowCount() != 1) {
-            NodoIndice nodoInd = arbolDeIndexacion.B_Tree_Search(0, modificar_textfield.getText());
+            int pk = getPosKey();
+            String llave = modificar_textfield.getText();
+            if (archivoFalso.getListaCampo(pk).getTipo().equals("int")) {
+                int num = archivoFalso.getListaCampo(pk).getLongitud() - llave.length();
+                llave = espacios.substring(0, num) + llave;
+            }
+            NodoIndice nodoInd = arbolDeIndexacion.B_Tree_Search(0, llave);
             if (nodoInd == null) {
                 JOptionPane.showMessageDialog(null, "No se encontro ningun registro con ese valor");
                 modificar_textfield.setText("");
@@ -2133,8 +2176,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         if (btn_modif.isEnabled()) {
             if (validarIngresoTable(tabla_modificar, false)) {
                 DefaultTableModel model = (DefaultTableModel) tabla_modificar.getModel();
-                arbolDeIndexacion.Remove(modificar_textfield.getText());
-                arbolDeIndexacion.insert(model.getValueAt(0, getPosKey()).toString(), rrnModi);
+              
+                int pk = getPosKey();
+                String llave = modificar_textfield.getText();
+                if (archivoFalso.getListaCampo(pk).getTipo().equals("int")) {
+                    int num = archivoFalso.getListaCampo(pk).getLongitud() - llave.length();
+                    llave = espacios.substring(0, num) + llave;
+                }
+                arbolDeIndexacion.Remove(llave);
+                
+                llave = model.getValueAt(0, getPosKey()).toString();
+                if (archivoFalso.getListaCampo(pk).getTipo().equals("int")) {
+                    int num = archivoFalso.getListaCampo(pk).getLongitud() - llave.length();
+                    llave = espacios.substring(0, num) + llave;
+                }
+                arbolDeIndexacion.insert(llave, rrnModi);
                 String guardar = "";
                 // int length=0;
 
@@ -2481,6 +2537,31 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_xmlMouseClicked
 
+    private void btn_siguientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_siguientesMouseClicked
+        // TODO add your handling code here:
+        if (upper < sortedRRN.size()) {
+            lower += 10;
+            upper += 10;
+            DefaultTableModel model = (DefaultTableModel) tabla_listarRegistros.getModel();
+            model.getDataVector().removeAllElements();
+            
+            llenarTablaListar(); 
+        }  
+    }//GEN-LAST:event_btn_siguientesMouseClicked
+
+    private void btn_anterioresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_anterioresMouseClicked
+        // TODO add your handling code here:
+        
+        if ((lower-10) >= 0) {
+            lower -= 10;
+            upper -= 10;
+            DefaultTableModel model = (DefaultTableModel) tabla_listarRegistros.getModel();
+            model.getDataVector().removeAllElements();
+            
+            llenarTablaListar(); 
+        }  
+    }//GEN-LAST:event_btn_anterioresMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -2520,9 +2601,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         letras1.append(letras);
         letras = letras1.reverse().toString();
 
-        for (int i = 0; i < 26; i++) {
-            //ab.insert(letras.substring(i,i+1), i);
-            ab.insert(Integer.toString(i), i);
+        for (int j = 0; j < 26; j++) {
+            //ab.insert(letras.substring(j,j+1), j);
+            ab.insert(Integer.toString(j), j);
         }
 
         ab.imprimir_arbol(ab.getRaiz(), 0);
@@ -2596,6 +2677,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton boton_crearArchivo;
     private javax.swing.JButton boton_regresar;
     private javax.swing.JButton btn_aceptar1;
+    private javax.swing.JButton btn_anteriores;
     private javax.swing.JButton btn_borrarRegistro;
     private javax.swing.JButton btn_buscar;
     private javax.swing.JButton btn_cerrararchivo;
@@ -2621,6 +2703,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btn_rreturn;
     private javax.swing.JButton btn_salir1;
     private javax.swing.JButton btn_salvar;
+    private javax.swing.JButton btn_siguientes;
     private javax.swing.JButton btn_xml;
     private javax.swing.JDialog buscar_registros;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -2696,10 +2779,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTable jTable1;
     private javax.swing.JDialog listar_registros;
     private javax.swing.JTextField modificar_textfield;
     private javax.swing.JTable tabla_eliminar;
+    private javax.swing.JTable tabla_listarRegistros;
     private javax.swing.JTable tabla_modificar;
     private javax.swing.JTable tabla_registros;
     // End of variables declaration//GEN-END:variables
@@ -2711,6 +2794,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private int rrnModi = 0;
     private int rrnEli = 0;
     private String espacios = new String(new char[1024]).replace('\0', ' ');
+    private ArrayList<Long> sortedRRN = new ArrayList<Long>();
+    private int lower = 0;
+    private int upper = 10;
 
     private String rrnAsString(int rrn) {
         String rrnString = "";
@@ -2899,6 +2985,29 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 raf.close();
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    private void llenarTablaListar() {
+        
+        DefaultTableModel model = (DefaultTableModel) tabla_listarRegistros.getModel();
+        
+        for (int i = lower; i < upper && i < sortedRRN.size(); i++) {
+            long RRN = sortedRRN.get(i);
+            try {
+                String data = readRecord(Math.toIntExact(RRN));
+                System.out.println(data);
+
+                String arr[] = data.split("\\|");
+                Object arr2[] = new Object[model.getColumnCount()];
+                for (int j = 0; j < model.getColumnCount(); j++) {
+                    arr2[j] = arr[j];
+                }
+                model.addRow(arr2);
+   
             } catch (IOException ex) {
                 Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
