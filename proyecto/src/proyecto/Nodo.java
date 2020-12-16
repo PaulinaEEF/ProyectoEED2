@@ -27,7 +27,7 @@ public class Nodo implements Serializable{
             llaves.add(null);
             hijos.add(-1);
         }
-        hijos.add(null);
+        hijos.add(-1);
         n = 0;
         leaf = true;
     }
