@@ -1424,7 +1424,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             if (GnombreArchivo != null) {
                 escribirArchivo(GnombreArchivo);
                 writeAvailList();
-                arbolDeIndexacion.imprimir_arbol(0, 0);
+                arbolPrimario.imprimir_arbol(0, 0);
             }
         } catch (IOException ex) {
             Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -1923,12 +1923,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         ex.printStackTrace();
                     }
                     try {
-                        arbolDeIndexacion = arbolDeIndexacion.cargarArchivo(GnombreArchivo);
+                        arbolPrimario = arbolPrimario.cargarArchivo(GnombreArchivo);
                     } catch (Exception e) {
-                        arbolDeIndexacion = new ArbolB(6);
+                        arbolPrimario = new ArbolB(6);
                     }
-                    if (arbolDeIndexacion == null) {
-                        arbolDeIndexacion = new ArbolB(6);
+                    if (arbolPrimario == null) {
+                        arbolPrimario = new ArbolB(6);
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo con terminación [.jjdp]");
@@ -1976,12 +1976,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 int num = archivoFalso.getListaCampo(pk).getLongitud() - llave.length();
                 llave = espacios.substring(0, num) + llave;
             }
-            if (arbolDeIndexacion.B_Tree_Search(0, llave) != null) {
+            if (arbolPrimario.B_Tree_Search(0, llave) != null) {
                 omitidos = true;
             } else {
                 registross.add(guardar);
                 guardarRegistro(guardar);
-                arbolDeIndexacion.insert(llave, getRrn());
+                arbolPrimario.insert(llave, getRrn());
             }
         }
         String message;
@@ -2111,7 +2111,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         upper = 10;
         sortedRRN = new ArrayList<Long>();
         
-        arbolDeIndexacion.traverseKeysInOrder(arbolDeIndexacion.getRaiz(), sortedRRN);
+        arbolPrimario.traverseKeysInOrder(arbolPrimario.getRaiz(), sortedRRN);
         
         llenarTablaListar();
         
@@ -2146,7 +2146,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 int num = archivoFalso.getListaCampo(pk).getLongitud() - llave.length();
                 llave = espacios.substring(0, num) + llave;
             }
-            NodoIndice nodoInd = arbolDeIndexacion.B_Tree_Search(0, llave);
+            NodoIndice nodoInd = arbolPrimario.B_Tree_Search(0, llave);
             if (nodoInd == null) {
                 JOptionPane.showMessageDialog(null, "No se encontro ningun registro con ese valor");
                 modificar_textfield.setText("");
@@ -2183,14 +2183,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     int num = archivoFalso.getListaCampo(pk).getLongitud() - llave.length();
                     llave = espacios.substring(0, num) + llave;
                 }
-                arbolDeIndexacion.Remove(llave);
+                arbolPrimario.Remove(llave);
                 
                 llave = model.getValueAt(0, getPosKey()).toString();
                 if (archivoFalso.getListaCampo(pk).getTipo().equals("int")) {
                     int num = archivoFalso.getListaCampo(pk).getLongitud() - llave.length();
                     llave = espacios.substring(0, num) + llave;
                 }
-                arbolDeIndexacion.insert(llave, rrnModi);
+                arbolPrimario.insert(llave, rrnModi);
                 String guardar = "";
                 // int length=0;
 
@@ -2230,7 +2230,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 int num = archivoFalso.getListaCampo(pk).getLongitud() - llave.length();
                 llave = espacios.substring(0, num) + llave;
             }
-            NodoIndice nodoInd = arbolDeIndexacion.B_Tree_Search(0, llave);
+            NodoIndice nodoInd = arbolPrimario.B_Tree_Search(0, llave);
             if (nodoInd == null) {
                 JOptionPane.showMessageDialog(null, "No se encontro ningun registro con ese valor");
                 Eliminar_textfield.setText("");
@@ -2283,7 +2283,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         int num = archivoFalso.getListaCampo(pk).getLongitud() - llave.length();
                         llave = espacios.substring(0, num) + llave;
                     }
-                    arbolDeIndexacion.Remove(llave);
+                    arbolPrimario.Remove(llave);
                     rewrite(new String(data2), rrnEli);
                 } catch (IOException ex) {
                     Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -2790,7 +2790,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private Archivo archivoFalso = new Archivo();//solo es prueba
     private String GnombreArchivo;
-    private ArbolB arbolDeIndexacion = new ArbolB(6);
+    private ArrayList<ArbolB> arbolitos;
+    private ArbolB arbolPrimario = arbolitos.get(getPosKey());
     private int rrnModi = 0;
     private int rrnEli = 0;
     private String espacios = new String(new char[1024]).replace('\0', ' ');
@@ -2855,7 +2856,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         try {
             fw = new FileOutputStream(nombre + "keyTree");
             bw = new ObjectOutputStream(fw);
-            bw.writeObject(arbolDeIndexacion);
+            bw.writeObject(arbolPrimario);
             bw.flush();
         } catch (Exception ex) {
         } finally {
