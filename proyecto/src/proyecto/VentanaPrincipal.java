@@ -526,7 +526,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Registros.getContentPane().add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 310, 210, 60));
 
         fondo_registros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/r1.gif"))); // NOI18N
-        Registros.getContentPane().add(fondo_registros, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 440));
+        Registros.getContentPane().add(fondo_registros, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 0, 800, 440));
 
         Indiices.setUndecorated(true);
         Indiices.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -2019,6 +2019,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             } else {
                 registross.add(guardar);
                 guardarRegistro(guardar);
+                System.out.println("llaver RRN: " + getRrn());
                 arbolDeIndexacion.insert(llave, getRrn());
             }
         }
@@ -3144,12 +3145,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
            
             fs.write("RegistrosPrueba.jjdp|PersonId:int:6:true:false|PersonName:char:20:false:false|PersonAge:int:3:false:false|CityId:int:2:false:true|-1...\n".getBytes());
             Random r = new Random();
-            ArrayList lista = new ArrayList();
-
-            long finalf1 = 0;
             long rrn = 1;
+            String llave;
             ArbolB arbolPrueba = new ArbolB(6);
-            for (int i = 0; i <= 9900; i++) {
+            for (int i = 0; i < 9901; i++) {
                 String nombre = Nombres.get((int) Math.floor(Math.random() * 18));
                 String apellido = Apellidos.get((int) Math.floor(Math.random() * 18));
                 //String person = IdPerson.get((int) Math.floor(Math.random() * 18));
@@ -3157,20 +3156,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 int edad = 1 + r.nextInt(100);
                 int city = 0 + r.nextInt(99);
                 String registro = idd + "|" + nombre + " " + apellido + "|" + edad + "|" + city + "|";
-                registro += fill(registro.length(), 36) + "\n";
+                registro += fill(registro.length(), 35) + "\n";
 
                 // f2.writeBytes(i + "," + f.getFilePointer() + ";");
                 //long posicion = fs.getFilePointer();
                 fs.write(registro.getBytes());
-
-                arbolPrueba.insert(String.valueOf(idd), rrn);
-
+                llave = String.valueOf(idd);
+                llave = espacios.substring(0, 6 - llave.length()) + llave;
+                arbolPrueba.insert(llave, rrn);
                 idd++;
                 rrn++;
             }
             fs.flush();
             fs.close();
             escribirArchivo("RegistrosPrueba.jjdp", arbolPrueba);
+            System.out.println(arbolPrueba.nodos.size());
         }
 
         GnombreArchivo = "RegistrosPrueba.jjdp";
