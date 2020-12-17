@@ -243,7 +243,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         combo2 = new javax.swing.JComboBox<>();
         btn_seleccionar = new javax.swing.JButton();
         btn_regresarCruzar = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btn_crossArchive = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
         ListaCampos_Archivo1 = new javax.swing.JList<>();
         jScrollPane8 = new javax.swing.JScrollPane();
@@ -1359,14 +1359,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         cruzarArchivo.getContentPane().add(btn_regresarCruzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 330, 150, 80));
 
-        jButton5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/key-with-cross-sign.png"))); // NOI18N
-        jButton5.setText("Cruzar archivo");
-        jButton5.setContentAreaFilled(false);
-        jButton5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jButton5.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/key-with-cross-sign (1).png"))); // NOI18N
-        cruzarArchivo.getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, 190, 80));
+        btn_crossArchive.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_crossArchive.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/key-with-cross-sign.png"))); // NOI18N
+        btn_crossArchive.setText("Cruzar archivo");
+        btn_crossArchive.setContentAreaFilled(false);
+        btn_crossArchive.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btn_crossArchive.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_crossArchive.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/key-with-cross-sign (1).png"))); // NOI18N
+        cruzarArchivo.getContentPane().add(btn_crossArchive, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, 190, 80));
 
         jScrollPane7.setViewportView(ListaCampos_Archivo1);
 
@@ -3021,6 +3021,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btn_buscar;
     private javax.swing.JButton btn_cerrararchivo;
     private javax.swing.JButton btn_confirmar;
+    private javax.swing.JButton btn_crossArchive;
     private javax.swing.JButton btn_cruzarArchivo;
     private javax.swing.JButton btn_delete1;
     private javax.swing.JButton btn_excel;
@@ -3073,7 +3074,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
