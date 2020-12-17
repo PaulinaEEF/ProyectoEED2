@@ -3319,6 +3319,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     public void Archivo10000(boolean generar) throws IOException {
         String metadata = ("RegistrosPrueba.jjdp|PersonId:int:6:true:false|PersonName:char:20:false:false|PersonAge:int:3:false:false|CityId:int:2:false:true|-1...\n");;
+        GnombreArchivo = "RegistrosPrueba.jjdp";
+        String[] arMetadata = metadata.split("\\|");
+        archivoFalso = new Archivo(GnombreArchivo);
+        arbolitos = new ArrayList<>();
+        for (int i = 1; i < arMetadata.length - 1; i++) {
+            String[] arMetadata2 = arMetadata[i].split("\\:");
+            String nombre = arMetadata2[0];
+            String tipo = arMetadata2[1];
+            int numBytes = (Integer.parseInt(arMetadata2[2]));
+            boolean key, keyPot;
+            key = arMetadata2[3].equals("true");
+            keyPot = arMetadata2[4].equals("true");
+            archivoFalso.setListaCampo(new Campo(nombre, tipo, numBytes, key, keyPot));
+            arbolitos.add(null);
+        }
         if (generar) {
             ArrayList<String> Nombres = new ArrayList();
             Nombres.add("Jose");
@@ -3339,27 +3354,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             Nombres.add("Maria");
             Nombres.add("Diego");
             Nombres.add("Alvaro");
-            ArrayList<String> IdPerson = new ArrayList();
             int idd = 100000;
-            IdPerson.add("080110");
-            IdPerson.add("080211");
-            IdPerson.add("080212");
-            IdPerson.add("080213");
-            IdPerson.add("080214");
-            IdPerson.add("080215");
-            IdPerson.add("080216");
-            IdPerson.add("080217");
-            IdPerson.add("080218");
-            IdPerson.add("080219");
-            IdPerson.add("080220");
-            IdPerson.add("0802");
-            IdPerson.add("0802");
-            IdPerson.add("0802");
-            IdPerson.add("0802");
-            IdPerson.add("0802");
-            IdPerson.add("0802");
-            IdPerson.add("0802");
-
             ArrayList<String> Apellidos = new ArrayList();
             Apellidos.add("Montesinos");
             Apellidos.add("Montalvan");
@@ -3385,7 +3380,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 //        f.writeBytes("RegistrosPrueba.jjdp|PersonId:int:6:true:false|PersonName:char:20:false:false|PersonAge:int:3:false:false|CityId:int:2:false:true|-1...;");
 //        f.seek(400);
             FileOutputStream fs = new FileOutputStream(new File("RegistrosPrueba.jjdp"));
-
+            ArbolB arbolCity  = new ArbolB((6));
             fs.write("RegistrosPrueba.jjdp|PersonId:int:6:true:false|PersonName:char:20:false:false|PersonAge:int:3:false:false|CityId:int:2:false:true|-1...\n".getBytes());
             Random r = new Random();
             long rrn = 1;
@@ -3407,6 +3402,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 llave = String.valueOf(idd);
                 llave = espacios.substring(0, 6 - llave.length()) + llave;
                 arbolPrueba.insert(llave, rrn);
+                llave = String.valueOf(city);
+                llave = espacios.substring(0, 3 - llave.length()) + llave;
+                arbolPrueba.insert(llave, rrn);
                 idd++;
                 rrn++;
             }
@@ -3414,25 +3412,41 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             fs.close();
             escribirArchivo("RegistrosPrueba.jjdp", arbolPrueba);
             System.out.println(arbolPrueba.nodos.size());
+            arbolitos.set(getPosKey(), arbolPrueba);
+            arbolitos.set(3, arbolCity);
+        } else {
+            for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
+                if (archivoFalso.getListaCampo(i).isLprimaria() || archivoFalso.getListaCampo(i).isLPotprimaria()) {
+                    try {
+                        arbolitos.set(i, new ArbolB(6));
+                        arbolitos.set(i, arbolitos.get(i).cargarArbol(GnombreArchivo + archivoFalso.getListaCampo(i).getNombre()));
+                    } catch (Exception e) {
+                        arbolitos.set(i, new ArbolB(6));
+                    }
+                    if (arbolitos.get(i) == null) {
+                        arbolitos.set(i, new ArbolB(6));
+                    }
+                }
+            }
         }
-
-        GnombreArchivo = "RegistrosPrueba.jjdp";
-        String[] arMetadata = metadata.split("\\|");
-        archivoFalso = new Archivo(GnombreArchivo);
-        for (int i = 1; i < arMetadata.length - 1; i++) {
-            String[] arMetadata2 = arMetadata[i].split("\\:");
-            String nombre = arMetadata2[0];
-            String tipo = arMetadata2[1];
-            int numBytes = (Integer.parseInt(arMetadata2[2]));
-            boolean key, keyPot;
-            key = arMetadata2[3].equals("true");
-            keyPot = arMetadata2[4].equals("true");
-            archivoFalso.setListaCampo(new Campo(nombre, tipo, numBytes, key, keyPot));
-        }
+        
+        
         System.out.println(arMetadata[arMetadata.length - 1]);
         loadAvailList(arMetadata[arMetadata.length - 1]);
-
-        arbolitos.add(0, new ArbolB(1).cargarArbol("RegistrosPrueba.jjdp"));
+        for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
+            arbolitos.add(null);
+            if (archivoFalso.getListaCampo(i).isLprimaria() || archivoFalso.getListaCampo(i).isLPotprimaria()) {
+                try {
+                    arbolitos.set(i, new ArbolB(6));
+                    arbolitos.set(i, arbolitos.get(i).cargarArbol(GnombreArchivo + archivoFalso.getListaCampo(i).getNombre()));
+                } catch (Exception e) {
+                    arbolitos.set(i, new ArbolB(6));
+                }
+                if (arbolitos.get(i) == null) {
+                    arbolitos.set(i, new ArbolB(6));
+                }
+            }
+        }
     }
 
     public String fill(int n, int n2) {
