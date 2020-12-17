@@ -526,7 +526,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Registros.getContentPane().add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 310, 210, 60));
 
         fondo_registros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/r1.gif"))); // NOI18N
-        Registros.getContentPane().add(fondo_registros, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 440));
+        Registros.getContentPane().add(fondo_registros, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 0, 800, 440));
 
         Indiices.setUndecorated(true);
         Indiices.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1805,6 +1805,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_aceptar1ActionPerformed
 
     private void boton_RegistrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_RegistrosMouseClicked
+
         if (GnombreArchivo != null) {
             for (int i = 0; i < archivoFalso.getAvailList().size(); i++) {
                 System.out.println((int) archivoFalso.getAvailList().get(i));
@@ -1828,7 +1829,44 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "No hay ningún archivo cargado en memoria.");
+
+            int decision = JOptionPane.showConfirmDialog(null, "Desea utilizar archivo de prueba?",
+                    "No hay ningun archivo cargado en memoria", JOptionPane.YES_NO_OPTION);
+            if (decision == JOptionPane.YES_OPTION) {
+                if (new File("RegistrosPrueba.jjdp").exists()) {
+                    int d2 = JOptionPane.showConfirmDialog(null, "El archivo de prueba ya existe, si usted continua, se regenerará, estás seguro?", "Confirma", JOptionPane.YES_NO_OPTION);
+                    if (d2 == JOptionPane.YES_OPTION) {
+
+                        try {
+                            Archivo10000(true);
+
+                        } catch (IOException ex) {
+                            Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    try {
+                        Archivo10000(false);
+                    } catch (IOException ex) {
+                        Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    Registros.pack();
+                    Registros.setModal(true);
+                    Registros.setLocationRelativeTo(null);
+                    Registros.setVisible(true);
+                } else {
+                    try {
+                        Archivo10000(true);
+                        
+                        Registros.pack();
+                        Registros.setModal(true);
+                        Registros.setLocationRelativeTo(null);
+                        Registros.setVisible(true);
+                    } catch (IOException ex) {
+                        Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+
         }
 
     }//GEN-LAST:event_boton_RegistrosMouseClicked
@@ -2002,7 +2040,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             } else {
                 registross.add(guardar);
                 guardarRegistro(guardar);
+
                 getArbolPrimario().insert(llave, getRrn());
+
             }
         }
         String message;
@@ -2127,26 +2167,28 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             model.addColumn(archivoFalso.getListaCampos().get(i).getNombre());
         }
         model.setNumRows(1);
-        
+
         lower = 0;
         upper = 10;
         sortedRRN = new ArrayList<Long>();
+
         
         getArbolPrimario().traverseKeysInOrder(getArbolPrimario().getRaiz(), sortedRRN);
         
+
         llenarTablaListar();
-        
+
         Registros.setVisible(false);
         listar_registros.pack();
         listar_registros.setModal(true);
         listar_registros.setLocationRelativeTo(null);
-        listar_registros.setVisible(true);     
+        listar_registros.setVisible(true);
     }//GEN-LAST:event_btn_listarMouseClicked
 
     private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
         listar_registros.setVisible(false);
         Registros.setVisible(true);
-        
+
         lower = 0;
         upper = 10;
         sortedRRN = new ArrayList<Long>();
@@ -2178,8 +2220,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             try {
                 String data = readRecord(Math.toIntExact(rrnModi));
                 System.out.println(data);
-
+                System.out.println(rrnModi);
                 String arr[] = data.split("\\|");
+                System.out.println(arr[0]);
+                System.out.println(nodoInd.getNodo().getLlaves().get(nodoInd.getIndice()).getPos());
+                System.out.println(archivoFalso.getAvailList().peekFirst());
                 Object arr2[] = new Object[model.getColumnCount()];
                 for (int i = 0; i < model.getColumnCount(); i++) {
                     arr2[i] = arr[i];
@@ -2197,15 +2242,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         if (btn_modif.isEnabled()) {
             if (validarIngresoTable(tabla_modificar, false)) {
                 DefaultTableModel model = (DefaultTableModel) tabla_modificar.getModel();
-              
+
                 int pk = getPosKey();
                 String llave = modificar_textfield.getText();
                 if (archivoFalso.getListaCampo(pk).getTipo().equals("int")) {
                     int num = archivoFalso.getListaCampo(pk).getLongitud() - llave.length();
                     llave = espacios.substring(0, num) + llave;
                 }
+
                 getArbolPrimario().Remove(llave);
                 
+
                 llave = model.getValueAt(0, getPosKey()).toString();
                 if (archivoFalso.getListaCampo(pk).getTipo().equals("int")) {
                     int num = archivoFalso.getListaCampo(pk).getLongitud() - llave.length();
@@ -2530,12 +2577,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                 Campo.setAttribute(archivoFalso.getListaCampos().get(i).getNombre(), "" + archivoFalso.getListaCampos().get(i).getTipo());
                                 rootElement.appendChild(Campo);
                             }
-                            
+
                             TransformerFactory transformerFactory = TransformerFactory.newInstance();
                             Transformer transformer = transformerFactory.newTransformer();
                             DOMSource dom = new DOMSource(doc);
                             String ss = archivoo.getAbsolutePath();
-                            ss = ss.substring(0, ss.length()-5);
+                            ss = ss.substring(0, ss.length() - 5);
                             StreamResult result = new StreamResult(new File(ss + ".xml"));
                             JOptionPane.showMessageDialog(null, "Espere un momento");
                             transformer.transform(dom, result);
@@ -2565,22 +2612,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             upper += 10;
             DefaultTableModel model = (DefaultTableModel) tabla_listarRegistros.getModel();
             model.getDataVector().removeAllElements();
-            
-            llenarTablaListar(); 
-        }  
+
+            llenarTablaListar();
+        }
     }//GEN-LAST:event_btn_siguientesMouseClicked
 
     private void btn_anterioresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_anterioresMouseClicked
         // TODO add your handling code here:
-        
-        if ((lower-10) >= 0) {
+
+        if ((lower - 10) >= 0) {
             lower -= 10;
             upper -= 10;
             DefaultTableModel model = (DefaultTableModel) tabla_listarRegistros.getModel();
             model.getDataVector().removeAllElements();
-            
-            llenarTablaListar(); 
-        }  
+
+            llenarTablaListar();
+        }
     }//GEN-LAST:event_btn_anterioresMouseClicked
 
     /**
@@ -2616,8 +2663,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        /*
         ArbolB ab = new ArbolB(6);
         String letras = "aaaaabbbbbbccccccccccccccc";
+
         StringBuilder letras1 = new StringBuilder();
         letras1.append(letras);
         //letras = letras1.reverse().toString();
@@ -2640,7 +2689,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ab.searchByAffinity(ab.getRaiz(), "b", lista);
         
         System.out.println(lista.toString());
-        
+         */
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
@@ -2889,6 +2938,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 }
             }
 
+    public void escribirArchivo(String nombre, ArbolB tree) {
+        FileOutputStream fw = null;
+        ObjectOutputStream bw = null;
+        try {
+            fw = new FileOutputStream(nombre + "keyTree");
+            bw = new ObjectOutputStream(fw);
+            bw.writeObject(tree);
+            bw.flush();
+        } catch (Exception ex) {
+        } finally {
+            try {
+                bw.close();
+                fw.close();
+            } catch (Exception ex) {
+            }
+        }
+    }
+
     private void writeAvailList() throws FileNotFoundException, IOException {
         File file = new File(GnombreArchivo);
         RandomAccessFile ra = new RandomAccessFile(file, "rw");
@@ -3012,11 +3079,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         }
     }
-    
+
     private void llenarTablaListar() {
-        
+
         DefaultTableModel model = (DefaultTableModel) tabla_listarRegistros.getModel();
-        
+
         for (int i = lower; i < upper && i < sortedRRN.size(); i++) {
             long RRN = sortedRRN.get(i);
             try {
@@ -3029,7 +3096,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     arr2[j] = arr[j];
                 }
                 model.addRow(arr2);
-   
+
             } catch (IOException ex) {
                 Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -3038,5 +3105,132 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     
     public ArbolB getArbolPrimario() {
         return arbolitos.get(getPosKey());
+    }
+
+
+    public void Archivo10000(boolean generar) throws IOException {
+         String metadata = ("RegistrosPrueba.jjdp|PersonId:int:6:true:false|PersonName:char:20:false:false|PersonAge:int:3:false:false|CityId:int:2:false:true|-1...\n");;
+        if (generar) {
+            ArrayList<String> Nombres = new ArrayList();
+            Nombres.add("Jose");
+            Nombres.add("David");
+            Nombres.add("Pau");
+            Nombres.add("Juda");
+            Nombres.add("Omar");
+            Nombres.add("Luis");
+            Nombres.add("Raul");
+            Nombres.add("Marce");
+            Nombres.add("Sergio");
+            Nombres.add("Lucia");
+            Nombres.add("Juan");
+            Nombres.add("Andrea");
+            Nombres.add("Linda");
+            Nombres.add("Aaron");
+            Nombres.add("Dunia");
+            Nombres.add("Maria");
+            Nombres.add("Diego");
+            Nombres.add("Alvaro");
+            ArrayList<String> IdPerson = new ArrayList();
+            int idd = 100000;
+            IdPerson.add("080110");
+            IdPerson.add("080211");
+            IdPerson.add("080212");
+            IdPerson.add("080213");
+            IdPerson.add("080214");
+            IdPerson.add("080215");
+            IdPerson.add("080216");
+            IdPerson.add("080217");
+            IdPerson.add("080218");
+            IdPerson.add("080219");
+            IdPerson.add("080220");
+            IdPerson.add("0802");
+            IdPerson.add("0802");
+            IdPerson.add("0802");
+            IdPerson.add("0802");
+            IdPerson.add("0802");
+            IdPerson.add("0802");
+            IdPerson.add("0802");
+
+            ArrayList<String> Apellidos = new ArrayList();
+            Apellidos.add("Montesinos");
+            Apellidos.add("Montalvan");
+            Apellidos.add("Gonzalez");
+            Apellidos.add("Larios");
+            Apellidos.add("Calix");
+            Apellidos.add("Romero");
+            Apellidos.add("Martinez");
+            Apellidos.add("Perez");
+            Apellidos.add("Sosa");
+            Apellidos.add("Torres");
+            Apellidos.add("Acosta");
+            Apellidos.add("Mejia");
+            Apellidos.add("Flores");
+            Apellidos.add("Luna");
+            Apellidos.add("Dominguez");
+            Apellidos.add("Sagastume");
+            Apellidos.add("Castro");
+            Apellidos.add("Fernandez");
+
+//        RandomAccessFile f = new RandomAccessFile(Archivo, "rw");
+//        f.seek(0);
+//        f.writeBytes("RegistrosPrueba.jjdp|PersonId:int:6:true:false|PersonName:char:20:false:false|PersonAge:int:3:false:false|CityId:int:2:false:true|-1...;");
+//        f.seek(400);
+            FileOutputStream fs = new FileOutputStream(new File("RegistrosPrueba.jjdp"));
+           
+            fs.write("RegistrosPrueba.jjdp|PersonId:int:6:true:false|PersonName:char:20:false:false|PersonAge:int:3:false:false|CityId:int:2:false:true|-1...\n".getBytes());
+            Random r = new Random();
+            long rrn = 1;
+            String llave;
+            ArbolB arbolPrueba = new ArbolB(6);
+            for (int i = 0; i < 9901; i++) {
+                String nombre = Nombres.get((int) Math.floor(Math.random() * 18));
+                String apellido = Apellidos.get((int) Math.floor(Math.random() * 18));
+                //String person = IdPerson.get((int) Math.floor(Math.random() * 18));
+
+                int edad = 1 + r.nextInt(100);
+                int city = 0 + r.nextInt(99);
+                String registro = idd + "|" + nombre + " " + apellido + "|" + edad + "|" + city + "|";
+                registro += fill(registro.length(), 35) + "\n";
+
+                // f2.writeBytes(i + "," + f.getFilePointer() + ";");
+                //long posicion = fs.getFilePointer();
+                fs.write(registro.getBytes());
+                llave = String.valueOf(idd);
+                llave = espacios.substring(0, 6 - llave.length()) + llave;
+                arbolPrueba.insert(llave, rrn);
+                idd++;
+                rrn++;
+            }
+            fs.flush();
+            fs.close();
+            escribirArchivo("RegistrosPrueba.jjdp", arbolPrueba);
+            System.out.println(arbolPrueba.nodos.size());
+        }
+
+        GnombreArchivo = "RegistrosPrueba.jjdp";
+        String[] arMetadata = metadata.split("\\|");
+        archivoFalso = new Archivo(GnombreArchivo);
+        for (int i = 1; i < arMetadata.length - 1; i++) {
+            String[] arMetadata2 = arMetadata[i].split("\\:");
+            String nombre = arMetadata2[0];
+            String tipo = arMetadata2[1];
+            int numBytes = (Integer.parseInt(arMetadata2[2]));
+            boolean key, keyPot;
+            key = arMetadata2[3].equals("true");
+            keyPot = arMetadata2[4].equals("true");
+            archivoFalso.setListaCampo(new Campo(nombre, tipo, numBytes, key, keyPot));
+        }
+        System.out.println(arMetadata[arMetadata.length - 1]);
+        loadAvailList(arMetadata[arMetadata.length - 1]);
+        
+        arbolDeIndexacion = arbolDeIndexacion.cargarArchivo("RegistrosPrueba.jjdp");
+    }
+
+    public String fill(int n, int n2) {
+        String cadena = "";
+        for (int i = n; i < n2; i++) {
+            cadena += " ";
+        }
+        return cadena;
     }
 }
