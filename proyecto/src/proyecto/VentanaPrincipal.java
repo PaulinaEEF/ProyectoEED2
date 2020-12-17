@@ -1,3 +1,4 @@
+
 package proyecto;
 
 import java.io.BufferedInputStream;
@@ -3292,7 +3293,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         System.out.println(arMetadata[arMetadata.length - 1]);
         loadAvailList(arMetadata[arMetadata.length - 1]);
         
-        arbolitos.set(getPosKey(), getArbolPrimario().cargarArbol("RegistrosPrueba.jjdp"));
+        arbolitos.add(0, new ArbolB(1).cargarArbol("RegistrosPrueba.jjdp"));
     }
 
     public String fill(int n, int n2) {
@@ -3303,3 +3304,4 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         return cadena;
     }
 }
+
