@@ -410,7 +410,9 @@ public class ArbolB implements  Serializable {
         }
     }
     
-    public ArbolB cargarArchivo(String nombre) {
+    
+    
+    public ArbolB cargarArbol(String nombre) {
         File archivo = new File(nombre + "keyTree");
         try {
             if (archivo.exists()) {
@@ -430,7 +432,5 @@ public class ArbolB implements  Serializable {
         }
         return null;
     }
-    
-    
-    
+      
 }

@@ -1420,15 +1420,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_boton_SalirActionPerformed
 
     private void boton_SalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_SalirMouseClicked
-        try {
-            if (GnombreArchivo != null) {
-                escribirArchivo(GnombreArchivo);
-                writeAvailList();
-                arbolPrimario.imprimir_arbol(0, 0);
+        if (GnombreArchivo != null) {
+            for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
+                if (archivoFalso.getListaCampo(i).isLprimaria() || archivoFalso.getListaCampo(i).isLPotprimaria()) {
+                    try {
+                        escribirArbol(GnombreArchivo, arbolitos.get(i));
+                    } catch (Exception ex) {
+                        Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
             }
-        } catch (IOException ex) {
-            Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                writeAvailList();
+            } catch (IOException ex) {
+                Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            getArbolPrimario().imprimir_arbol(0, 0);
         }
+
         System.exit(0);
     }//GEN-LAST:event_boton_SalirMouseClicked
 
@@ -1922,14 +1931,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
-                    try {
-                        arbolPrimario = arbolPrimario.cargarArchivo(GnombreArchivo);
-                    } catch (Exception e) {
-                        arbolPrimario = new ArbolB(6);
+                    for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
+                        if (archivoFalso.getListaCampo(i).isLprimaria() || archivoFalso.getListaCampo(i).isLPotprimaria()) {
+                            try {
+                                arbolitos.set(i, arbolitos.get(i).cargarArbol(GnombreArchivo + archivoFalso.getListaCampo(i).getNombre()));
+                            } catch (Exception e) {
+                                arbolitos.set(i, new ArbolB(6));
+                            }
+                            if (arbolitos.get(i).equals(null)) {
+                                arbolitos.set(i, new ArbolB(6));
+                            }
+                        }
                     }
-                    if (arbolPrimario == null) {
-                        arbolPrimario = new ArbolB(6);
-                    }
+
                 } else {
                     JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo con terminación [.jjdp]");
                 }
@@ -1963,6 +1977,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         String guardar = "";
         // int length=0;
         boolean omitidos = false;
+        if (arbolitos.equals(null)) {
+            arbolitos = new ArrayList<ArbolB>(archivoFalso.getListaCampos().size());
+            for (int i = 0; i < arbolitos.size(); i++) {
+                arbolitos.set(i, null);
+            }
+            arbolitos.set(getPosKey(), new ArbolB(6));
+        }
         for (int i = 0; i < model.getRowCount(); i++) {
             guardar = "";
             for (int j = 0; j < model.getColumnCount(); j++) {
@@ -1976,12 +1997,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 int num = archivoFalso.getListaCampo(pk).getLongitud() - llave.length();
                 llave = espacios.substring(0, num) + llave;
             }
-            if (arbolPrimario.B_Tree_Search(0, llave) != null) {
+            if (getArbolPrimario().B_Tree_Search(0, llave) != null) {
                 omitidos = true;
             } else {
                 registross.add(guardar);
                 guardarRegistro(guardar);
-                arbolPrimario.insert(llave, getRrn());
+                getArbolPrimario().insert(llave, getRrn());
             }
         }
         String message;
@@ -2111,7 +2132,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         upper = 10;
         sortedRRN = new ArrayList<Long>();
         
-        arbolPrimario.traverseKeysInOrder(arbolPrimario.getRaiz(), sortedRRN);
+        getArbolPrimario().traverseKeysInOrder(getArbolPrimario().getRaiz(), sortedRRN);
         
         llenarTablaListar();
         
@@ -2146,7 +2167,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 int num = archivoFalso.getListaCampo(pk).getLongitud() - llave.length();
                 llave = espacios.substring(0, num) + llave;
             }
-            NodoIndice nodoInd = arbolPrimario.B_Tree_Search(0, llave);
+            NodoIndice nodoInd = getArbolPrimario().B_Tree_Search(0, llave);
             if (nodoInd == null) {
                 JOptionPane.showMessageDialog(null, "No se encontro ningun registro con ese valor");
                 modificar_textfield.setText("");
@@ -2183,14 +2204,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     int num = archivoFalso.getListaCampo(pk).getLongitud() - llave.length();
                     llave = espacios.substring(0, num) + llave;
                 }
-                arbolPrimario.Remove(llave);
+                getArbolPrimario().Remove(llave);
                 
                 llave = model.getValueAt(0, getPosKey()).toString();
                 if (archivoFalso.getListaCampo(pk).getTipo().equals("int")) {
                     int num = archivoFalso.getListaCampo(pk).getLongitud() - llave.length();
                     llave = espacios.substring(0, num) + llave;
                 }
-                arbolPrimario.insert(llave, rrnModi);
+                getArbolPrimario().insert(llave, rrnModi);
                 String guardar = "";
                 // int length=0;
 
@@ -2230,7 +2251,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 int num = archivoFalso.getListaCampo(pk).getLongitud() - llave.length();
                 llave = espacios.substring(0, num) + llave;
             }
-            NodoIndice nodoInd = arbolPrimario.B_Tree_Search(0, llave);
+            NodoIndice nodoInd = getArbolPrimario().B_Tree_Search(0, llave);
             if (nodoInd == null) {
                 JOptionPane.showMessageDialog(null, "No se encontro ningun registro con ese valor");
                 Eliminar_textfield.setText("");
@@ -2283,7 +2304,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         int num = archivoFalso.getListaCampo(pk).getLongitud() - llave.length();
                         llave = espacios.substring(0, num) + llave;
                     }
-                    arbolPrimario.Remove(llave);
+                    getArbolPrimario().Remove(llave);
                     rewrite(new String(data2), rrnEli);
                 } catch (IOException ex) {
                     Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -2790,8 +2811,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private Archivo archivoFalso = new Archivo();//solo es prueba
     private String GnombreArchivo;
-    private ArrayList<ArbolB> arbolitos;
-    private ArbolB arbolPrimario = arbolitos.get(getPosKey());
+    private ArrayList<ArbolB> arbolitos = null;
     private int rrnModi = 0;
     private int rrnEli = 0;
     private String espacios = new String(new char[1024]).replace('\0', ' ');
@@ -2850,23 +2870,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         return x;
     }
 
-    public void escribirArchivo(String nombre) {
+    public void escribirArbol(String nombre, ArbolB arbolito) {
         FileOutputStream fw = null;
         ObjectOutputStream bw = null;
-        try {
+                try {
             fw = new FileOutputStream(nombre + "keyTree");
-            bw = new ObjectOutputStream(fw);
-            bw.writeObject(arbolPrimario);
-            bw.flush();
-        } catch (Exception ex) {
-        } finally {
-            try {
-                bw.close();
-                fw.close();
-            } catch (Exception ex) {
+                    bw = new ObjectOutputStream(fw);
+            bw.writeObject(arbolito);
+                    bw.flush();
+                } catch (Exception ex) {
+                } finally {
+                    try {
+                        bw.close();
+                        fw.close();
+                    } catch (Exception ex) {
+                    }
+                }
             }
-        }
-    }
 
     private void writeAvailList() throws FileNotFoundException, IOException {
         File file = new File(GnombreArchivo);
@@ -3013,5 +3033,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+    
+    public ArbolB getArbolPrimario() {
+        return arbolitos.get(getPosKey());
     }
 }
