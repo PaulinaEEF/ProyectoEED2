@@ -1326,12 +1326,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel45.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel45.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         jLabel45.setText("Cruzar archivos");
         cruzarArchivo.getContentPane().add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 210, -1));
 
         cruzarArchivo.getContentPane().add(combo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 140, -1));
 
+
         cruzarArchivo.getContentPane().add(combo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 60, 150, -1));
+
 
         btn_seleccionar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_seleccionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/folderr.png"))); // NOI18N
@@ -1345,6 +1348,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btn_seleccionarMouseClicked(evt);
             }
         });
+
         cruzarArchivo.getContentPane().add(btn_seleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 230, 90));
 
         btn_regresarCruzar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -1357,6 +1361,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btn_regresarCruzarMouseClicked(evt);
             }
         });
+
         cruzarArchivo.getContentPane().add(btn_regresarCruzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 330, 150, 80));
 
         btn_crossArchive.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -1384,6 +1389,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fcruzar.jpg"))); // NOI18N
         cruzarArchivo.getContentPane().add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 480));
+
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -2896,6 +2902,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
        Registros.setVisible(true);
     }//GEN-LAST:event_btn_regresarCruzarMouseClicked
 
+
     /**
      * @param args the command line arguments
      */
@@ -3074,6 +3081,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
@@ -3141,8 +3149,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     //</editor-fold>
 
     private Archivo archivoFalso = new Archivo();//solo es prueba
+    private Archivo archivoFalso2 = new Archivo();
     private String GnombreArchivo;
+    private String GnombreArchivo2;
     private ArrayList<ArbolB> arbolitos = null;
+    private ArrayList<ArbolB> arbolitos2 = null;
+    private ArrayList<Integer> camposListar;
+    private ArrayList<Integer> camposListar2;
+    private int campoCruce;
+    private int campoCruce2;
     ArrayList<Long> rrnsEli;
     private int rrnModi = 0;
     private int rrnEli = 0;
