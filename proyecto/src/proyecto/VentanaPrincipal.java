@@ -1,4 +1,3 @@
-
 package proyecto;
 
 import java.io.BufferedInputStream;
@@ -65,6 +64,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      * Creates new form VentanaPrincipal
      */
     JFileChooser escogerArchivo = new JFileChooser();
+    JFileChooser escogerArchivo2 = new JFileChooser();
     File archivoo;
 
     public VentanaPrincipal() {
@@ -113,6 +113,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btn_borrarRegistro = new javax.swing.JButton();
         btn_listar = new javax.swing.JButton();
         btn_buscar = new javax.swing.JButton();
+        btn_cruzarArchivo = new javax.swing.JButton();
         fondo_registros = new javax.swing.JLabel();
         Indiices = new javax.swing.JDialog();
         jLabel26 = new javax.swing.JLabel();
@@ -235,7 +236,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btn_anteriores = new javax.swing.JButton();
         jLabel41 = new javax.swing.JLabel();
         jLabel43 = new javax.swing.JLabel();
-        jDialog1 = new javax.swing.JDialog();
+        cruzarArchivo = new javax.swing.JDialog();
+        jLabel45 = new javax.swing.JLabel();
+        combo1 = new javax.swing.JComboBox<>();
+        combo2 = new javax.swing.JComboBox<>();
+        btn_seleccionar = new javax.swing.JButton();
+        btn_regresarCruzar = new javax.swing.JButton();
+        fondo_cruzar = new javax.swing.JLabel();
         Boton_Archivos = new javax.swing.JButton();
         boton_Indices = new javax.swing.JButton();
         Boton_Campos = new javax.swing.JButton();
@@ -449,7 +456,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btn_rreturnMouseClicked(evt);
             }
         });
-        Registros.getContentPane().add(btn_rreturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 310, 170, 70));
+        Registros.getContentPane().add(btn_rreturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 350, 170, 70));
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -525,6 +532,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         Registros.getContentPane().add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 310, 210, 60));
+
+        btn_cruzarArchivo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_cruzarArchivo.setText("Cruzar Archivo");
+        btn_cruzarArchivo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_cruzarArchivoMouseClicked(evt);
+            }
+        });
+        Registros.getContentPane().add(btn_cruzarArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(631, 300, 130, 30));
 
         fondo_registros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/r1.gif"))); // NOI18N
         Registros.getContentPane().add(fondo_registros, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 0, 800, 440));
@@ -1275,6 +1291,36 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel43.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/checklist.gif"))); // NOI18N
         listar_registros.getContentPane().add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 590));
 
+        cruzarArchivo.setUndecorated(true);
+        cruzarArchivo.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel45.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel45.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel45.setText("Cruzar archivo");
+        cruzarArchivo.getContentPane().add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 100, -1));
+
+        cruzarArchivo.getContentPane().add(combo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 60, 100, -1));
+
+        cruzarArchivo.getContentPane().add(combo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 90, -1));
+
+        btn_seleccionar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_seleccionar.setText("Seleccionar archivo");
+        btn_seleccionar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_seleccionarMouseClicked(evt);
+            }
+        });
+        cruzarArchivo.getContentPane().add(btn_seleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 150, 50));
+
+        btn_regresarCruzar.setText("Regresar");
+        btn_regresarCruzar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_regresarCruzarMouseClicked(evt);
+            }
+        });
+        cruzarArchivo.getContentPane().add(btn_regresarCruzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 130, 50));
+        cruzarArchivo.getContentPane().add(fondo_cruzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 400));
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1862,7 +1908,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 } else {
                     try {
                         Archivo10000(true);
-                        
+
                         Registros.pack();
                         Registros.setModal(true);
                         Registros.setLocationRelativeTo(null);
@@ -2157,14 +2203,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         eliminar_registro.setLocationRelativeTo(null);
         for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
             if (archivoFalso.getListaCampo(i).isLprimaria()) {
-                
+
                 cb_camposLlave.addItem(new ComboItem(archivoFalso.getListaCampo(i).getNombre(), i));
                 break;
             }
         }
         for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
             if (archivoFalso.getListaCampo(i).isLPotprimaria()) {
-                
+
                 cb_camposLlave.addItem(new ComboItem(archivoFalso.getListaCampo(i).getNombre(), i));
                 break;
             }
@@ -2184,9 +2230,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         upper = 10;
         sortedRRN = new ArrayList<Long>();
 
-        
         getArbolPrimario().traverseKeysInOrder(getArbolPrimario().getRaiz(), sortedRRN);
-        
 
         llenarTablaListar();
 
@@ -2263,7 +2307,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 }
 
                 getArbolPrimario().Remove(llave);
-                
 
                 llave = model.getValueAt(0, getPosKey()).toString();
                 if (archivoFalso.getListaCampo(pk).getTipo().equals("int")) {
@@ -2302,7 +2345,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             return;
         }
         Object Item = cb_camposLlave.getSelectedItem();
-        int pos = ((ComboItem)Item).getPos();
+        int pos = ((ComboItem) Item).getPos();
         DefaultTableModel model = (DefaultTableModel) tabla_eliminar.getModel();
         if (true || cb_camposLlave.getSelectedIndex() == 0) {
             int pk = pos;
@@ -2313,7 +2356,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
             rrnsEli = new ArrayList<Long>();
             arbolitos.get(pos).searchByAffinity(arbolitos.get(pos).getRaiz(), llave, rrnsEli);
-            
+
             //NodoIndice nodoInd = getArbolPrimario().B_Tree_Search(getArbolPrimario().getRaiz(), llave);
             if (rrnsEli.size() == 0) {
                 JOptionPane.showMessageDialog(null, "No se encontro ningun registro con ese valor");
@@ -2339,7 +2382,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            
+
         }
     }//GEN-LAST:event_Eliminar_BuscarMouseClicked
 
@@ -2380,7 +2423,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     }
                 }
             }
-           
+
             Eliminar_textfield.setEditable(true);
             cb_camposLlave.setEnabled(true);
             Eliminar_Buscar.setEnabled(true);
@@ -2656,16 +2699,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
-        
+
         ArrayList<Integer> llaves = new ArrayList<>();
-        
+
         arbolitos = new ArrayList<ArbolB>();
-        
+
         for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
             if (archivoFalso.getListaCampo(i).isLprimaria() || archivoFalso.getListaCampo(i).isLPotprimaria()) {
                 arbolitos.add(new ArbolB(6));
                 llaves.add(i);
-            }else {
+            } else {
                 arbolitos.add(null);
             }
         }
@@ -2673,32 +2716,121 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         numReg = (int) ((new File(GnombreArchivo).length() - archivoFalso.getSizeMetadata()) / recordSize());
 
-
-        for (int rrn = 1; rrn <= numReg ; rrn++) {
+        for (int rrn = 1; rrn <= numReg; rrn++) {
             try {
                 String data = readRecord(Math.toIntExact(rrn));
                 System.out.println(data);
 
                 String arr[] = data.split("\\|");
-                
-                if(!(arr[0].length() == 0 && arr[1].length() >= 1 && arr[1].charAt(0) == '*')) {
+
+                if (!(arr[0].length() == 0 && arr[1].length() >= 1 && arr[1].charAt(0) == '*')) {
                     for (int ik : llaves) {
                         String llave = arr[ik];
-                        if(archivoFalso.getListaCampo(ik).getTipo().equals("int")) {
+                        if (archivoFalso.getListaCampo(ik).getTipo().equals("int")) {
                             int num = archivoFalso.getListaCampo(ik).getLongitud() - llave.length();
-                            llave = espacios.substring(0,num) + llave;
+                            llave = espacios.substring(0, num) + llave;
                         }
                         arbolitos.get(ik).insert(llave, rrn);
                     }
                 }
-                
+
             } catch (IOException ex) {
                 Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         JOptionPane.showMessageDialog(null, "Indices creados con éxito!");
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void btn_seleccionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_seleccionarMouseClicked
+        Archivo archi = new Archivo();
+
+        escogerArchivo.setFileView(new FileView() {
+
+            File dirToLock = new File(".");
+
+            @Override
+            public Boolean isTraversable(File f) {
+                return dirToLock.equals(f);
+            }
+        });
+
+        escogerArchivo.setSelectedFile(new File(""));
+        if (escogerArchivo.showDialog(null, "Abrir archivo") == JFileChooser.APPROVE_OPTION) {
+            archivoo = escogerArchivo.getSelectedFile();
+            if (archivoo.canRead()) {
+                if (archivoo.getName().endsWith(".jjdp")) {
+                    GnombreArchivo = archivoo.getName();
+                    JOptionPane.showMessageDialog(null, "El archivo ha sido abierto exitosamente");
+                    try {
+                        // create a reader
+                        FileInputStream fis = new FileInputStream(archivoo);
+                        BufferedInputStream reader = new BufferedInputStream(fis);
+
+//                        // read one byte at a time
+                        String metadata = "";
+//                        int ch;
+//                        while ((ch = reader.read()) != -1) {
+//                            metadata += (char) ch;
+//                        }
+//                        reader.close();
+//                        // close the reader
+                        BufferedReader r = new BufferedReader(
+                                new InputStreamReader(reader, StandardCharsets.UTF_8));
+                        metadata = r.readLine();
+                        String[] arMetadata = metadata.split("\\|");
+                        archivoFalso = new Archivo(GnombreArchivo);
+                        for (int i = 1; i < arMetadata.length - 1; i++) {
+                            String[] arMetadata2 = arMetadata[i].split("\\:");
+                            String nombre = arMetadata2[0];
+                            String tipo = arMetadata2[1];
+                            int numBytes = (Integer.parseInt(arMetadata2[2]));
+                            boolean key, keyPot;
+                            key = arMetadata2[3].equals("true");
+                            keyPot = arMetadata2[4].equals("true");
+                            archivoFalso.setListaCampo(new Campo(nombre, tipo, numBytes, key, keyPot));
+                        }
+                        System.out.println(arMetadata[arMetadata.length - 1]);
+                        loadAvailList(arMetadata[arMetadata.length - 1]);
+
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    arbolitos = new ArrayList<ArbolB>();
+                    for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
+                        arbolitos.add(null);
+                        if (archivoFalso.getListaCampo(i).isLprimaria() || archivoFalso.getListaCampo(i).isLPotprimaria()) {
+                            try {
+                                arbolitos.set(i, new ArbolB(6));
+                                arbolitos.set(i, arbolitos.get(i).cargarArbol(GnombreArchivo + archivoFalso.getListaCampo(i).getNombre()));
+                            } catch (Exception e) {
+                                arbolitos.set(i, new ArbolB(6));
+                            }
+                            if (arbolitos.get(i) == null) {
+                                arbolitos.set(i, new ArbolB(6));
+                            }
+                        }
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo con terminación [.jjdp]");
+                }
+            }
+        }
+    }//GEN-LAST:event_btn_seleccionarMouseClicked
+
+    private void btn_cruzarArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cruzarArchivoMouseClicked
+        Registros.setVisible(false);
+        cruzarArchivo.pack();
+        cruzarArchivo.setModal(true);
+        cruzarArchivo.setLocationRelativeTo(null);
+        cruzarArchivo.setVisible(true);
+    }//GEN-LAST:event_btn_cruzarArchivoMouseClicked
+
+    private void btn_regresarCruzarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_regresarCruzarMouseClicked
+       cruzarArchivo.setVisible(false);
+       Registros.setVisible(true);
+    }//GEN-LAST:event_btn_regresarCruzarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -2733,7 +2865,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        /*
+ /*
         ArbolB ab = new ArbolB(6);
         String letras = "aaaaabbbbbbccccccccccccccc";
 
@@ -2823,6 +2955,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btn_buscar;
     private javax.swing.JButton btn_cerrararchivo;
     private javax.swing.JButton btn_confirmar;
+    private javax.swing.JButton btn_cruzarArchivo;
     private javax.swing.JButton btn_delete1;
     private javax.swing.JButton btn_excel;
     private javax.swing.JButton btn_insertar;
@@ -2838,12 +2971,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btn_regresar4;
     private javax.swing.JButton btn_regresar5;
     private javax.swing.JButton btn_regresar6;
+    private javax.swing.JButton btn_regresarCruzar;
     private javax.swing.JButton btn_return;
     private javax.swing.JButton btn_return4;
     private javax.swing.JButton btn_returnnn;
     private javax.swing.JButton btn_rreturn;
     private javax.swing.JButton btn_salir1;
     private javax.swing.JButton btn_salvar;
+    private javax.swing.JButton btn_seleccionar;
     private javax.swing.JButton btn_siguientes;
     private javax.swing.JButton btn_xml;
     private javax.swing.JDialog buscar_registros;
@@ -2852,13 +2987,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<ComboItem> cb_camposLlave;
     private javax.swing.JComboBox<Campo> cb_listaCampos;
     private javax.swing.JComboBox<String> cb_listarArchivos;
+    private javax.swing.JComboBox<String> combo1;
+    private javax.swing.JComboBox<String> combo2;
     private javax.swing.JComboBox<String> comboTipos;
     private javax.swing.JDialog crearCampos;
+    private javax.swing.JDialog cruzarArchivo;
     private javax.swing.JDialog eliminar_registro;
     private javax.swing.JLabel ffondo_buscar;
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel fondo2;
     private javax.swing.JLabel fondo_Modificar;
+    private javax.swing.JLabel fondo_cruzar;
     private javax.swing.JLabel fondo_delete;
     private javax.swing.JLabel fondo_expor;
     private javax.swing.JLabel fondo_indice;
@@ -2870,7 +3009,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2909,6 +3047,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -2932,7 +3071,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private Archivo archivoFalso = new Archivo();//solo es prueba
     private String GnombreArchivo;
     private ArrayList<ArbolB> arbolitos = null;
-    ArrayList <Long> rrnsEli;
+    ArrayList<Long> rrnsEli;
     private int rrnModi = 0;
     private int rrnEli = 0;
     private String espacios = new String(new char[1024]).replace('\0', ' ');
@@ -2994,20 +3133,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public void escribirArbol(String nombre, ArbolB arbolito) {
         FileOutputStream fw = null;
         ObjectOutputStream bw = null;
-                try {
+        try {
             fw = new FileOutputStream(nombre + "keyTree");
-                    bw = new ObjectOutputStream(fw);
+            bw = new ObjectOutputStream(fw);
             bw.writeObject(arbolito);
-                    bw.flush();
-                } catch (Exception ex) {
-                } finally {
-                    try {
-                        bw.close();
-                        fw.close();
-                    } catch (Exception ex) {
-                    }
-                }
+            bw.flush();
+        } catch (Exception ex) {
+        } finally {
+            try {
+                bw.close();
+                fw.close();
+            } catch (Exception ex) {
             }
+        }
+    }
 
     public void escribirArchivo(String nombre, ArbolB tree) {
         FileOutputStream fw = null;
@@ -3173,14 +3312,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         }
     }
-    
+
     public ArbolB getArbolPrimario() {
         return arbolitos.get(getPosKey());
     }
 
-
     public void Archivo10000(boolean generar) throws IOException {
-         String metadata = ("RegistrosPrueba.jjdp|PersonId:int:6:true:false|PersonName:char:20:false:false|PersonAge:int:3:false:false|CityId:int:2:false:true|-1...\n");;
+        String metadata = ("RegistrosPrueba.jjdp|PersonId:int:6:true:false|PersonName:char:20:false:false|PersonAge:int:3:false:false|CityId:int:2:false:true|-1...\n");;
         if (generar) {
             ArrayList<String> Nombres = new ArrayList();
             Nombres.add("Jose");
@@ -3247,7 +3385,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 //        f.writeBytes("RegistrosPrueba.jjdp|PersonId:int:6:true:false|PersonName:char:20:false:false|PersonAge:int:3:false:false|CityId:int:2:false:true|-1...;");
 //        f.seek(400);
             FileOutputStream fs = new FileOutputStream(new File("RegistrosPrueba.jjdp"));
-           
+
             fs.write("RegistrosPrueba.jjdp|PersonId:int:6:true:false|PersonName:char:20:false:false|PersonAge:int:3:false:false|CityId:int:2:false:true|-1...\n".getBytes());
             Random r = new Random();
             long rrn = 1;
@@ -3293,7 +3431,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
         System.out.println(arMetadata[arMetadata.length - 1]);
         loadAvailList(arMetadata[arMetadata.length - 1]);
-        
+
         arbolitos.add(0, new ArbolB(1).cargarArbol("RegistrosPrueba.jjdp"));
     }
 
@@ -3305,4 +3443,3 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         return cadena;
     }
 }
-
