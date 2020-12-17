@@ -1997,7 +1997,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 int num = archivoFalso.getListaCampo(pk).getLongitud() - llave.length();
                 llave = espacios.substring(0, num) + llave;
             }
-            if (getArbolPrimario().B_Tree_Search(0, llave) != null) {
+            if (getArbolPrimario().B_Tree_Search(getArbolPrimario().getRaiz(), llave) != null) {
                 omitidos = true;
             } else {
                 registross.add(guardar);
@@ -2167,7 +2167,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 int num = archivoFalso.getListaCampo(pk).getLongitud() - llave.length();
                 llave = espacios.substring(0, num) + llave;
             }
-            NodoIndice nodoInd = getArbolPrimario().B_Tree_Search(0, llave);
+            NodoIndice nodoInd = getArbolPrimario().B_Tree_Search(getArbolPrimario().getRaiz(), llave);
             if (nodoInd == null) {
                 JOptionPane.showMessageDialog(null, "No se encontro ningun registro con ese valor");
                 modificar_textfield.setText("");
@@ -2251,7 +2251,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 int num = archivoFalso.getListaCampo(pk).getLongitud() - llave.length();
                 llave = espacios.substring(0, num) + llave;
             }
-            NodoIndice nodoInd = getArbolPrimario().B_Tree_Search(0, llave);
+            NodoIndice nodoInd = getArbolPrimario().B_Tree_Search(getArbolPrimario().getRaiz(), llave);
             if (nodoInd == null) {
                 JOptionPane.showMessageDialog(null, "No se encontro ningun registro con ese valor");
                 Eliminar_textfield.setText("");
@@ -2616,15 +2616,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        /*ArbolB ab = new ArbolB(4);
-        String letras = "abcdefghijklmnopqrstuvwxyz";
+        ArbolB ab = new ArbolB(6);
+        String letras = "aaaaabbbbbbccccccccccccccc";
         StringBuilder letras1 = new StringBuilder();
         letras1.append(letras);
-        letras = letras1.reverse().toString();
+        //letras = letras1.reverse().toString();
 
         for (int j = 0; j < 26; j++) {
-            //ab.insert(letras.substring(j,j+1), j);
-            ab.insert(Integer.toString(j), j);
+            ab.insert(letras.substring(j,j+1), j);
+            //ab.insert(Integer.toString(j), j);
         }
 
         ab.imprimir_arbol(ab.getRaiz(), 0);
@@ -2636,10 +2636,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //ab.imprimir_arbol(ab.getRaiz(), 0);
         
         ArrayList<Long> lista = new ArrayList<>();
-        ab.traverseKeysInOrder(ab.getRaiz(), lista);
+        //ab.traverseKeysInOrder(ab.getRaiz(), lista);
+        ab.searchByAffinity(ab.getRaiz(), "b", lista);
         
         System.out.println(lista.toString());
-        */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {

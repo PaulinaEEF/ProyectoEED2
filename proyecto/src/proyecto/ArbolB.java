@@ -410,7 +410,29 @@ public class ArbolB implements  Serializable {
         }
     }
     
-    
+    public void searchByAffinity(int ix, String k, ArrayList<Long> rrns) {
+        
+        int i = 0;
+        Nodo x = nodos.get((int) ix);
+
+        while (i < x.getN() && k.compareTo(x.getLlaves().get(i).getLlave()) > 0) {
+            i++;
+        }
+        
+        boolean flag = false;
+        
+        while (i < x.getN() && k.compareTo(x.getLlaves().get(i).getLlave()) == 0) {
+            flag = true;
+            rrns.add(x.getLlaves().get(i).getPos());
+            if(!x.isLeaf()) {
+               searchByAffinity(x.getHijos().get(i), k, rrns); 
+            }
+            i++;
+        }
+        if (!x.isLeaf()) {
+            searchByAffinity(x.getHijos().get(i), k, rrns);
+        }
+    } 
     
     public ArbolB cargarArbol(String nombre) {
         File archivo = new File(nombre + "keyTree");
