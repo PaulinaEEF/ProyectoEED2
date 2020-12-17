@@ -1487,7 +1487,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             } catch (IOException ex) {
                 Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
-            getArbolPrimario().imprimir_arbol(0, 0);
+            getArbolPrimario().imprimir_arbol(getArbolPrimario().raiz, 0);
         }
 
         System.exit(0);
@@ -1864,7 +1864,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
             if (!archivoFalso.getListaCampos().isEmpty()) {
                 if (new File(GnombreArchivo).length() < archivoFalso.getSizeMetadata()) {
-                    JOptionPane.showMessageDialog(null, "Tiene cambios sin guardar en los campos. Favor guarde el archivo antes de ");
+                    JOptionPane.showMessageDialog(null, "Tiene cambios sin guardar en los campos. Favor guarde el archivo antes de");
                     return;
                 }
                 if (new File(GnombreArchivo).length() > 0) {
@@ -2164,6 +2164,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
             model.addColumn(archivoFalso.getListaCampos().get(i).getNombre());
         }
+        modificar_textfield.setText("");
+        modificar_textfield.setEditable(true);
+        btn_modif.setEnabled(false);
         Modificar_Registros.pack();
         Modificar_Registros.setModal(true);
         Modificar_Registros.setLocationRelativeTo(null);
@@ -3318,7 +3321,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     public void Archivo10000(boolean generar) throws IOException {
-        String metadata = ("RegistrosPrueba.jjdp|PersonId:int:6:true:false|PersonName:char:20:false:false|PersonAge:int:3:false:false|CityId:int:2:false:true|-1...\n");;
+        String metadata = ("RegistrosPrueba.jjdp|PersonId:int:6:true:false|PersonName:char:20:false:false|PersonAge:int:3:false:false|CityId:int:2:false:true|-1...\n");
         GnombreArchivo = "RegistrosPrueba.jjdp";
         String[] arMetadata = metadata.split("\\|");
         archivoFalso = new Archivo(GnombreArchivo);
@@ -3414,6 +3417,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             System.out.println(arbolPrueba.nodos.size());
             arbolitos.set(getPosKey(), arbolPrueba);
             arbolitos.set(3, arbolCity);
+            ciudades();//tambien genera el archivo de ciudades
         } else {
             for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
                 if (archivoFalso.getListaCampo(i).isLprimaria() || archivoFalso.getListaCampo(i).isLPotprimaria()) {
@@ -3455,5 +3459,130 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             cadena += " ";
         }
         return cadena;
+    }
+    
+    private void ciudades() throws FileNotFoundException, IOException {
+        ArrayList<String> ciudades = new ArrayList<>();
+        String metadata = ("CiudadesPrueba.jjdp|CityId:int:2:true:false|CityName:char:30:false:false|-1...\n");
+        ciudades.add("Fukuoka");
+        ciudades.add("El Paso");
+        ciudades.add("Seul");
+        ciudades.add("Wuhan");
+        ciudades.add("Kuala Lumpur");
+        ciudades.add("Berlin");
+        ciudades.add("Hong Kong");
+        ciudades.add("Bruselas");
+        ciudades.add("Birmingham");
+        ciudades.add("Sydney");
+        ciudades.add("Lille");
+        ciudades.add("Bogota");
+        ciudades.add("Filadelfia");
+        ciudades.add("Copenhague");
+        ciudades.add("Bombay");
+        ciudades.add("San Petesburgo");
+        ciudades.add("Columbus");
+        ciudades.add("Nagoya");
+        ciudades.add("Kuwait");
+        ciudades.add("Orlando");
+        ciudades.add("Madrid");
+        ciudades.add("Kiev");
+        ciudades.add("Nashville");
+        ciudades.add("Qingdao");
+        ciudades.add("Amsterdam");
+        ciudades.add("Glasgow");
+        ciudades.add("Baltimore");
+        ciudades.add("Sao Paulo");
+        ciudades.add("Cincinatti");
+        ciudades.add("Riad");
+        ciudades.add("Lima");
+        ciudades.add("Milan");
+        ciudades.add("Miami");
+        ciudades.add("Nueva Orleans");
+        ciudades.add("Buenos Aires");
+        ciudades.add("Budapest");
+        ciudades.add("Melbourne");
+        ciudades.add("Singapur");
+        ciudades.add("Atlanta");
+        ciudades.add("Estocolmo");
+        ciudades.add("Phoenix");
+        ciudades.add("San Francisco");
+        ciudades.add("Ciudad de Mexico");
+        ciudades.add("Busan");
+        ciudades.add("Dalian");
+        ciudades.add("Seattle");
+        ciudades.add("Tel Aviv");
+        ciudades.add("Moscu");
+        ciudades.add("Barcelona");
+        ciudades.add("Portland");
+        ciudades.add("El Cairo");
+        ciudades.add("Roma");
+        ciudades.add("Brasilia");
+        ciudades.add("Toronto");
+        ciudades.add("Boston");
+        ciudades.add("Estambul");
+        ciudades.add("Frackfurt");
+        ciudades.add("Denver");
+        ciudades.add("Washington D.C.");
+        ciudades.add("Nanking");
+        ciudades.add("Shanghai");
+        ciudades.add("San Diego");
+        ciudades.add("Rio de Janeiro");
+        ciudades.add("Atenas");
+        ciudades.add("Nueva York");
+        ciudades.add("Tegucigalpa");
+        ciudades.add("Las Vegas");
+        ciudades.add("Yakarta");
+        ciudades.add("Monterrey");
+        ciudades.add("Hangzhou");
+        ciudades.add("Londres");
+        ciudades.add("Taipei");
+        ciudades.add("Bangkok");
+        ciudades.add("Manila");
+        ciudades.add("San Luis");
+        ciudades.add("Montreal");
+        ciudades.add("Chicago");
+        ciudades.add("Paris");
+        ciudades.add("Milwaukke");
+        ciudades.add("Viena");
+        ciudades.add("Houston");
+        ciudades.add("Tokio");
+        ciudades.add("Abu Dabi");
+        ciudades.add("Lyon");
+        ciudades.add("Dublin");
+        ciudades.add("Tianjin");
+        ciudades.add("Chongqing");
+        ciudades.add("Dallas");
+        ciudades.add("Lisboa");
+        ciudades.add("Varsovia");
+        ciudades.add("Abiyan");
+        ciudades.add("Sacramento");
+        ciudades.add("Praga");
+        ciudades.add("Lagos");
+        ciudades.add("Kansas City");
+        ciudades.add("Los Angeles");
+        ciudades.add("Delhi");
+        ciudades.add("Detroit");
+        ciudades.add("Colonia");
+        ciudades.add("Pekin");
+        Collections.shuffle(ciudades);
+        File archivo = new File("CiudadesPrueba.jjdp");
+        try {
+            archivo.createNewFile();
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        FileOutputStream fs = new FileOutputStream(archivo);
+        String registro, llave;
+        ArbolB arbolCiudades = new ArbolB(6);
+        fs.write(metadata.getBytes());
+        for (int i = 1; i <= 99; i++) {
+            registro = String.valueOf(i) + "|" + ciudades.get(i - 1) + "|";
+            registro += fill(registro.length() - 2, 32) + "\n";
+            llave = String.valueOf(i);
+            llave = espacios.substring(0, 2 - llave.length()) + llave;
+            arbolCiudades.insert(llave, i);
+            fs.write(registro.getBytes());
+        }
+        escribirArbol("CiudadesPrueba.jjdp" + "CityId", arbolCiudades);
     }
 }
