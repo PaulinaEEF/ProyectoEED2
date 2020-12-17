@@ -3223,7 +3223,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         System.out.println(arMetadata[arMetadata.length - 1]);
         loadAvailList(arMetadata[arMetadata.length - 1]);
         
-        arbolDeIndexacion = arbolDeIndexacion.cargarArchivo("RegistrosPrueba.jjdp");
+        arbolitos.set(getPosKey(), getArbolPrimario().cargarArbol("RegistrosPrueba.jjdp"));
     }
 
     public String fill(int n, int n2) {
