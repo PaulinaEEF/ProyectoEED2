@@ -227,6 +227,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jLabel40 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
         listar_registros = new javax.swing.JDialog();
         jLabel42 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -242,7 +243,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         combo2 = new javax.swing.JComboBox<>();
         btn_seleccionar = new javax.swing.JButton();
         btn_regresarCruzar = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        ListaCampos_Archivo1 = new javax.swing.JList<>();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        ListaCampos_Archivo2 = new javax.swing.JList<>();
         fondo_cruzar = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
         Boton_Archivos = new javax.swing.JButton();
         boton_Indices = new javax.swing.JButton();
         Boton_Campos = new javax.swing.JButton();
@@ -475,7 +483,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btn_registrarMouseClicked(evt);
             }
         });
-        Registros.getContentPane().add(btn_registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 80, 240, 70));
+        Registros.getContentPane().add(btn_registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(-50, 80, 240, 70));
 
         btn_modifica_registro.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_modifica_registro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/lapiz.png"))); // NOI18N
@@ -503,7 +511,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btn_borrarRegistroMouseClicked(evt);
             }
         });
-        Registros.getContentPane().add(btn_borrarRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 190, 210, 60));
+        Registros.getContentPane().add(btn_borrarRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 190, 220, 60));
 
         btn_listar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_listar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/lista-de-la-compra.png"))); // NOI18N
@@ -534,13 +542,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Registros.getContentPane().add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 310, 210, 60));
 
         btn_cruzarArchivo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btn_cruzarArchivo.setText("Cruzar Archivo");
+        btn_cruzarArchivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/decline.png"))); // NOI18N
+        btn_cruzarArchivo.setText("Cruzar archivo");
+        btn_cruzarArchivo.setContentAreaFilled(false);
+        btn_cruzarArchivo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btn_cruzarArchivo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_cruzarArchivo.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/decline (1).png"))); // NOI18N
         btn_cruzarArchivo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_cruzarArchivoMouseClicked(evt);
             }
         });
-        Registros.getContentPane().add(btn_cruzarArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(631, 300, 130, 30));
+        Registros.getContentPane().add(btn_cruzarArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 300, 190, 80));
 
         fondo_registros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/r1.gif"))); // NOI18N
         Registros.getContentPane().add(fondo_registros, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 0, 800, 440));
@@ -1070,24 +1083,30 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel35.setText("Por favor, seleccione el registro que desea editar");
         Modificar_Registros.getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 300, 20));
 
-        Modificar_Buscar.setText("jButton8");
+        Modificar_Buscar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Modificar_Buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/magnifying-glass.png"))); // NOI18N
+        Modificar_Buscar.setText("Buscar");
+        Modificar_Buscar.setContentAreaFilled(false);
+        Modificar_Buscar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Modificar_Buscar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        Modificar_Buscar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/magnifying-glass (1).png"))); // NOI18N
         Modificar_Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Modificar_BuscarMouseClicked(evt);
             }
         });
-        Modificar_Registros.getContentPane().add(Modificar_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 40, -1, -1));
+        Modificar_Registros.getContentPane().add(Modificar_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, 150, 60));
 
         modificar_textfield.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modificar_textfieldActionPerformed(evt);
             }
         });
-        Modificar_Registros.getContentPane().add(modificar_textfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 160, -1));
+        Modificar_Registros.getContentPane().add(modificar_textfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 160, -1));
 
-        Modificar_Label.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        Modificar_Label.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         Modificar_Label.setText("jLabel44");
-        Modificar_Registros.getContentPane().add(Modificar_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 120, -1));
+        Modificar_Registros.getContentPane().add(Modificar_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 120, -1));
 
         btn_modif.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_modif.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/document.png"))); // NOI18N
@@ -1189,13 +1208,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         eliminar_registro.getContentPane().add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 580, 170));
 
-        Eliminar_Buscar.setText("jButton8");
+        Eliminar_Buscar.setBackground(new java.awt.Color(255, 255, 255));
+        Eliminar_Buscar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        Eliminar_Buscar.setForeground(new java.awt.Color(255, 255, 255));
+        Eliminar_Buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/magnifying-glass.png"))); // NOI18N
+        Eliminar_Buscar.setText("Buscar");
+        Eliminar_Buscar.setContentAreaFilled(false);
+        Eliminar_Buscar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Eliminar_Buscar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        Eliminar_Buscar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/magnifying-glass (1).png"))); // NOI18N
         Eliminar_Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Eliminar_BuscarMouseClicked(evt);
             }
         });
-        eliminar_registro.getContentPane().add(Eliminar_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, -1, -1));
+        eliminar_registro.getContentPane().add(Eliminar_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, 150, 60));
 
         Eliminar_Borrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         Eliminar_Borrar.setForeground(new java.awt.Color(255, 255, 255));
@@ -1233,7 +1260,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         eliminar_registro.getContentPane().add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jLabel39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/delete.gif"))); // NOI18N
-        eliminar_registro.getContentPane().add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 460));
+        eliminar_registro.getContentPane().add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 530, 520));
+
+        jLabel44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/delete.gif"))); // NOI18N
+        eliminar_registro.getContentPane().add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 520));
 
         listar_registros.setUndecorated(true);
         listar_registros.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1294,32 +1324,66 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         cruzarArchivo.setUndecorated(true);
         cruzarArchivo.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel45.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel45.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel45.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel45.setText("Cruzar archivo");
-        cruzarArchivo.getContentPane().add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 100, -1));
+        jLabel45.setText("Cruzar archivos");
+        cruzarArchivo.getContentPane().add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 210, -1));
 
-        cruzarArchivo.getContentPane().add(combo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 60, 100, -1));
+        cruzarArchivo.getContentPane().add(combo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 140, -1));
 
-        cruzarArchivo.getContentPane().add(combo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 90, -1));
+        cruzarArchivo.getContentPane().add(combo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 60, 150, -1));
 
         btn_seleccionar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_seleccionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/folderr.png"))); // NOI18N
         btn_seleccionar.setText("Seleccionar archivo");
+        btn_seleccionar.setContentAreaFilled(false);
+        btn_seleccionar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btn_seleccionar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_seleccionar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/folderr (1).png"))); // NOI18N
         btn_seleccionar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_seleccionarMouseClicked(evt);
             }
         });
-        cruzarArchivo.getContentPane().add(btn_seleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 150, 50));
+        cruzarArchivo.getContentPane().add(btn_seleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 230, 90));
 
+        btn_regresarCruzar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_regresarCruzar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda.png"))); // NOI18N
         btn_regresarCruzar.setText("Regresar");
+        btn_regresarCruzar.setContentAreaFilled(false);
+        btn_regresarCruzar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda (1).png"))); // NOI18N
         btn_regresarCruzar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_regresarCruzarMouseClicked(evt);
             }
         });
-        cruzarArchivo.getContentPane().add(btn_regresarCruzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 130, 50));
-        cruzarArchivo.getContentPane().add(fondo_cruzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 400));
+        cruzarArchivo.getContentPane().add(btn_regresarCruzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 330, 150, 80));
+
+        jButton5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/key-with-cross-sign.png"))); // NOI18N
+        jButton5.setText("Cruzar archivo");
+        jButton5.setContentAreaFilled(false);
+        jButton5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jButton5.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/key-with-cross-sign (1).png"))); // NOI18N
+        cruzarArchivo.getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, 190, 80));
+
+        jScrollPane7.setViewportView(ListaCampos_Archivo1);
+
+        cruzarArchivo.getContentPane().add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 140, 220));
+
+        jScrollPane8.setViewportView(ListaCampos_Archivo2);
+
+        cruzarArchivo.getContentPane().add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 90, 150, 220));
+
+        fondo_cruzar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fcruzar.jpg"))); // NOI18N
+        cruzarArchivo.getContentPane().add(fondo_cruzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 940, 480));
+
+        jLabel46.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fcruzar.jpg"))); // NOI18N
+        cruzarArchivo.getContentPane().add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 0, 170, 480));
+
+        jLabel47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fcruzar.jpg"))); // NOI18N
+        cruzarArchivo.getContentPane().add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 480));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -2917,6 +2981,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel FModificar;
     private javax.swing.JLabel Fondo;
     private javax.swing.JDialog Indiices;
+    private javax.swing.JList<String> ListaCampos_Archivo1;
+    private javax.swing.JList<String> ListaCampos_Archivo2;
     private javax.swing.JList<Campo> Lista_borrar;
     private javax.swing.JList<Campo> Lista_campos;
     private javax.swing.JDialog Listar_Campos;
@@ -3007,6 +3073,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
@@ -3047,7 +3114,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -3059,6 +3129,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JDialog listar_registros;
     private javax.swing.JTextField modificar_textfield;
     private javax.swing.JTable tabla_eliminar;
