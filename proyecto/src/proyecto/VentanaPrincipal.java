@@ -242,6 +242,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         combo2 = new javax.swing.JComboBox<>();
         btn_seleccionar = new javax.swing.JButton();
         btn_regresarCruzar = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         fondo_cruzar = new javax.swing.JLabel();
         Boton_Archivos = new javax.swing.JButton();
         boton_Indices = new javax.swing.JButton();
@@ -1297,11 +1298,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel45.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel45.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel45.setText("Cruzar archivo");
-        cruzarArchivo.getContentPane().add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 100, -1));
+        cruzarArchivo.getContentPane().add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 100, -1));
 
         cruzarArchivo.getContentPane().add(combo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 60, 100, -1));
 
-        cruzarArchivo.getContentPane().add(combo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 90, -1));
+        cruzarArchivo.getContentPane().add(combo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 90, -1));
 
         btn_seleccionar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_seleccionar.setText("Seleccionar archivo");
@@ -1310,7 +1311,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btn_seleccionarMouseClicked(evt);
             }
         });
-        cruzarArchivo.getContentPane().add(btn_seleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 150, 50));
+        cruzarArchivo.getContentPane().add(btn_seleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 170, 50));
 
         btn_regresarCruzar.setText("Regresar");
         btn_regresarCruzar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1318,7 +1319,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btn_regresarCruzarMouseClicked(evt);
             }
         });
-        cruzarArchivo.getContentPane().add(btn_regresarCruzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 130, 50));
+        cruzarArchivo.getContentPane().add(btn_regresarCruzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 250, 130, 50));
+
+        jButton5.setText("Cruzar");
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
+        cruzarArchivo.getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, -1, -1));
         cruzarArchivo.getContentPane().add(fondo_cruzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 400));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -2832,6 +2841,50 @@ public class VentanaPrincipal extends javax.swing.JFrame {
        Registros.setVisible(true);
     }//GEN-LAST:event_btn_regresarCruzarMouseClicked
 
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        // TODO add your handling code here:
+        int ik = getPosKey();
+        campoCruce2 = 0;
+        ArrayList<Long> rrns1 = new ArrayList<>();
+        arbolitos.get(ik).traverseKeysInOrder(arbolitos.get(ik).getRaiz(), rrns1);
+        
+        for (long RRN : rrns1) {
+            try {
+                String data = readRecord(Math.toIntExact(RRN));
+                System.out.println(data);
+
+                String arr[] = data.split("\\|");
+                String llave = arr[campoCruce];
+                if(archivoFalso.getListaCampo(campoCruce).getTipo().equals("int")) {
+                    int num = archivoFalso.getListaCampo(campoCruce).getLongitud() - llave.length();
+                    llave = espacios.substring(0, num) + llave;
+                }
+                ArrayList<Long> rrns2 = new ArrayList<>();
+                arbolitos2.get(campoCruce2).searchByAffinity(arbolitos2.get(campoCruce2).getRaiz(), llave, rrns2);
+              
+                for (Long RRN2 : rrns2) {
+                    String data2 = readRecord(Math.toIntExact(RRN2));
+                    System.out.println(data);
+
+                    String arr2[] = data2.split("\\|");
+                    
+                    ArrayList<String> arr3 = new ArrayList<String>();
+                    
+                    for (int i : camposListar) {
+                        arr3.add(arr[i]);
+                    }
+                    for (int i : camposListar2) {
+                        arr3.add(arr2[i]);
+                    }
+                    
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+    }//GEN-LAST:event_jButton5MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -3007,6 +3060,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
@@ -3069,8 +3123,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     //</editor-fold>
 
     private Archivo archivoFalso = new Archivo();//solo es prueba
+    private Archivo archivoFalso2 = new Archivo();
     private String GnombreArchivo;
+    private String GnombreArchivo2;
     private ArrayList<ArbolB> arbolitos = null;
+    private ArrayList<ArbolB> arbolitos2 = null;
+    private ArrayList<Integer> camposListar;
+    private ArrayList<Integer> camposListar2;
+    private int campoCruce;
+    private int campoCruce2;
     ArrayList<Long> rrnsEli;
     private int rrnModi = 0;
     private int rrnEli = 0;
