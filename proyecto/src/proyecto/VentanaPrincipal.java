@@ -213,8 +213,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel37 = new javax.swing.JLabel();
         buscar_registros = new javax.swing.JDialog();
         jLabel38 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        buscar_Buscar = new javax.swing.JButton();
         btn_regresar6 = new javax.swing.JButton();
+        cb_camposLlave_buscar = new javax.swing.JComboBox<>();
+        buscar_textfield = new javax.swing.JTextField();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        tabla_buscar = new javax.swing.JTable();
         ffondo_buscar = new javax.swing.JLabel();
         eliminar_registro = new javax.swing.JDialog();
         cb_camposLlave = new javax.swing.JComboBox<>();
@@ -1120,14 +1124,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel38.setText("Busqueda de registros");
         buscar_registros.getContentPane().add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 210, 30));
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
-        jButton4.setText("Buscar");
-        jButton4.setContentAreaFilled(false);
-        jButton4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jButton4.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar (1).png"))); // NOI18N
-        buscar_registros.getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 150, 80));
+        buscar_Buscar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        buscar_Buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
+        buscar_Buscar.setText("Buscar");
+        buscar_Buscar.setContentAreaFilled(false);
+        buscar_Buscar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        buscar_Buscar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        buscar_Buscar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar (1).png"))); // NOI18N
+        buscar_Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buscar_BuscarMouseClicked(evt);
+            }
+        });
+        buscar_registros.getContentPane().add(buscar_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 40, 150, 80));
 
         btn_regresar6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_regresar6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda.png"))); // NOI18N
@@ -1141,10 +1150,34 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btn_regresar6MouseClicked(evt);
             }
         });
-        buscar_registros.getContentPane().add(btn_regresar6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 160, 100));
+        buscar_registros.getContentPane().add(btn_regresar6, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 300, 160, 100));
+
+        cb_camposLlave_buscar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cb_camposLlave_buscar.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_camposLlave_buscarItemStateChanged(evt);
+            }
+        });
+        buscar_registros.getContentPane().add(cb_camposLlave_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 140, -1));
+        buscar_registros.getContentPane().add(buscar_textfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 130, -1));
+
+        tabla_buscar.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane7.setViewportView(tabla_buscar);
+
+        buscar_registros.getContentPane().add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 580, 170));
 
         ffondo_buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/search.gif"))); // NOI18N
-        buscar_registros.getContentPane().add(ffondo_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 360));
+        buscar_registros.getContentPane().add(ffondo_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 490));
 
         eliminar_registro.setUndecorated(true);
         eliminar_registro.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -2127,6 +2160,27 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void btn_buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_buscarMouseClicked
         Registros.setVisible(false);
+        DefaultTableModel modelo = new DefaultTableModel();
+        tabla_buscar.setModel(new DefaultTableModel());
+        DefaultTableModel model = (DefaultTableModel) tabla_buscar.getModel();
+        for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
+            model.addColumn(archivoFalso.getListaCampos().get(i).getNombre());
+        }
+        
+        for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
+            if (archivoFalso.getListaCampo(i).isLprimaria()) {
+                
+                cb_camposLlave_buscar.addItem(new ComboItem(archivoFalso.getListaCampo(i).getNombre(), i));
+                break;
+            }
+        }
+        for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
+            if (archivoFalso.getListaCampo(i).isLPotprimaria()) {
+                
+                cb_camposLlave_buscar.addItem(new ComboItem(archivoFalso.getListaCampo(i).getNombre(), i));
+                break;
+            }
+        }
         buscar_registros.pack();
         buscar_registros.setModal(true);
         buscar_registros.setLocationRelativeTo(null);
@@ -2700,6 +2754,56 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Indices creados con éxito!");
     }//GEN-LAST:event_jButton2MouseClicked
 
+    private void cb_camposLlave_buscarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_camposLlave_buscarItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_camposLlave_buscarItemStateChanged
+
+    private void buscar_BuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscar_BuscarMouseClicked
+        // TODO add your handling code here:
+        if (buscar_textfield.getText().equals("") || cb_camposLlave_buscar.getSelectedItem() == null) {
+            return;
+        }
+        Object Item = cb_camposLlave_buscar.getSelectedItem();
+        int pos = ((ComboItem)Item).getPos();
+        DefaultTableModel model = (DefaultTableModel) tabla_buscar.getModel();
+        if (true || cb_camposLlave_buscar.getSelectedIndex() == 0) {
+            int pk = pos;
+            String llave = buscar_textfield.getText();
+            if (archivoFalso.getListaCampo(pk).getTipo().equals("int")) {
+                int num = archivoFalso.getListaCampo(pk).getLongitud() - llave.length();
+                llave = espacios.substring(0, num) + llave;
+            }
+            rrnsEli = new ArrayList<Long>();
+            arbolitos.get(pos).searchByAffinity(arbolitos.get(pos).getRaiz(), llave, rrnsEli);
+            
+            //NodoIndice nodoInd = getArbolPrimario().B_Tree_Search(getArbolPrimario().getRaiz(), llave);
+            if (rrnsEli.size() == 0) {
+                JOptionPane.showMessageDialog(null, "No se encontro ningun registro con ese valor");
+                buscar_textfield.setText("");
+                return;
+            }
+            //rrnEli = Math.toIntExact(nodoInd.getNodo().getLlaves().get(nodoInd.getIndice()).getPos());
+            for (long l : rrnsEli) {
+                rrnEli = Math.toIntExact(l);
+                try {
+                    String data = readRecord(Math.toIntExact(rrnEli));
+                    System.out.println(data);
+                    String arr[] = data.split("\\|");
+                    Object arr2[] = new Object[model.getColumnCount()];
+                    for (int i = 0; i < model.getColumnCount()-1; i++) {
+                        arr2[i] = arr[i];
+                    }
+                    model.addRow(arr2);
+                    /*buscar_textfield.setEditable(false);
+                    cb_camposLlave_buscar.setEnabled(false);*/
+                } catch (IOException ex) {
+                    Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+        }
+    }//GEN-LAST:event_buscar_BuscarMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -2846,10 +2950,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btn_salvar;
     private javax.swing.JButton btn_siguientes;
     private javax.swing.JButton btn_xml;
+    private javax.swing.JButton buscar_Buscar;
     private javax.swing.JDialog buscar_registros;
+    private javax.swing.JTextField buscar_textfield;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox<ComboItem> cb_camposLlave;
+    private javax.swing.JComboBox<ComboItem> cb_camposLlave_buscar;
     private javax.swing.JComboBox<Campo> cb_listaCampos;
     private javax.swing.JComboBox<String> cb_listarArchivos;
     private javax.swing.JComboBox<String> comboTipos;
@@ -2867,7 +2974,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JDialog jDialog1;
@@ -2920,8 +3026,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JDialog listar_registros;
     private javax.swing.JTextField modificar_textfield;
+    private javax.swing.JTable tabla_buscar;
     private javax.swing.JTable tabla_eliminar;
     private javax.swing.JTable tabla_listarRegistros;
     private javax.swing.JTable tabla_modificar;
