@@ -1783,7 +1783,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             //archivoFalso.setPrimaria(false);
             JOptionPane.showMessageDialog(null, "El archivo ha sido cerrado exitosamente");
         }
-
     }//GEN-LAST:event_btn_cerrararchivoMouseClicked
 
     private void RB_SiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RB_SiMouseClicked
@@ -1866,7 +1865,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     }
                 }
             }
-
         }
 
     }//GEN-LAST:event_boton_RegistrosMouseClicked
@@ -1970,14 +1968,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         ex.printStackTrace();
                     }
                     for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
-                        if (archivoFalso.getListaCampo(i).isLprimaria() || archivoFalso.getListaCampo(i).isLPotprimaria()) {
+                        if (archivoFalso.getListaCampo(i).isLprimaria()) {
                             try {
-                                arbolitos.set(i, arbolitos.get(i).cargarArbol(GnombreArchivo + archivoFalso.getListaCampo(i).getNombre()));
+                                arbolitos.add(0, arbolitos.get(i).cargarArbol(GnombreArchivo + archivoFalso.getListaCampo(i).getNombre()));
                             } catch (Exception e) {
-                                arbolitos.set(i, new ArbolB(6));
+                                arbolitos.add(new ArbolB(6));
                             }
-                            if (arbolitos.get(i).equals(null)) {
-                                arbolitos.set(i, new ArbolB(6));
+                            if (archivoFalso.getListaCampo(i).isLPotprimaria()) {
+                                try {
+                                    arbolitos.add(arbolitos.get(i).cargarArbol(GnombreArchivo + archivoFalso.getListaCampo(i).getNombre()));
+                                } catch (Exception e) {
+                                    arbolitos.add(new ArbolB(6));
+                                }
+                            }
+                            if (arbolitos.get(i) == null) {
+                                arbolitos.add(new ArbolB(6));
                             }
                         }
                     }
@@ -2861,7 +2866,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private Archivo archivoFalso = new Archivo();//solo es prueba
     private String GnombreArchivo;
-    private ArrayList<ArbolB> arbolitos = null;
+    private ArrayList<ArbolB> arbolitos = new ArrayList();
     private int rrnModi = 0;
     private int rrnEli = 0;
     private String espacios = new String(new char[1024]).replace('\0', ' ');
@@ -3104,7 +3109,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
     
     public ArbolB getArbolPrimario() {
-        return arbolitos.get(getPosKey());
+        return arbolitos.get(0);
     }
 
 
@@ -3223,7 +3228,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         System.out.println(arMetadata[arMetadata.length - 1]);
         loadAvailList(arMetadata[arMetadata.length - 1]);
         
-        arbolitos.set(getPosKey(), getArbolPrimario().cargarArbol("RegistrosPrueba.jjdp"));
+        arbolitos.add(0, new ArbolB(1).cargarArbol("RegistrosPrueba.jjdp"));
     }
 
     public String fill(int n, int n2) {
