@@ -1980,6 +1980,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         arbolitos.add(null);
                         if (archivoFalso.getListaCampo(i).isLprimaria() || archivoFalso.getListaCampo(i).isLPotprimaria()) {
                             try {
+                                arbolitos.set(i, new ArbolB(6));
                                 arbolitos.set(i, arbolitos.get(i).cargarArbol(GnombreArchivo + archivoFalso.getListaCampo(i).getNombre()));
                             } catch (Exception e) {
                                 arbolitos.set(i, new ArbolB(6));
