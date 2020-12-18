@@ -3830,16 +3830,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 arbolPrueba.insert(llave, rrn);
                 llave = String.valueOf(city);
                 llave = espacios.substring(0, 3 - llave.length()) + llave;
-                arbolPrueba.insert(llave, rrn);
+                arbolCity.insert(llave, rrn);
                 idd++;
                 rrn++;
             }
             fs.flush();
             fs.close();
-            escribirArchivo("RegistrosPrueba.jjdp", arbolPrueba);
+            escribirArbol("RegistrosPrueba.jjdpPersonId", arbolPrueba);
             System.out.println(arbolPrueba.nodos.size());
             arbolitos.set(getPosKey(), arbolPrueba);
             arbolitos.set(3, arbolCity);
+            escribirArbol("RegistrosPrueba.jjdpCityId", arbolCity);
             ciudades();//tambien genera el archivo de ciudades
         } else {
             for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
