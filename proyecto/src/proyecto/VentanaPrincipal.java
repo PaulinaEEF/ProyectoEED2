@@ -2677,16 +2677,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                 sc = new Scanner(archivoo);
                                 // sc.useDelimiter("\\|");
 
-                                while (sc.hasNext()) {
+                                while (sc.hasNextLine()) {
                                     int con = contador + 2;
 
-                                    String m = sc.next();
+                                    String m = sc.nextLine();
                                     String[] tokens = m.split("\\|");
-                                    if (contador != 0) {
+                                    if (tokens[0].charAt(0) != '|' && tokens[0].charAt(1) != '*') {
                                         empinfo.put("" + con, tokens);
                                         for (int i = 0; i < tokens.length; i++) {
                                             System.out.print(tokens[i]);
-
                                         }
                                         System.out.println("");
                                     }
