@@ -1172,6 +1172,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         buscar_Buscar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         buscar_Buscar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         buscar_Buscar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar (1).png"))); // NOI18N
+        buscar_Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buscar_BuscarMouseClicked(evt);
+            }
+        });
         buscar_registros.getContentPane().add(buscar_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 40, 150, 80));
 
         btn_regresar6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -1328,21 +1333,33 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         listar_registros.getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 490, 200, 70));
 
+        btn_siguientes.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_siguientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/next-button.png"))); // NOI18N
         btn_siguientes.setText("Siguientes");
+        btn_siguientes.setContentAreaFilled(false);
+        btn_siguientes.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btn_siguientes.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_siguientes.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/next-button (1).png"))); // NOI18N
         btn_siguientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_siguientesMouseClicked(evt);
             }
         });
-        listar_registros.getContentPane().add(btn_siguientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 510, -1, -1));
+        listar_registros.getContentPane().add(btn_siguientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 480, 160, 70));
 
+        btn_anteriores.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_anteriores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/previous.png"))); // NOI18N
         btn_anteriores.setText("Anteriores");
+        btn_anteriores.setContentAreaFilled(false);
+        btn_anteriores.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btn_anteriores.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_anteriores.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/previous (1).png"))); // NOI18N
         btn_anteriores.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_anterioresMouseClicked(evt);
             }
         });
-        listar_registros.getContentPane().add(btn_anteriores, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 510, -1, -1));
+        listar_registros.getContentPane().add(btn_anteriores, new org.netbeans.lib.awtextra.AbsoluteConstraints(481, 481, 170, 70));
 
         jLabel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/checklist.gif"))); // NOI18N
         listar_registros.getContentPane().add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 800, 590));
@@ -1518,17 +1535,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(Boton_Campos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, 190, 90));
 
         boton_Estandarizacion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        boton_Estandarizacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/check.png"))); // NOI18N
+        boton_Estandarizacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/send.png"))); // NOI18N
         boton_Estandarizacion.setContentAreaFilled(false);
+        boton_Estandarizacion.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         boton_Estandarizacion.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        boton_Estandarizacion.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/check (1).png"))); // NOI18N
+        boton_Estandarizacion.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/send (1).png"))); // NOI18N
         boton_Estandarizacion.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         boton_Estandarizacion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 boton_EstandarizacionMouseClicked(evt);
             }
         });
-        getContentPane().add(boton_Estandarizacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 350, 200, 60));
+        getContentPane().add(boton_Estandarizacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 370, 70, 60));
 
         boton_Registros.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         boton_Registros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/register (3)_1.png"))); // NOI18N
@@ -1566,8 +1584,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 20, 100));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel10.setText("Estandarización");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 410, -1, 20));
+        jLabel10.setText("Utilidades");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 390, -1, 20));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/blue.jpg"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1180, 60));
@@ -2588,7 +2606,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             int num = archivoFalso.getListaCampo(pk).getLongitud() - llave.length();
                             llave = espacios.substring(0, num) + llave;
                         }
-                        getArbolPrimario().Remove(llave);
+                        arbolitos.get(getPosKey()).Remove(llave);
+                        
                         rewrite(new String(data2), Math.toIntExact(rrn));
                     } catch (IOException ex) {
                         Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -2686,23 +2705,28 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
                                 sc = new Scanner(archivoo);
                                 // sc.useDelimiter("\\|");
-
-                                while (sc.hasNext()) {
+                                boolean eliminado;
+                                while (sc.hasNextLine()) {
                                     int con = contador + 2;
-
-                                    String m = sc.next();
+                                    eliminado = false;
+                                    String m = sc.nextLine();
+                                    if (m.charAt(0) == '|' && m.charAt(1) == '*') {
+                                        eliminado = true;
+                                    }
                                     String[] tokens = m.split("\\|");
-                                    if (contador != 0) {
-                                        empinfo.put("" + con, tokens);
-                                        for (int i = 0; i < tokens.length; i++) {
-                                            System.out.print(tokens[i]);
-
+                                    if (!eliminado) {
+                                        if (contador != 0) {
+                                            empinfo.put("" + con, tokens);
+                                            for (int i = 0; i < tokens.length; i++) {
+                                                System.out.print(tokens[i]);
+                                            }
+                                            System.out.println("");
                                         }
-                                        System.out.println("");
                                     }
                                     contador++;
                                 }
-                            } catch (Exception ex) {
+                            } catch (FileNotFoundException ex) {
+                                Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             sc.close();
                         }//FIN IF
@@ -3070,6 +3094,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ListarCruceMouseClicked
 
+
     private void btn_regresar_ListarCruceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_regresar_ListarCruceMouseClicked
         // TODO add your handling code here:
         ListarCruce.setVisible(false);
@@ -3084,6 +3109,54 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
         llenarTablaCruzar();
     }//GEN-LAST:event_btn_siguientes1MouseClicked
+
+    private void buscar_BuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscar_BuscarMouseClicked
+        // TODO add your handling code here:
+        if (buscar_textfield.getText().equals("") || cb_camposLlave_buscar.getSelectedItem() == null) {
+            return;
+        }
+        Object Item = cb_camposLlave_buscar.getSelectedItem();
+        int pos = ((ComboItem)Item).getPos();
+        DefaultTableModel model = (DefaultTableModel) tabla_buscar.getModel();
+        model.getDataVector().removeAllElements();
+        if (true || cb_camposLlave_buscar.getSelectedIndex() == 0) {
+            int pk = pos;
+            String llave = buscar_textfield.getText();
+            if (archivoFalso.getListaCampo(pk).getTipo().equals("int")) {
+                int num = archivoFalso.getListaCampo(pk).getLongitud() - llave.length();
+                llave = espacios.substring(0, num) + llave;
+            }
+            rrnsEli = new ArrayList<Long>();
+            arbolitos.get(pos).searchByAffinity(arbolitos.get(pos).getRaiz(), llave, rrnsEli);
+            
+
+            //NodoIndice nodoInd = getArbolPrimario().B_Tree_Search(getArbolPrimario().getRaiz(), llave);
+            if (rrnsEli.size() == 0) {
+                JOptionPane.showMessageDialog(null, "No se encontro ningun registro con ese valor");
+                buscar_textfield.setText("");
+                return;
+            }
+            //rrnEli = Math.toIntExact(nodoInd.getNodo().getLlaves().get(nodoInd.getIndice()).getPos());
+            for (long l : rrnsEli) {
+                rrnEli = Math.toIntExact(l);
+                try {
+                    String data = readRecord(Math.toIntExact(rrnEli));
+                    System.out.println(data);
+                    String arr[] = data.split("\\|");
+                    Object arr2[] = new Object[model.getColumnCount()];
+                    for (int i = 0; i < model.getColumnCount(); i++) {
+                        arr2[i] = arr[i];
+                    }
+                    model.addRow(arr2);
+                    /*buscar_textfield.setEditable(false);
+                    cb_camposLlave_buscar.setEnabled(false);*/
+                } catch (IOException ex) {
+                    Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_buscar_BuscarMouseClicked
+
 
 
     /**
