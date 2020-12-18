@@ -2565,14 +2565,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     String data = readRecord(Math.toIntExact(rrnEli));
                     System.out.println(data);
                     String arr[] = data.split("\\|");
-                    Object arr2[] = new Object[model.getColumnCount()];
-                    for (int i = 0; i < model.getColumnCount(); i++) {
-                        arr2[i] = arr[i];
+                    if (!(arr[0].length() == 0 && arr[1].charAt(0) == '*')) {
+                        Object arr2[] = new Object[model.getColumnCount()];
+                        for (int i = 0; i < model.getColumnCount(); i++) {
+                            arr2[i] = arr[i];
+                        }
+                        model.addRow(arr2);
+                        //Eliminar_textfield.setEditable(false);
+                        Eliminar_Borrar.setEnabled(true);
+                        //cb_camposLlave.setEnabled(false);
                     }
-                    model.addRow(arr2);
-                    //Eliminar_textfield.setEditable(false);
-                    Eliminar_Borrar.setEnabled(true);
-                    //cb_camposLlave.setEnabled(false);
                 } catch (IOException ex) {
                     Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -3198,6 +3200,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         /* Create and display the form */
  /*
+        Esto es un comentario
         ArbolB ab = new ArbolB(6);
         String letras = "aaaaabbbbbbccccccccccccccc";
 
