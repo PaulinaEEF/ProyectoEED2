@@ -2091,10 +2091,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_rreturnMouseClicked
 
     private void boton_IndicesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_IndicesMouseClicked
-        Indiices.pack();
-        Indiices.setModal(true);
-        Indiices.setLocationRelativeTo(null);
-        Indiices.setVisible(true);
+        if (GnombreArchivo != null) {
+            Indiices.pack();
+            Indiices.setModal(true);
+            Indiices.setLocationRelativeTo(null);
+            Indiices.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "No tiene un archivo cargado");
+        }
+        
     }//GEN-LAST:event_boton_IndicesMouseClicked
 
     private void btn_regresar3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_regresar3MouseClicked
