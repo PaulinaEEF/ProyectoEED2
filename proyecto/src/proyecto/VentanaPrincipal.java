@@ -1513,17 +1513,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(Boton_Campos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, 190, 90));
 
         boton_Estandarizacion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        boton_Estandarizacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/check.png"))); // NOI18N
+        boton_Estandarizacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/send.png"))); // NOI18N
         boton_Estandarizacion.setContentAreaFilled(false);
         boton_Estandarizacion.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        boton_Estandarizacion.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/check (1).png"))); // NOI18N
+        boton_Estandarizacion.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/send (1).png"))); // NOI18N
         boton_Estandarizacion.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         boton_Estandarizacion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 boton_EstandarizacionMouseClicked(evt);
             }
         });
-        getContentPane().add(boton_Estandarizacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 350, 200, 60));
+        getContentPane().add(boton_Estandarizacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 370, 90, 60));
 
         boton_Registros.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         boton_Registros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/register (3)_1.png"))); // NOI18N
@@ -1561,8 +1561,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 20, 100));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel10.setText("Estandarización");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 410, -1, 20));
+        jLabel10.setText("Utilidades");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 390, -1, 20));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/blue.jpg"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1180, 60));
