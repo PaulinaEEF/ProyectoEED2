@@ -2596,7 +2596,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             int num = archivoFalso.getListaCampo(pk).getLongitud() - llave.length();
                             llave = espacios.substring(0, num) + llave;
                         }
-                        getArbolPrimario().Remove(llave);
+                        arbolitos.get(getPosKey()).Remove(llave);
+                        
                         rewrite(new String(data2), Math.toIntExact(rrn));
                     } catch (IOException ex) {
                         Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -2694,22 +2695,28 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
                                 sc = new Scanner(archivoo);
                                 // sc.useDelimiter("\\|");
-
+                                boolean eliminado;
                                 while (sc.hasNextLine()) {
                                     int con = contador + 2;
-
+                                    eliminado = false;
                                     String m = sc.nextLine();
+                                    if (m.charAt(0) == '|' && m.charAt(1) == '*') {
+                                        eliminado = true;
+                                    }
                                     String[] tokens = m.split("\\|");
-                                    if (tokens[0].charAt(0) != '|' && tokens[0].charAt(1) != '*') {
-                                        empinfo.put("" + con, tokens);
-                                        for (int i = 0; i < tokens.length; i++) {
-                                            System.out.print(tokens[i]);
+                                    if (!eliminado) {
+                                        if (contador != 0) {
+                                            empinfo.put("" + con, tokens);
+                                            for (int i = 0; i < tokens.length; i++) {
+                                                System.out.print(tokens[i]);
+                                            }
+                                            System.out.println("");
                                         }
-                                        System.out.println("");
                                     }
                                     contador++;
                                 }
-                            } catch (Exception ex) {
+                            } catch (FileNotFoundException ex) {
+                                Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             sc.close();
                         }//FIN IF
