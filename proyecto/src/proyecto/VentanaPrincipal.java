@@ -3837,7 +3837,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 llave = espacios.substring(0, 6 - llave.length()) + llave;
                 arbolPrueba.insert(llave, rrn);
                 llave = String.valueOf(city);
-                llave = espacios.substring(0, 3 - llave.length()) + llave;
+                llave = espacios.substring(0, 2 - llave.length()) + llave;
                 arbolCity.insert(llave, rrn);
                 idd++;
                 rrn++;
