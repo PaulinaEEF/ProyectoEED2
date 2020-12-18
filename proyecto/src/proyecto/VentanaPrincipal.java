@@ -248,7 +248,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btn_seleccionar = new javax.swing.JButton();
         btn_regresarCruzar = new javax.swing.JButton();
         btn_crossArchive = new javax.swing.JButton();
-        jScrollPane7 = new javax.swing.JScrollPane();
+        jScrollPane10 = new javax.swing.JScrollPane();
         ListaCampos_Archivo1 = new javax.swing.JList<>();
         jScrollPane8 = new javax.swing.JScrollPane();
         ListaCampos_Archivo2 = new javax.swing.JList<>();
@@ -1172,11 +1172,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         buscar_Buscar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         buscar_Buscar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         buscar_Buscar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar (1).png"))); // NOI18N
-        buscar_Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buscar_BuscarMouseClicked(evt);
-            }
-        });
         buscar_registros.getContentPane().add(buscar_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 40, 150, 80));
 
         btn_regresar6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -1194,11 +1189,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         buscar_registros.getContentPane().add(btn_regresar6, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 300, 160, 100));
 
         cb_camposLlave_buscar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        cb_camposLlave_buscar.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cb_camposLlave_buscarItemStateChanged(evt);
-            }
-        });
         buscar_registros.getContentPane().add(cb_camposLlave_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 140, -1));
         buscar_registros.getContentPane().add(buscar_textfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 130, -1));
 
@@ -1412,9 +1402,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         cruzarArchivo.getContentPane().add(btn_crossArchive, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, 190, 80));
 
-        jScrollPane7.setViewportView(ListaCampos_Archivo1);
+        jScrollPane10.setViewportView(ListaCampos_Archivo1);
 
-        cruzarArchivo.getContentPane().add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 140, 220));
+        cruzarArchivo.getContentPane().add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 140, 220));
 
         jScrollPane8.setViewportView(ListaCampos_Archivo2);
 
@@ -3330,16 +3320,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
-
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-
     private javax.swing.JDialog listar_registros;
     private javax.swing.JTextField modificar_textfield;
     private javax.swing.JTable tabla_buscar;
