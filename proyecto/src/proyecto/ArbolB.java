@@ -304,7 +304,7 @@ public class ArbolB implements  Serializable {
                     nb = nodos.get(inb);
                     x.getLlaves().set(pos-1, nb.getLlaves().get(nb.n-1));
                     int ichild = nb.getHijos().get(nb.n);
-                    Nodo child = nodos.get(ichild);
+                    //Nodo child = nodos.get(ichild);
                     nb.n--;
 
                     for (int i = tmp.n; i > 0; i--) {
