@@ -1,3 +1,4 @@
+
 package proyecto;
 
 import java.io.BufferedInputStream;
@@ -251,6 +252,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         fondo_cruzar = new javax.swing.JLabel();
         jLabel46 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
+        ListarCruce = new javax.swing.JDialog();
+        jLabel48 = new javax.swing.JLabel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        tabla_listarCruce = new javax.swing.JTable();
+        jButton8 = new javax.swing.JButton();
+        btn_siguientes1 = new javax.swing.JButton();
         Boton_Archivos = new javax.swing.JButton();
         boton_Indices = new javax.swing.JButton();
         Boton_Campos = new javax.swing.JButton();
@@ -1345,7 +1352,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btn_seleccionarMouseClicked(evt);
             }
         });
-        cruzarArchivo.getContentPane().add(btn_seleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 330, 230, 90));
+
+        cruzarArchivo.getContentPane().add(btn_seleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 230, 90));
+
 
         btn_regresarCruzar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_regresarCruzar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda.png"))); // NOI18N
@@ -1357,7 +1366,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btn_regresarCruzarMouseClicked(evt);
             }
         });
-        cruzarArchivo.getContentPane().add(btn_regresarCruzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 150, 80));
+
+        cruzarArchivo.getContentPane().add(btn_regresarCruzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 330, 150, 80));
+
 
         btn_crossArchive.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_crossArchive.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/key-with-cross-sign.png"))); // NOI18N
@@ -1389,6 +1400,50 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fcruzar.jpg"))); // NOI18N
         cruzarArchivo.getContentPane().add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 480));
+
+
+        ListarCruce.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel48.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel48.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel48.setText("Resultado de Cruce");
+        ListarCruce.getContentPane().add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 290, 30));
+
+        tabla_listarCruce.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        tabla_listarCruce.setEnabled(false);
+        jScrollPane9.setViewportView(tabla_listarCruce);
+
+        ListarCruce.getContentPane().add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 610, 290));
+
+        jButton8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda.png"))); // NOI18N
+        jButton8.setText("Regresar");
+        jButton8.setContentAreaFilled(false);
+        jButton8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jButton8.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda (1).png"))); // NOI18N
+        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton8MouseClicked(evt);
+            }
+        });
+        ListarCruce.getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 200, 70));
+
+        btn_siguientes1.setText("Siguientes");
+        btn_siguientes1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_siguientes1MouseClicked(evt);
+            }
+        });
+        ListarCruce.getContentPane().add(btn_siguientes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 510, -1, -1));
+
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -2901,6 +2956,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
        Registros.setVisible(true);
     }//GEN-LAST:event_btn_regresarCruzarMouseClicked
 
+
     private void btn_crossArchiveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_crossArchiveMouseClicked
         
         GnombreArchivo2 = "c2.jjdp";
@@ -3074,6 +3130,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JList<String> ListaCampos_Archivo2;
     private javax.swing.JList<Campo> Lista_borrar;
     private javax.swing.JList<Campo> Lista_campos;
+    private javax.swing.JDialog ListarCruce;
     private javax.swing.JDialog Listar_Campos;
     private javax.swing.JSpinner MDC_CBytes;
     private javax.swing.JTextField MDC_NombreCampo;
@@ -3136,6 +3193,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btn_salvar;
     private javax.swing.JButton btn_seleccionar;
     private javax.swing.JButton btn_siguientes;
+    private javax.swing.JButton btn_siguientes1;
     private javax.swing.JButton btn_xml;
     private javax.swing.JDialog buscar_registros;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -3165,6 +3223,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -3207,6 +3266,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -3220,9 +3280,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JDialog listar_registros;
     private javax.swing.JTextField modificar_textfield;
     private javax.swing.JTable tabla_eliminar;
+    private javax.swing.JTable tabla_listarCruce;
     private javax.swing.JTable tabla_listarRegistros;
     private javax.swing.JTable tabla_modificar;
     private javax.swing.JTable tabla_registros;
@@ -3549,9 +3611,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public ArbolB getArbolPrimario() {
         return arbolitos.get(getPosKey());
     }
-
+  
     public void Archivo10000(boolean generar) throws IOException {
-        String metadata = ("RegistrosPrueba.jjdp|PersonId:int:6:true:false|PersonName:char:20:false:false|PersonAge:int:3:false:false|CityId:int:2:false:true|-1...\n");;
+        String metadata = ("RegistrosPrueba.jjdp|PersonId:int:6:true:false|PersonName:char:20:false:false|PersonAge:int:3:false:false|CityId:int:2:false:true|-1...\n");
+        GnombreArchivo = "RegistrosPrueba.jjdp";
+        String[] arMetadata = metadata.split("\\|");
+        archivoFalso = new Archivo(GnombreArchivo);
+        arbolitos = new ArrayList<>();
+        for (int i = 1; i < arMetadata.length - 1; i++) {
+            String[] arMetadata2 = arMetadata[i].split("\\:");
+            String nombre = arMetadata2[0];
+            String tipo = arMetadata2[1];
+            int numBytes = (Integer.parseInt(arMetadata2[2]));
+            boolean key, keyPot;
+            key = arMetadata2[3].equals("true");
+            keyPot = arMetadata2[4].equals("true");
+            archivoFalso.setListaCampo(new Campo(nombre, tipo, numBytes, key, keyPot));
+            arbolitos.add(null);
+        }
         if (generar) {
             ArrayList<String> Nombres = new ArrayList();
             Nombres.add("Jose");
@@ -3572,27 +3649,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             Nombres.add("Maria");
             Nombres.add("Diego");
             Nombres.add("Alvaro");
-            ArrayList<String> IdPerson = new ArrayList();
             int idd = 100000;
-            IdPerson.add("080110");
-            IdPerson.add("080211");
-            IdPerson.add("080212");
-            IdPerson.add("080213");
-            IdPerson.add("080214");
-            IdPerson.add("080215");
-            IdPerson.add("080216");
-            IdPerson.add("080217");
-            IdPerson.add("080218");
-            IdPerson.add("080219");
-            IdPerson.add("080220");
-            IdPerson.add("0802");
-            IdPerson.add("0802");
-            IdPerson.add("0802");
-            IdPerson.add("0802");
-            IdPerson.add("0802");
-            IdPerson.add("0802");
-            IdPerson.add("0802");
-
             ArrayList<String> Apellidos = new ArrayList();
             Apellidos.add("Montesinos");
             Apellidos.add("Montalvan");
@@ -3618,7 +3675,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 //        f.writeBytes("RegistrosPrueba.jjdp|PersonId:int:6:true:false|PersonName:char:20:false:false|PersonAge:int:3:false:false|CityId:int:2:false:true|-1...;");
 //        f.seek(400);
             FileOutputStream fs = new FileOutputStream(new File("RegistrosPrueba.jjdp"));
-
+            ArbolB arbolCity  = new ArbolB((6));
             fs.write("RegistrosPrueba.jjdp|PersonId:int:6:true:false|PersonName:char:20:false:false|PersonAge:int:3:false:false|CityId:int:2:false:true|-1...\n".getBytes());
             Random r = new Random();
             long rrn = 1;
@@ -3640,6 +3697,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 llave = String.valueOf(idd);
                 llave = espacios.substring(0, 6 - llave.length()) + llave;
                 arbolPrueba.insert(llave, rrn);
+                llave = String.valueOf(city);
+                llave = espacios.substring(0, 3 - llave.length()) + llave;
+                arbolPrueba.insert(llave, rrn);
                 idd++;
                 rrn++;
             }
@@ -3647,25 +3707,42 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             fs.close();
             escribirArchivo("RegistrosPrueba.jjdp", arbolPrueba);
             System.out.println(arbolPrueba.nodos.size());
+            arbolitos.set(getPosKey(), arbolPrueba);
+            arbolitos.set(3, arbolCity);
+            ciudades();//tambien genera el archivo de ciudades
+        } else {
+            for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
+                if (archivoFalso.getListaCampo(i).isLprimaria() || archivoFalso.getListaCampo(i).isLPotprimaria()) {
+                    try {
+                        arbolitos.set(i, new ArbolB(6));
+                        arbolitos.set(i, arbolitos.get(i).cargarArbol(GnombreArchivo + archivoFalso.getListaCampo(i).getNombre()));
+                    } catch (Exception e) {
+                        arbolitos.set(i, new ArbolB(6));
+                    }
+                    if (arbolitos.get(i) == null) {
+                        arbolitos.set(i, new ArbolB(6));
+                    }
+                }
+            }
         }
-
-        GnombreArchivo = "RegistrosPrueba.jjdp";
-        String[] arMetadata = metadata.split("\\|");
-        archivoFalso = new Archivo(GnombreArchivo);
-        for (int i = 1; i < arMetadata.length - 1; i++) {
-            String[] arMetadata2 = arMetadata[i].split("\\:");
-            String nombre = arMetadata2[0];
-            String tipo = arMetadata2[1];
-            int numBytes = (Integer.parseInt(arMetadata2[2]));
-            boolean key, keyPot;
-            key = arMetadata2[3].equals("true");
-            keyPot = arMetadata2[4].equals("true");
-            archivoFalso.setListaCampo(new Campo(nombre, tipo, numBytes, key, keyPot));
-        }
+        
+        
         System.out.println(arMetadata[arMetadata.length - 1]);
         loadAvailList(arMetadata[arMetadata.length - 1]);
-
-        arbolitos.add(0, new ArbolB(1).cargarArbol("RegistrosPrueba.jjdp"));
+        for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
+            arbolitos.add(null);
+            if (archivoFalso.getListaCampo(i).isLprimaria() || archivoFalso.getListaCampo(i).isLPotprimaria()) {
+                try {
+                    arbolitos.set(i, new ArbolB(6));
+                    arbolitos.set(i, arbolitos.get(i).cargarArbol(GnombreArchivo + archivoFalso.getListaCampo(i).getNombre()));
+                } catch (Exception e) {
+                    arbolitos.set(i, new ArbolB(6));
+                }
+                if (arbolitos.get(i) == null) {
+                    arbolitos.set(i, new ArbolB(6));
+                }
+            }
+        }
     }
 
     public String fill(int n, int n2) {
@@ -3675,4 +3752,130 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
         return cadena;
     }
+    
+    private void ciudades() throws FileNotFoundException, IOException {
+        ArrayList<String> ciudades = new ArrayList<>();
+        String metadata = ("CiudadesPrueba.jjdp|CityId:int:2:true:false|CityName:char:30:false:false|-1...\n");
+        ciudades.add("Fukuoka");
+        ciudades.add("El Paso");
+        ciudades.add("Seul");
+        ciudades.add("Wuhan");
+        ciudades.add("Kuala Lumpur");
+        ciudades.add("Berlin");
+        ciudades.add("Hong Kong");
+        ciudades.add("Bruselas");
+        ciudades.add("Birmingham");
+        ciudades.add("Sydney");
+        ciudades.add("Lille");
+        ciudades.add("Bogota");
+        ciudades.add("Filadelfia");
+        ciudades.add("Copenhague");
+        ciudades.add("Bombay");
+        ciudades.add("San Petesburgo");
+        ciudades.add("Columbus");
+        ciudades.add("Nagoya");
+        ciudades.add("Kuwait");
+        ciudades.add("Orlando");
+        ciudades.add("Madrid");
+        ciudades.add("Kiev");
+        ciudades.add("Nashville");
+        ciudades.add("Qingdao");
+        ciudades.add("Amsterdam");
+        ciudades.add("Glasgow");
+        ciudades.add("Baltimore");
+        ciudades.add("Sao Paulo");
+        ciudades.add("Cincinatti");
+        ciudades.add("Riad");
+        ciudades.add("Lima");
+        ciudades.add("Milan");
+        ciudades.add("Miami");
+        ciudades.add("Nueva Orleans");
+        ciudades.add("Buenos Aires");
+        ciudades.add("Budapest");
+        ciudades.add("Melbourne");
+        ciudades.add("Singapur");
+        ciudades.add("Atlanta");
+        ciudades.add("Estocolmo");
+        ciudades.add("Phoenix");
+        ciudades.add("San Francisco");
+        ciudades.add("Ciudad de Mexico");
+        ciudades.add("Busan");
+        ciudades.add("Dalian");
+        ciudades.add("Seattle");
+        ciudades.add("Tel Aviv");
+        ciudades.add("Moscu");
+        ciudades.add("Barcelona");
+        ciudades.add("Portland");
+        ciudades.add("El Cairo");
+        ciudades.add("Roma");
+        ciudades.add("Brasilia");
+        ciudades.add("Toronto");
+        ciudades.add("Boston");
+        ciudades.add("Estambul");
+        ciudades.add("Frackfurt");
+        ciudades.add("Denver");
+        ciudades.add("Washington D.C.");
+        ciudades.add("Nanking");
+        ciudades.add("Shanghai");
+        ciudades.add("San Diego");
+        ciudades.add("Rio de Janeiro");
+        ciudades.add("Atenas");
+        ciudades.add("Nueva York");
+        ciudades.add("Tegucigalpa");
+        ciudades.add("Las Vegas");
+        ciudades.add("Yakarta");
+        ciudades.add("Monterrey");
+        ciudades.add("Hangzhou");
+        ciudades.add("Londres");
+        ciudades.add("Taipei");
+        ciudades.add("Bangkok");
+        ciudades.add("Manila");
+        ciudades.add("San Luis");
+        ciudades.add("Montreal");
+        ciudades.add("Chicago");
+        ciudades.add("Paris");
+        ciudades.add("Milwaukke");
+        ciudades.add("Viena");
+        ciudades.add("Houston");
+        ciudades.add("Tokio");
+        ciudades.add("Abu Dabi");
+        ciudades.add("Lyon");
+        ciudades.add("Dublin");
+        ciudades.add("Tianjin");
+        ciudades.add("Chongqing");
+        ciudades.add("Dallas");
+        ciudades.add("Lisboa");
+        ciudades.add("Varsovia");
+        ciudades.add("Abiyan");
+        ciudades.add("Sacramento");
+        ciudades.add("Praga");
+        ciudades.add("Lagos");
+        ciudades.add("Kansas City");
+        ciudades.add("Los Angeles");
+        ciudades.add("Delhi");
+        ciudades.add("Detroit");
+        ciudades.add("Colonia");
+        ciudades.add("Pekin");
+        Collections.shuffle(ciudades);
+        File archivo = new File("CiudadesPrueba.jjdp");
+        try {
+            archivo.createNewFile();
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        FileOutputStream fs = new FileOutputStream(archivo);
+        String registro, llave;
+        ArbolB arbolCiudades = new ArbolB(6);
+        fs.write(metadata.getBytes());
+        for (int i = 1; i <= 99; i++) {
+            registro = String.valueOf(i) + "|" + ciudades.get(i - 1) + "|";
+            registro += fill(registro.length() - 2, 32) + "\n";
+            llave = String.valueOf(i);
+            llave = espacios.substring(0, 2 - llave.length()) + llave;
+            arbolCiudades.insert(llave, i);
+            fs.write(registro.getBytes());
+        }
+        escribirArbol("CiudadesPrueba.jjdp" + "CityId", arbolCiudades);
+    }
 }
+
