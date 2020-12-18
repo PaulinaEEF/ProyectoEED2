@@ -1172,6 +1172,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         buscar_Buscar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         buscar_Buscar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         buscar_Buscar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar (1).png"))); // NOI18N
+        buscar_Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buscar_BuscarMouseClicked(evt);
+            }
+        });
         buscar_registros.getContentPane().add(buscar_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 40, 150, 80));
 
         btn_regresar6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -3083,6 +3088,53 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void ListarCruceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListarCruceMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_ListarCruceMouseClicked
+
+    private void buscar_BuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscar_BuscarMouseClicked
+        // TODO add your handling code here:
+        if (buscar_textfield.getText().equals("") || cb_camposLlave_buscar.getSelectedItem() == null) {
+            return;
+        }
+        Object Item = cb_camposLlave_buscar.getSelectedItem();
+        int pos = ((ComboItem)Item).getPos();
+        DefaultTableModel model = (DefaultTableModel) tabla_buscar.getModel();
+        model.getDataVector().removeAllElements();
+        if (true || cb_camposLlave_buscar.getSelectedIndex() == 0) {
+            int pk = pos;
+            String llave = buscar_textfield.getText();
+            if (archivoFalso.getListaCampo(pk).getTipo().equals("int")) {
+                int num = archivoFalso.getListaCampo(pk).getLongitud() - llave.length();
+                llave = espacios.substring(0, num) + llave;
+            }
+            rrnsEli = new ArrayList<Long>();
+            arbolitos.get(pos).searchByAffinity(arbolitos.get(pos).getRaiz(), llave, rrnsEli);
+            
+
+            //NodoIndice nodoInd = getArbolPrimario().B_Tree_Search(getArbolPrimario().getRaiz(), llave);
+            if (rrnsEli.size() == 0) {
+                JOptionPane.showMessageDialog(null, "No se encontro ningun registro con ese valor");
+                buscar_textfield.setText("");
+                return;
+            }
+            //rrnEli = Math.toIntExact(nodoInd.getNodo().getLlaves().get(nodoInd.getIndice()).getPos());
+            for (long l : rrnsEli) {
+                rrnEli = Math.toIntExact(l);
+                try {
+                    String data = readRecord(Math.toIntExact(rrnEli));
+                    System.out.println(data);
+                    String arr[] = data.split("\\|");
+                    Object arr2[] = new Object[model.getColumnCount()];
+                    for (int i = 0; i < model.getColumnCount(); i++) {
+                        arr2[i] = arr[i];
+                    }
+                    model.addRow(arr2);
+                    /*buscar_textfield.setEditable(false);
+                    cb_camposLlave_buscar.setEnabled(false);*/
+                } catch (IOException ex) {
+                    Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_buscar_BuscarMouseClicked
 
 
     /**
