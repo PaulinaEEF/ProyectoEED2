@@ -1333,21 +1333,33 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         listar_registros.getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 490, 200, 70));
 
+        btn_siguientes.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_siguientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/next-button.png"))); // NOI18N
         btn_siguientes.setText("Siguientes");
+        btn_siguientes.setContentAreaFilled(false);
+        btn_siguientes.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btn_siguientes.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_siguientes.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/next-button (1).png"))); // NOI18N
         btn_siguientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_siguientesMouseClicked(evt);
             }
         });
-        listar_registros.getContentPane().add(btn_siguientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 510, -1, -1));
+        listar_registros.getContentPane().add(btn_siguientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 480, 160, 70));
 
+        btn_anteriores.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_anteriores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/previous.png"))); // NOI18N
         btn_anteriores.setText("Anteriores");
+        btn_anteriores.setContentAreaFilled(false);
+        btn_anteriores.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btn_anteriores.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_anteriores.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/previous (1).png"))); // NOI18N
         btn_anteriores.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_anterioresMouseClicked(evt);
             }
         });
-        listar_registros.getContentPane().add(btn_anteriores, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 510, -1, -1));
+        listar_registros.getContentPane().add(btn_anteriores, new org.netbeans.lib.awtextra.AbsoluteConstraints(481, 481, 170, 70));
 
         jLabel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/checklist.gif"))); // NOI18N
         listar_registros.getContentPane().add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 800, 590));
@@ -1515,6 +1527,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         boton_Estandarizacion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         boton_Estandarizacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/send.png"))); // NOI18N
         boton_Estandarizacion.setContentAreaFilled(false);
+        boton_Estandarizacion.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         boton_Estandarizacion.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         boton_Estandarizacion.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/send (1).png"))); // NOI18N
         boton_Estandarizacion.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
@@ -1523,7 +1536,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 boton_EstandarizacionMouseClicked(evt);
             }
         });
-        getContentPane().add(boton_Estandarizacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 370, 90, 60));
+        getContentPane().add(boton_Estandarizacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 370, 70, 60));
 
         boton_Registros.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         boton_Registros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/register (3)_1.png"))); // NOI18N
