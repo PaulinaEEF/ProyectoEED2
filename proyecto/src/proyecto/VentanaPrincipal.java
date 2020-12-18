@@ -2616,6 +2616,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         arbolitos.get(getPosKey()).Remove(llave);
                         
                         rewrite(new String(data2), Math.toIntExact(rrn));
+                        archivoFalso.getAvailList().add(0, Math.toIntExact(rrn));
                     } catch (IOException ex) {
                         Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -2625,7 +2626,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             Eliminar_textfield.setEditable(true);
             cb_camposLlave.setEnabled(true);
             Eliminar_Buscar.setEnabled(true);
-            archivoFalso.getAvailList().add(0, rrnEli);
             Eliminar_Borrar.setEnabled(false);
         }
 
