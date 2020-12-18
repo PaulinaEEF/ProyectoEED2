@@ -1352,9 +1352,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btn_seleccionarMouseClicked(evt);
             }
         });
-
         cruzarArchivo.getContentPane().add(btn_seleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 230, 90));
-
 
         btn_regresarCruzar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_regresarCruzar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda.png"))); // NOI18N
@@ -1366,9 +1364,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btn_regresarCruzarMouseClicked(evt);
             }
         });
-
         cruzarArchivo.getContentPane().add(btn_regresarCruzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 330, 150, 80));
-
 
         btn_crossArchive.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_crossArchive.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/key-with-cross-sign.png"))); // NOI18N
@@ -1401,7 +1397,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fcruzar.jpg"))); // NOI18N
         cruzarArchivo.getContentPane().add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 480));
 
-
+        ListarCruce.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ListarCruceMouseClicked(evt);
+            }
+        });
         ListarCruce.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel48.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -1429,21 +1429,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jButton8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jButton8.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda (1).png"))); // NOI18N
-        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton8MouseClicked(evt);
-            }
-        });
         ListarCruce.getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 200, 70));
 
         btn_siguientes1.setText("Siguientes");
-        btn_siguientes1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_siguientes1MouseClicked(evt);
-            }
-        });
         ListarCruce.getContentPane().add(btn_siguientes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 510, -1, -1));
-
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -3039,6 +3028,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         listar_registros.setLocationRelativeTo(null);
         listar_registros.setVisible(true);
     }//GEN-LAST:event_btn_crossArchiveMouseClicked
+
+    private void ListarCruceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListarCruceMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ListarCruceMouseClicked
 
 
     /**
