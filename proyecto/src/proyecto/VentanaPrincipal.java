@@ -1326,15 +1326,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel45.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel45.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
         jLabel45.setText("Cruzar archivos");
         cruzarArchivo.getContentPane().add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 210, -1));
 
         cruzarArchivo.getContentPane().add(combo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 140, -1));
 
-
         cruzarArchivo.getContentPane().add(combo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 60, 150, -1));
-
 
         btn_seleccionar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_seleccionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/folderr.png"))); // NOI18N
@@ -1348,8 +1345,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btn_seleccionarMouseClicked(evt);
             }
         });
-
-        cruzarArchivo.getContentPane().add(btn_seleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 230, 90));
+        cruzarArchivo.getContentPane().add(btn_seleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 330, 230, 90));
 
         btn_regresarCruzar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_regresarCruzar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda.png"))); // NOI18N
@@ -1361,8 +1357,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 btn_regresarCruzarMouseClicked(evt);
             }
         });
-
-        cruzarArchivo.getContentPane().add(btn_regresarCruzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 330, 150, 80));
+        cruzarArchivo.getContentPane().add(btn_regresarCruzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 150, 80));
 
         btn_crossArchive.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_crossArchive.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/key-with-cross-sign.png"))); // NOI18N
@@ -1371,6 +1366,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btn_crossArchive.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         btn_crossArchive.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btn_crossArchive.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/key-with-cross-sign (1).png"))); // NOI18N
+        btn_crossArchive.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_crossArchiveMouseClicked(evt);
+            }
+        });
         cruzarArchivo.getContentPane().add(btn_crossArchive, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, 190, 80));
 
         jScrollPane7.setViewportView(ListaCampos_Archivo1);
@@ -1389,7 +1389,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fcruzar.jpg"))); // NOI18N
         cruzarArchivo.getContentPane().add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 480));
-
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -2294,7 +2293,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
             model.addColumn(archivoFalso.getListaCampos().get(i).getNombre());
         }
-        model.setNumRows(1);
+        model.setNumRows(0);
 
         lower = 0;
         upper = 10;
@@ -2902,6 +2901,89 @@ public class VentanaPrincipal extends javax.swing.JFrame {
        Registros.setVisible(true);
     }//GEN-LAST:event_btn_regresarCruzarMouseClicked
 
+    private void btn_crossArchiveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_crossArchiveMouseClicked
+        
+        GnombreArchivo2 = "c2.jjdp";
+        
+        try {
+            // create a reader
+            FileInputStream fis = new FileInputStream("c2.jjdp");
+            BufferedInputStream reader = new BufferedInputStream(fis);
+
+            String metadata = "";
+
+            BufferedReader r = new BufferedReader(
+                    new InputStreamReader(reader, StandardCharsets.UTF_8));
+            metadata = r.readLine();
+            String[] arMetadata = metadata.split("\\|");
+            archivoFalso2 = new Archivo(GnombreArchivo2);
+            for (int i = 1; i < arMetadata.length - 1; i++) {
+                String[] arMetadata2 = arMetadata[i].split("\\:");
+                String nombre = arMetadata2[0];
+                String tipo = arMetadata2[1];
+                int numBytes = (Integer.parseInt(arMetadata2[2]));
+                boolean key, keyPot;
+                key = arMetadata2[3].equals("true");
+                keyPot = arMetadata2[4].equals("true");
+                archivoFalso2.setListaCampo(new Campo(nombre, tipo, numBytes, key, keyPot));
+            }
+            System.out.println(arMetadata[arMetadata.length - 1]);
+            //loadAvailList(arMetadata[arMetadata.length - 1]);
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        arbolitos2 = new ArrayList<ArbolB>();
+        for (int i = 0; i < archivoFalso2.getListaCampos().size(); i++) {
+            arbolitos2.add(null);
+            if (archivoFalso2.getListaCampo(i).isLprimaria() || archivoFalso2.getListaCampo(i).isLPotprimaria()) {
+                try {
+                    arbolitos2.set(i, new ArbolB(6));
+                    arbolitos2.set(i, arbolitos2.get(i).cargarArbol(GnombreArchivo2 + archivoFalso2.getListaCampo(i).getNombre()));
+                } catch (Exception e) {
+                    arbolitos2.set(i, new ArbolB(6));
+                }
+                if (arbolitos2.get(i) == null) {
+                    arbolitos2.set(i, new ArbolB(6));
+                }
+            }
+        }
+        
+        
+        campoCruce = 1;
+        campoCruce2 = 0;
+        camposListar = new ArrayList<Integer>();
+        camposListar.add(0);
+        camposListar.add(1);
+        camposListar2 = new ArrayList<Integer>();
+        camposListar2.add(0);
+        camposListar2.add(1);
+        //CAMBIAR NOMBRES
+        tabla_listarRegistros.setModel(new DefaultTableModel());
+        DefaultTableModel model = (DefaultTableModel) tabla_listarRegistros.getModel();
+        
+        for (int i : camposListar) {
+            model.addColumn(archivoFalso.getListaCampos().get(i).getNombre());
+        }
+        for (int i : camposListar2) {
+            model.addColumn(archivoFalso2.getListaCampos().get(i).getNombre());
+        }
+        model.setNumRows(0);
+        
+        int ik = getPosKey();
+        ArrayList<Long> rrns1 = new ArrayList<>();
+        arbolitos.get(ik).traverseKeysInOrder(arbolitos.get(ik).getRaiz(), rrns1);
+        
+        lower = 0;
+        llenarTablaCruzar(rrns1);
+        
+        cruzarArchivo.setVisible(false);
+        listar_registros.pack();
+        listar_registros.setModal(true);
+        listar_registros.setLocationRelativeTo(null);
+        listar_registros.setVisible(true);
+    }//GEN-LAST:event_btn_crossArchiveMouseClicked
+
 
     /**
      * @param args the command line arguments
@@ -3081,7 +3163,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
@@ -3158,6 +3239,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private ArrayList<Integer> camposListar2;
     private int campoCruce;
     private int campoCruce2;
+    private ArrayList<String> cruzados;
     ArrayList<Long> rrnsEli;
     private int rrnModi = 0;
     private int rrnEli = 0;
@@ -3211,6 +3293,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         String x = "";
         RandomAccessFile af = new RandomAccessFile(archivo, "r");
         af.seek(((RRN - 1) * recordSize()) + archivoFalso.getSizeMetadata());
+        x = af.readLine();
+        af.close();
+        fr.close();
+        return x;
+    }
+    
+    private String readRecord2(int RRN) throws FileNotFoundException, IOException {
+        File archivo = new File(GnombreArchivo2);
+        FileReader fr = new FileReader(archivo);
+        String x = "";
+        RandomAccessFile af = new RandomAccessFile(archivo, "r");
+        af.seek(((RRN - 1) * recordSize2()) + archivoFalso2.getSizeMetadata());
         x = af.readLine();
         af.close();
         fr.close();
@@ -3337,6 +3431,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
         return length + archivoFalso.getListaCampos().size() + 1;
     }
+    
+    private int recordSize2() {
+        int length = 0;
+        for (Campo campo : archivoFalso2.getListaCampos()) {
+            length += campo.getLongitud();
+        }
+        return length + archivoFalso2.getListaCampos().size() + 1;
+    }
 
     private int getRrn() {
         if (archivoFalso.getAvailList().isEmpty()) {
@@ -3397,6 +3499,50 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             } catch (IOException ex) {
                 Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+    }
+    
+    private void llenarTablaCruzar(ArrayList<Long> rrns1) {
+        
+        DefaultTableModel model = (DefaultTableModel) tabla_listarRegistros.getModel();
+        
+        while (lower < rrns1.size() && model.getRowCount() < 11) {
+            long RRN = rrns1.get(lower);
+            try {
+                String data = readRecord(Math.toIntExact(RRN));
+                System.out.println("data: " + data);
+
+                String arr[] = data.split("\\|");
+                String llave = arr[campoCruce];
+                if(archivoFalso.getListaCampo(campoCruce).getTipo().equals("int")) {
+                    int num = archivoFalso.getListaCampo(campoCruce).getLongitud() - llave.length();
+                    llave = espacios.substring(0, num) + llave;
+                }
+                ArrayList<Long> rrns2 = new ArrayList<>();
+                arbolitos2.get(campoCruce2).searchByAffinity(arbolitos2.get(campoCruce2).getRaiz(), llave, rrns2);
+              
+                for (Long RRN2 : rrns2) {
+                    String data2 = readRecord2(Math.toIntExact(RRN2));
+                    System.out.println("data2: " + data2);
+
+                    String arr2[] = data2.split("\\|");
+                    
+                    ArrayList<String> arr3 = new ArrayList<String>();
+                    
+                    for (int j : camposListar) {
+                        arr3.add(arr[j]);
+                    }
+                    for (int j : camposListar2) {
+                        arr3.add(arr2[j]);
+                    }
+                    
+                    model.addRow(arr3.toArray());
+                    
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            lower++;
         }
     }
 
