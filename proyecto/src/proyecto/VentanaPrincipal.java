@@ -1,4 +1,3 @@
-
 package proyecto;
 
 import java.io.BufferedInputStream;
@@ -2570,7 +2569,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             if (archivoo.canRead()) {
                 if (archivoo.getName().endsWith(".jjdp")) {
                     GnombreArchivo = archivoo.getName();
-                    JOptionPane.showMessageDialog(null, "El archivo ha sido abierto exitosamente");
+                    JOptionPane.showMessageDialog(null, "Archivo seleccionado correcto");
                     try {
                         // create a reader
 
@@ -2603,10 +2602,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         loadAvailList(arMetadata[arMetadata.length - 1]);
                         XSSFWorkbook workbook = new XSSFWorkbook();
                         String nHoja = JOptionPane.showInputDialog(null, "Nombre para la hoja de Excel");
-                        if (nHoja.equals("")) {
+                        while (nHoja.length() == 0) {
                             JOptionPane.showMessageDialog(null, "Debe de escribir un nombre para la hoja");
-                            // nHoja = JOptionPane.showInputDialog(null, "Nombre para la hoja de Excel");
-                            return;
+                            nHoja = JOptionPane.showInputDialog(null, "Nombre para la hoja de Excel");
                         }
 
                         //Create a blank sheet
@@ -2664,6 +2662,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         }
                         //Write the workbook in file system
                         String nombreArchivo = JOptionPane.showInputDialog(null, "Nombre para su archivo a exportar");
+                        while (nombreArchivo.length() == 0) {
+                            JOptionPane.showMessageDialog(null, "Debe de escribir un nombre para el arhcivo");
+                            nombreArchivo = JOptionPane.showInputDialog(null, "Nombre para su archivo a exportar");
+                        }
                         FileOutputStream out = new FileOutputStream(
                                 new File("./" + nombreArchivo + ".xlsx"));
 
@@ -2941,15 +2943,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cruzarArchivoMouseClicked
 
     private void btn_regresarCruzarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_regresarCruzarMouseClicked
-       cruzarArchivo.setVisible(false);
-       Registros.setVisible(true);
+        cruzarArchivo.setVisible(false);
+        Registros.setVisible(true);
     }//GEN-LAST:event_btn_regresarCruzarMouseClicked
 
 
     private void btn_crossArchiveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_crossArchiveMouseClicked
-        
+
         GnombreArchivo2 = "c2.jjdp";
-        
+
         try {
             // create a reader
             FileInputStream fis = new FileInputStream("c2.jjdp");
@@ -2993,8 +2995,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 }
             }
         }
-        
-        
+
         campoCruce = 1;
         campoCruce2 = 0;
         camposListar = new ArrayList<Integer>();
@@ -3006,7 +3007,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //CAMBIAR NOMBRES
         tabla_listarRegistros.setModel(new DefaultTableModel());
         DefaultTableModel model = (DefaultTableModel) tabla_listarRegistros.getModel();
-        
+
         for (int i : camposListar) {
             model.addColumn(archivoFalso.getListaCampos().get(i).getNombre());
         }
@@ -3014,14 +3015,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             model.addColumn(archivoFalso2.getListaCampos().get(i).getNombre());
         }
         model.setNumRows(0);
-        
+
         int ik = getPosKey();
         ArrayList<Long> rrns1 = new ArrayList<>();
         arbolitos.get(ik).traverseKeysInOrder(arbolitos.get(ik).getRaiz(), rrns1);
-        
+
         lower = 0;
         llenarTablaCruzar(rrns1);
-        
+
         cruzarArchivo.setVisible(false);
         listar_registros.pack();
         listar_registros.setModal(true);
@@ -3032,7 +3033,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void ListarCruceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListarCruceMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_ListarCruceMouseClicked
-
 
     /**
      * @param args the command line arguments
@@ -3353,7 +3353,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         fr.close();
         return x;
     }
-    
+
     private String readRecord2(int RRN) throws FileNotFoundException, IOException {
         File archivo = new File(GnombreArchivo2);
         FileReader fr = new FileReader(archivo);
@@ -3486,7 +3486,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
         return length + archivoFalso.getListaCampos().size() + 1;
     }
-    
+
     private int recordSize2() {
         int length = 0;
         for (Campo campo : archivoFalso2.getListaCampos()) {
@@ -3556,11 +3556,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         }
     }
-    
+
     private void llenarTablaCruzar(ArrayList<Long> rrns1) {
-        
+
         DefaultTableModel model = (DefaultTableModel) tabla_listarRegistros.getModel();
-        
+
         while (lower < rrns1.size() && model.getRowCount() < 11) {
             long RRN = rrns1.get(lower);
             try {
@@ -3569,30 +3569,30 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
                 String arr[] = data.split("\\|");
                 String llave = arr[campoCruce];
-                if(archivoFalso.getListaCampo(campoCruce).getTipo().equals("int")) {
+                if (archivoFalso.getListaCampo(campoCruce).getTipo().equals("int")) {
                     int num = archivoFalso.getListaCampo(campoCruce).getLongitud() - llave.length();
                     llave = espacios.substring(0, num) + llave;
                 }
                 ArrayList<Long> rrns2 = new ArrayList<>();
                 arbolitos2.get(campoCruce2).searchByAffinity(arbolitos2.get(campoCruce2).getRaiz(), llave, rrns2);
-              
+
                 for (Long RRN2 : rrns2) {
                     String data2 = readRecord2(Math.toIntExact(RRN2));
                     System.out.println("data2: " + data2);
 
                     String arr2[] = data2.split("\\|");
-                    
+
                     ArrayList<String> arr3 = new ArrayList<String>();
-                    
+
                     for (int j : camposListar) {
                         arr3.add(arr[j]);
                     }
                     for (int j : camposListar2) {
                         arr3.add(arr2[j]);
                     }
-                    
+
                     model.addRow(arr3.toArray());
-                    
+
                 }
             } catch (IOException ex) {
                 Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -3604,7 +3604,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public ArbolB getArbolPrimario() {
         return arbolitos.get(getPosKey());
     }
-  
+
     public void Archivo10000(boolean generar) throws IOException {
         String metadata = ("RegistrosPrueba.jjdp|PersonId:int:6:true:false|PersonName:char:20:false:false|PersonAge:int:3:false:false|CityId:int:2:false:true|-1...\n");
         GnombreArchivo = "RegistrosPrueba.jjdp";
@@ -3668,7 +3668,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 //        f.writeBytes("RegistrosPrueba.jjdp|PersonId:int:6:true:false|PersonName:char:20:false:false|PersonAge:int:3:false:false|CityId:int:2:false:true|-1...;");
 //        f.seek(400);
             FileOutputStream fs = new FileOutputStream(new File("RegistrosPrueba.jjdp"));
-            ArbolB arbolCity  = new ArbolB((6));
+            ArbolB arbolCity = new ArbolB((6));
             fs.write("RegistrosPrueba.jjdp|PersonId:int:6:true:false|PersonName:char:20:false:false|PersonAge:int:3:false:false|CityId:int:2:false:true|-1...\n".getBytes());
             Random r = new Random();
             long rrn = 1;
@@ -3718,8 +3718,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 }
             }
         }
-        
-        
+
         System.out.println(arMetadata[arMetadata.length - 1]);
         loadAvailList(arMetadata[arMetadata.length - 1]);
         for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
@@ -3745,7 +3744,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
         return cadena;
     }
-    
+
     private void ciudades() throws FileNotFoundException, IOException {
         ArrayList<String> ciudades = new ArrayList<>();
         String metadata = ("CiudadesPrueba.jjdp|CityId:int:2:true:false|CityName:char:30:false:false|-1...\n");
@@ -3871,4 +3870,3 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         escribirArbol("CiudadesPrueba.jjdp" + "CityId", arbolCiudades);
     }
 }
-
