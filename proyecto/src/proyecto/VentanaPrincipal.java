@@ -3193,6 +3193,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         /* Create and display the form */
  /*
+        Esto es un comentario
         ArbolB ab = new ArbolB(6);
         String letras = "aaaaabbbbbbccccccccccccccc";
 
