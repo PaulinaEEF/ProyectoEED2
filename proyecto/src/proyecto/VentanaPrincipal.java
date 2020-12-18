@@ -2262,9 +2262,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 omitidos = true;
             } else {
                 registross.add(guardar);
-                guardarRegistro(guardar);
+                int rrn = guardarRegistro(guardar);
 
-                getArbolPrimario().insert(llave, getRrn());
+                getArbolPrimario().insert(llave, rrn);
 
             }
         }
@@ -3642,7 +3642,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         return (int) archivoFalso.getAvailList().peekFirst();
     }
 
-    private void guardarRegistro(String registro) {
+    private int  guardarRegistro(String registro) {
+        int rrn = getRrn();
         if (archivoFalso.getAvailList().isEmpty()) {
             try {
                 // create a writer
@@ -3658,6 +3659,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         } else {
             try {
+                rrn = (int)archivoFalso.getAvailList().peekFirst();
                 RandomAccessFile raf = new RandomAccessFile(new File(GnombreArchivo), "rw");
                 raf.seek(((int) archivoFalso.getAvailList().removeFirst() - 1) * recordSize() + archivoFalso.getSizeMetadata());
                 System.out.println("\n");
@@ -3672,6 +3674,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        return rrn;
     }
 
     private void llenarTablaListar() {
