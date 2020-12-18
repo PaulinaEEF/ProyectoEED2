@@ -1,4 +1,3 @@
-
 package proyecto;
 
 import java.io.BufferedInputStream;
@@ -1895,7 +1894,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 } else {
                     try {
                         Archivo10000(true);
-                        
+
                         Registros.pack();
                         Registros.setModal(true);
                         Registros.setLocationRelativeTo(null);
@@ -2166,21 +2165,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
             model.addColumn(archivoFalso.getListaCampos().get(i).getNombre());
         }
-        
+        tabla_registros.setModel(modelo);
+        cb_camposLlave_buscar.setModel(new DefaultComboBoxModel<>());
         for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
             if (archivoFalso.getListaCampo(i).isLprimaria()) {
-                
+
                 cb_camposLlave_buscar.addItem(new ComboItem(archivoFalso.getListaCampo(i).getNombre(), i));
                 break;
             }
         }
         for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
             if (archivoFalso.getListaCampo(i).isLPotprimaria()) {
-                
+
                 cb_camposLlave_buscar.addItem(new ComboItem(archivoFalso.getListaCampo(i).getNombre(), i));
                 break;
             }
         }
+
+        buscar_textfield.setText("");
         buscar_registros.pack();
         buscar_registros.setModal(true);
         buscar_registros.setLocationRelativeTo(null);
@@ -2209,20 +2211,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         eliminar_registro.pack();
         eliminar_registro.setModal(true);
         eliminar_registro.setLocationRelativeTo(null);
+        cb_camposLlave.setModel(new DefaultComboBoxModel<>());
         for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
             if (archivoFalso.getListaCampo(i).isLprimaria()) {
-                
+
                 cb_camposLlave.addItem(new ComboItem(archivoFalso.getListaCampo(i).getNombre(), i));
                 break;
             }
         }
         for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
             if (archivoFalso.getListaCampo(i).isLPotprimaria()) {
-                
+
                 cb_camposLlave.addItem(new ComboItem(archivoFalso.getListaCampo(i).getNombre(), i));
                 break;
             }
         }
+        Eliminar_textfield.setText("");
         eliminar_registro.setVisible(true);
     }//GEN-LAST:event_btn_borrarRegistroMouseClicked
 
@@ -2238,9 +2242,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         upper = 10;
         sortedRRN = new ArrayList<Long>();
 
-        
         getArbolPrimario().traverseKeysInOrder(getArbolPrimario().getRaiz(), sortedRRN);
-        
 
         llenarTablaListar();
 
@@ -2317,7 +2319,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 }
 
                 getArbolPrimario().Remove(llave);
-                
 
                 llave = model.getValueAt(0, getPosKey()).toString();
                 if (archivoFalso.getListaCampo(pk).getTipo().equals("int")) {
@@ -2356,8 +2357,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             return;
         }
         Object Item = cb_camposLlave.getSelectedItem();
-        int pos = ((ComboItem)Item).getPos();
+        int pos = ((ComboItem) Item).getPos();
         DefaultTableModel model = (DefaultTableModel) tabla_eliminar.getModel();
+        model.getDataVector().removeAllElements();
         if (true || cb_camposLlave.getSelectedIndex() == 0) {
             int pk = pos;
             String llave = Eliminar_textfield.getText();
@@ -2367,7 +2369,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
             rrnsEli = new ArrayList<Long>();
             arbolitos.get(pos).searchByAffinity(arbolitos.get(pos).getRaiz(), llave, rrnsEli);
-            
+
             //NodoIndice nodoInd = getArbolPrimario().B_Tree_Search(getArbolPrimario().getRaiz(), llave);
             if (rrnsEli.size() == 0) {
                 JOptionPane.showMessageDialog(null, "No se encontro ningun registro con ese valor");
@@ -2386,14 +2388,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         arr2[i] = arr[i];
                     }
                     model.addRow(arr2);
-                    Eliminar_textfield.setEditable(false);
+                    //Eliminar_textfield.setEditable(false);
                     Eliminar_Borrar.setEnabled(true);
-                    cb_camposLlave.setEnabled(false);
+                    //cb_camposLlave.setEnabled(false);
                 } catch (IOException ex) {
                     Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            
+
         }
     }//GEN-LAST:event_Eliminar_BuscarMouseClicked
 
@@ -2434,7 +2436,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     }
                 }
             }
-           
+
             Eliminar_textfield.setEditable(true);
             cb_camposLlave.setEnabled(true);
             Eliminar_Buscar.setEnabled(true);
@@ -2710,16 +2712,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
-        
+
         ArrayList<Integer> llaves = new ArrayList<>();
-        
+
         arbolitos = new ArrayList<ArbolB>();
-        
+
         for (int i = 0; i < archivoFalso.getListaCampos().size(); i++) {
             if (archivoFalso.getListaCampo(i).isLprimaria() || archivoFalso.getListaCampo(i).isLPotprimaria()) {
                 arbolitos.add(new ArbolB(6));
                 llaves.add(i);
-            }else {
+            } else {
                 arbolitos.add(null);
             }
         }
@@ -2727,30 +2729,29 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         numReg = (int) ((new File(GnombreArchivo).length() - archivoFalso.getSizeMetadata()) / recordSize());
 
-
-        for (int rrn = 1; rrn <= numReg ; rrn++) {
+        for (int rrn = 1; rrn <= numReg; rrn++) {
             try {
                 String data = readRecord(Math.toIntExact(rrn));
                 System.out.println(data);
 
                 String arr[] = data.split("\\|");
-                
-                if(!(arr[0].length() == 0 && arr[1].length() >= 1 && arr[1].charAt(0) == '*')) {
+
+                if (!(arr[0].length() == 0 && arr[1].length() >= 1 && arr[1].charAt(0) == '*')) {
                     for (int ik : llaves) {
                         String llave = arr[ik];
-                        if(archivoFalso.getListaCampo(ik).getTipo().equals("int")) {
+                        if (archivoFalso.getListaCampo(ik).getTipo().equals("int")) {
                             int num = archivoFalso.getListaCampo(ik).getLongitud() - llave.length();
-                            llave = espacios.substring(0,num) + llave;
+                            llave = espacios.substring(0, num) + llave;
                         }
                         arbolitos.get(ik).insert(llave, rrn);
                     }
                 }
-                
+
             } catch (IOException ex) {
                 Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         JOptionPane.showMessageDialog(null, "Indices creados con éxito!");
     }//GEN-LAST:event_jButton2MouseClicked
 
@@ -2764,8 +2765,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             return;
         }
         Object Item = cb_camposLlave_buscar.getSelectedItem();
-        int pos = ((ComboItem)Item).getPos();
+        int pos = ((ComboItem) Item).getPos();
         DefaultTableModel model = (DefaultTableModel) tabla_buscar.getModel();
+        model.getDataVector().removeAllElements();
         if (true || cb_camposLlave_buscar.getSelectedIndex() == 0) {
             int pk = pos;
             String llave = buscar_textfield.getText();
@@ -2775,7 +2777,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
             rrnsEli = new ArrayList<Long>();
             arbolitos.get(pos).searchByAffinity(arbolitos.get(pos).getRaiz(), llave, rrnsEli);
-            
+
             //NodoIndice nodoInd = getArbolPrimario().B_Tree_Search(getArbolPrimario().getRaiz(), llave);
             if (rrnsEli.size() == 0) {
                 JOptionPane.showMessageDialog(null, "No se encontro ningun registro con ese valor");
@@ -2790,7 +2792,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     System.out.println(data);
                     String arr[] = data.split("\\|");
                     Object arr2[] = new Object[model.getColumnCount()];
-                    for (int i = 0; i < model.getColumnCount()-1; i++) {
+                    for (int i = 0; i < model.getColumnCount(); i++) {
                         arr2[i] = arr[i];
                     }
                     model.addRow(arr2);
@@ -2800,7 +2802,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            
+
         }
     }//GEN-LAST:event_buscar_BuscarMouseClicked
 
@@ -2837,7 +2839,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        /*
+ /*
         ArbolB ab = new ArbolB(6);
         String letras = "aaaaabbbbbbccccccccccccccc";
 
@@ -3040,7 +3042,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private Archivo archivoFalso = new Archivo();//solo es prueba
     private String GnombreArchivo;
     private ArrayList<ArbolB> arbolitos = null;
-    ArrayList <Long> rrnsEli;
+    ArrayList<Long> rrnsEli;
     private int rrnModi = 0;
     private int rrnEli = 0;
     private String espacios = new String(new char[1024]).replace('\0', ' ');
@@ -3102,20 +3104,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public void escribirArbol(String nombre, ArbolB arbolito) {
         FileOutputStream fw = null;
         ObjectOutputStream bw = null;
-                try {
+        try {
             fw = new FileOutputStream(nombre + "keyTree");
-                    bw = new ObjectOutputStream(fw);
+            bw = new ObjectOutputStream(fw);
             bw.writeObject(arbolito);
-                    bw.flush();
-                } catch (Exception ex) {
-                } finally {
-                    try {
-                        bw.close();
-                        fw.close();
-                    } catch (Exception ex) {
-                    }
-                }
+            bw.flush();
+        } catch (Exception ex) {
+        } finally {
+            try {
+                bw.close();
+                fw.close();
+            } catch (Exception ex) {
             }
+        }
+    }
 
     public void escribirArchivo(String nombre, ArbolB tree) {
         FileOutputStream fw = null;
@@ -3281,14 +3283,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         }
     }
-    
+
     public ArbolB getArbolPrimario() {
         return arbolitos.get(getPosKey());
     }
 
-
     public void Archivo10000(boolean generar) throws IOException {
-         String metadata = ("RegistrosPrueba.jjdp|PersonId:int:6:true:false|PersonName:char:20:false:false|PersonAge:int:3:false:false|CityId:int:2:false:true|-1...\n");;
+        String metadata = ("RegistrosPrueba.jjdp|PersonId:int:6:true:false|PersonName:char:20:false:false|PersonAge:int:3:false:false|CityId:int:2:false:true|-1...\n");;
         if (generar) {
             ArrayList<String> Nombres = new ArrayList();
             Nombres.add("Jose");
@@ -3355,7 +3356,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 //        f.writeBytes("RegistrosPrueba.jjdp|PersonId:int:6:true:false|PersonName:char:20:false:false|PersonAge:int:3:false:false|CityId:int:2:false:true|-1...;");
 //        f.seek(400);
             FileOutputStream fs = new FileOutputStream(new File("RegistrosPrueba.jjdp"));
-           
+
             fs.write("RegistrosPrueba.jjdp|PersonId:int:6:true:false|PersonName:char:20:false:false|PersonAge:int:3:false:false|CityId:int:2:false:true|-1...\n".getBytes());
             Random r = new Random();
             long rrn = 1;
@@ -3401,7 +3402,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
         System.out.println(arMetadata[arMetadata.length - 1]);
         loadAvailList(arMetadata[arMetadata.length - 1]);
-        
+
         arbolitos.add(0, new ArbolB(1).cargarArbol("RegistrosPrueba.jjdp"));
     }
 
@@ -3413,4 +3414,3 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         return cadena;
     }
 }
-
